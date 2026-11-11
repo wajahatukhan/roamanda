@@ -55,7 +55,7 @@ for (const regionId of REGION_CANDIDATES) {
 }
 if (!serp || usedRegion === undefined) throw new Error("No sandbox region returned hotels");
 if (Buffer.byteLength(JSON.stringify(serp, null, 2)) > MAX_BYTES) {
-  // Deterministic trim: keep the first N hotels that fit; feature hotels keep all their rates.
+  // Deterministic trim: keep the first N hotels (all their rates) that fit under the size cap.
   const hotels = serp.hotels ?? [];
   for (let n = hotels.length; n > 1; n--) {
     const trimmed = { ...serp, hotels: hotels.slice(0, n) };

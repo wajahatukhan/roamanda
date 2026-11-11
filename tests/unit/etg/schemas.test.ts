@@ -1,6 +1,6 @@
 import { resetEnvCache } from "@/env";
 import { HotelPageData, MulticompleteData, SearchRegionData } from "@/lib/etg/schemas";
-import { hotelPage, multicomplete, searchRegion } from "@/lib/etg/search";
+import { hotelPage, multicomplete, parseHotelsLenient, searchRegion } from "@/lib/etg/search";
 import hp10004834 from "../../fixtures/etg/hp-10004834.json";
 import hp8819557 from "../../fixtures/etg/hp-8819557.json";
 import multicompleteFixture from "../../fixtures/etg/multicomplete.json";
@@ -88,4 +88,73 @@ test("live mode posts the stay to the hotel page endpoint with language en and r
   expect(rates.length).toBe(hp10004834.hotels[0]!.rates.length);
   expect(fetchSpy.mock.calls[0]?.[0]).toBe("https://etg.test/api/b2b/v3/search/hp/");
   expect(JSON.parse(String(fetchSpy.mock.calls[0]?.[1]?.body))).toEqual({ ...query, language: "en", hid: 10004834 });
+});
+
+describe("lenient hotel parsing", () => {
+  // Test-only loose shape so fixtures can be corrupted in place.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  type Raw = { hotels: { rates: Record<string, any>[] }[] };
+  const copy = () => structuredClone(hp10004834) as unknown as Raw;
+  let warn: ReturnType<typeof vi.spyOn>;
+  beforeEach(() => { warn = vi.spyOn(console, "warn").mockImplementation(() => {}); });
+  afterEach(() => { warn.mockRestore(); });
+
+  test("a malformed amount is rejected", () => {
+    const data = copy();
+    data.hotels[0]!.rates[0]!.payment_options.payment_types[0].amount = "abc";
+    expect(() => HotelPageData.parse(data)).toThrow();
+    for (const bad of ["", "-5", "NaN"]) {
+      data.hotels[0]!.rates[0]!.payment_options.payment_types[0].amount = bad;
+      expect(() => HotelPageData.parse(data)).toThrow();
+    }
+  });
+
+  test("a null room_name drops only that rate and warns once without payload", () => {
+    const data = copy();
+    const total = data.hotels[0]!.rates.length;
+    data.hotels[0]!.rates[0]!.room_name = null;
+    const out = parseHotelsLenient(data);
+    expect(out.droppedRates).toBe(1);
+    expect(out.hotels[0]!.rates.length).toBe(total - 1);
+    expect(warn).toHaveBeenCalledTimes(1);
+    expect(String(warn.mock.calls[0]![0])).toContain("room_name");
+  });
+
+  test("an unknown payment type drops only that rate", () => {
+    const data = copy();
+    data.hotels[0]!.rates[1]!.payment_options.payment_types[0].type = "installments";
+    const out = parseHotelsLenient(data);
+    expect(out.droppedRates).toBe(1);
+    expect(out.hotels[0]!.rates.length).toBe(data.hotels[0]!.rates.length - 1);
+  });
+
+  test("a rate with empty payment_types is dropped", () => {
+    const data = copy();
+    data.hotels[0]!.rates[0]!.payment_options.payment_types = [];
+    expect(parseHotelsLenient(data).droppedRates).toBe(1);
+  });
+
+  test("an invalid hotel is dropped", () => {
+    const data = copy() as unknown as { hotels: unknown[] };
+    data.hotels.push({ hid: "x", rates: [] });
+    const out = parseHotelsLenient(data);
+    expect(out.droppedHotels).toBe(1);
+    expect(out.hotels.length).toBe(1);
+  });
+
+  test("all rates invalid throws unexpected_response", () => {
+    const data = copy();
+    for (const r of data.hotels[0]!.rates) r.room_name = null;
+    expect(() => parseHotelsLenient(data)).toThrow(expect.objectContaining({ code: "unexpected_response" }));
+  });
+
+  test("zero rates is a normal empty result", () => {
+    expect(parseHotelsLenient({ hotels: [{ hid: 1, rates: [] }] })).toEqual({ hotels: [{ hid: 1, rates: [] }], droppedRates: 0, droppedHotels: 0 });
+    expect(parseHotelsLenient({ hotels: [] }).hotels).toEqual([]);
+    expect(warn).not.toHaveBeenCalled();
+  });
+
+  test("a broken envelope throws", () => {
+    expect(() => parseHotelsLenient({ nope: 1 })).toThrow(expect.objectContaining({ code: "unexpected_response" }));
+  });
 });

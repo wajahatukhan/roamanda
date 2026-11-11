@@ -43,7 +43,7 @@ marked (settled) were checked against the sandbox recordings in
   `requests_number`, `seconds_number`.
 - Use numeric `hid` everywhere. String `id` is deprecated.
 - Sandbox fixed values: language `en`, search currency USD, booking currency EUR.
-  Sandbox region IDs: 2011, 2395, 2734, 6053839 (2011 and 2734 verified to return hotels; 2734 is Paris). Feature hotels: 10004834
+  Sandbox region IDs: 2011, 2395, 2734, 6053839 (2011 verified to return hotels in a region search; 2734 was only seen as Paris in the multicomplete response, not searched). Feature hotels: 10004834
   (taxes, all meals), 8819557 (10% prebook increase), 9744270 (20% increase).
   No 3-D Secure or card flows in sandbox.
 - Test key warning: hotel 8473727 on the test (not sandbox) key makes real bookings.

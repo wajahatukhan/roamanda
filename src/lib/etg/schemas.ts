@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+/** Non-negative decimal as ETG sends money: digits with an optional fractional part. */
+export const DecimalString = z.string().regex(/^\d+(\.\d+)?$/);
+
 // Non-strict objects: unknown fields are tolerated, and fields this app does not use are omitted.
 // Shapes were checked against sandbox recordings in tests/fixtures/etg/.
 
@@ -18,7 +21,7 @@ export type StayQuery = z.infer<typeof StayQuery>;
 export const Tax = z.object({
   name: z.string(),
   included_by_supplier: z.boolean(),
-  amount: z.string(),
+  amount: DecimalString,
   currency_code: z.string(),
 });
 export type Tax = z.infer<typeof Tax>;
@@ -29,17 +32,17 @@ export const CancellationPenalties = z.object({
     z.object({
       start_at: z.string().nullable(),
       end_at: z.string().nullable(),
-      amount_charge: z.string(),
-      amount_show: z.string(),
+      amount_charge: DecimalString,
+      amount_show: DecimalString,
     }),
   ),
 });
 export type CancellationPenalties = z.infer<typeof CancellationPenalties>;
 
 export const PaymentType = z.object({
-  amount: z.string(),
+  amount: DecimalString,
   currency_code: z.string(),
-  show_amount: z.string(),
+  show_amount: DecimalString,
   show_currency_code: z.string(),
   type: z.enum(["now", "hotel", "deposit"]),
   // The sandbox sends tax_data as {} when a rate has no taxes, so a missing list becomes [].
@@ -60,7 +63,7 @@ export const Rate = z.object({
   }),
   meal_data: z.object({ value: z.string(), has_breakfast: z.boolean() }),
   amenities_data: z.array(z.string()),
-  payment_options: z.object({ payment_types: z.array(PaymentType) }),
+  payment_options: z.object({ payment_types: z.array(PaymentType).min(1) }),
 });
 export type Rate = z.infer<typeof Rate>;
 
