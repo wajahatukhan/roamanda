@@ -14,7 +14,16 @@ function rate(amount: string, o: { free?: string | null; breakfast?: boolean; ta
     show_currency_code: o.currency ?? "USD",
     type: o.type ?? ("now" as const),
     tax_data: { taxes: o.tax ? [{ name: "city_tax", included_by_supplier: false, amount: "7.00", currency_code: "USD" }] : [] },
-    cancellation_penalties: { free_cancellation_before: o.free ?? null, policies: [] },
+    // A coherent schedule: free until the deadline then the full amount, or the full amount from the start.
+    cancellation_penalties: {
+      free_cancellation_before: o.free ?? null,
+      policies: o.free
+        ? [
+            { start_at: null, end_at: o.free, amount_charge: "0.00", amount_show: "0.00" },
+            { start_at: o.free, end_at: null, amount_charge: amount, amount_show: amount },
+          ]
+        : [{ start_at: null, end_at: null, amount_charge: amount, amount_show: amount }],
+    },
   };
   return {
     book_hash: null,
@@ -71,7 +80,7 @@ describe("buildList", () => {
     expect(items[0]!.from.payAtHotel).toEqual([{ label: "City tax", money: { amount: "7.00", currency: "USD" } }]);
   });
 
-  it("flags free cancellation only when a deadline is after now", () => {
+  it("flags free cancellation only when the policy is free now (deadline after now)", () => {
     const run = (free: string | null) => buildList([{ hid: 1, rates: [rate("100.00", { free })] }], hotels(hotel(1)), CTX).items[0]!.freeCancellation;
     expect(run("2026-12-10T00:00:00")).toBe(true);
     expect(run("2026-11-10T23:59:59")).toBe(false);

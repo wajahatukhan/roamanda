@@ -1,6 +1,7 @@
 import Decimal from "decimal.js";
 import type { Hotel } from "@/lib/content/types";
-import type { PaymentType, Rate } from "@/lib/etg/schemas";
+import type { Rate } from "@/lib/etg/schemas";
+import { cancellationStatus, isFreeCancellation } from "@/lib/policy/cancellation-status";
 import { priceRate, type StayPrice } from "@/lib/pricing/price-rate";
 
 export type ListItem = { hotel: Hotel; from: StayPrice; freeCancellation: boolean; hasBreakfast: boolean };
@@ -10,13 +11,6 @@ export type ListFilters = { minStars?: number; minRating?: number; freeCancellat
 export type ListRequirements = { freeCancellation?: boolean; breakfast?: boolean };
 export type ListContext = { markupPercent: number; taxNames: Record<string, string>; now: Date; currency: string };
 
-/** ETG sends deadlines in UTC, sometimes without a zone suffix. */
-function deadlineMs(s: string | null): number | null {
-  if (!s) return null;
-  const ms = Date.parse(/(Z|[+-]\d{2}:?\d{2})$/.test(s) ? s : `${s}Z`);
-  return Number.isNaN(ms) ? null : ms;
-}
-
 export function buildList(
   results: { hid: number; rates: Rate[] }[],
   hotels: Map<number, Hotel>,
@@ -25,30 +19,30 @@ export function buildList(
 ): { items: ListItem[]; missing: number[] } {
   const items: ListItem[] = [];
   const missing: number[] = [];
-  const now = ctx.now.getTime();
   for (const { hid, rates } of results) {
     const hotel = hotels.get(hid);
     if (!hotel) {
       if (!missing.includes(hid)) missing.push(hid);
       continue;
     }
-    let cheapest: { pt: PaymentType; net: Decimal; freeCancellation: boolean; hasBreakfast: boolean } | undefined;
+    let cheapest: { from: StayPrice; net: Decimal; freeCancellation: boolean; hasBreakfast: boolean } | undefined;
     for (const rate of rates) {
       const hasBreakfast = rate.meal_data.has_breakfast;
       if (require.breakfast && !hasBreakfast) continue;
       for (const pt of rate.payment_options.payment_types) {
         // Only amounts charged at booking, in the requested currency, are comparable as a "from" price.
         if ((pt.type !== "deposit" && pt.type !== "now") || pt.show_currency_code !== ctx.currency) continue;
-        const until = deadlineMs(pt.cancellation_penalties.free_cancellation_before);
-        const freeCancellation = until !== null && until > now;
+        const from = priceRate(pt, ctx.markupPercent, ctx.taxNames);
+        // The same classification as the hotel page's sentence, so the label and the sentence always agree.
+        const freeCancellation = isFreeCancellation(cancellationStatus(pt.cancellation_penalties, from.total, ctx.markupPercent, ctx.now));
         if (require.freeCancellation && !freeCancellation) continue;
         const net = new Decimal(pt.show_amount);
-        if (!cheapest || net.lt(cheapest.net)) cheapest = { pt, net, freeCancellation, hasBreakfast };
+        // Markup is monotonic, so the lowest net price is also the lowest selling price.
+        if (!cheapest || net.lt(cheapest.net)) cheapest = { from, net, freeCancellation, hasBreakfast };
       }
     }
-    // Markup is monotonic, so the lowest net price is also the lowest selling price.
     if (!cheapest) continue;
-    items.push({ hotel, from: priceRate(cheapest.pt, ctx.markupPercent, ctx.taxNames), freeCancellation: cheapest.freeCancellation, hasBreakfast: cheapest.hasBreakfast });
+    items.push({ hotel, from: cheapest.from, freeCancellation: cheapest.freeCancellation, hasBreakfast: cheapest.hasBreakfast });
   }
   return { items, missing };
 }

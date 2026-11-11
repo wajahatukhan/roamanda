@@ -148,6 +148,22 @@ describe("buildRateRows details", () => {
     expect(row!.cancellation).toMatch(/12:00 pm/);
     expect(row!.cancellation).toMatch(/UTC/);
   });
+  it("carries the full policy lines, in selling-price terms and the hotel's zone, and none for malformed data", () => {
+    const fixtureRows = buildRateRows(rates, CTX);
+    for (const row of fixtureRows) expect(row.policyLines.length).toBeGreaterThan(0);
+    const pt = paymentType({
+      amount: "100.00",
+      cancellation_penalties: { free_cancellation_before: "2026-12-10T12:00:00", policies: [{ start_at: null, end_at: "2026-12-10T12:00:00", amount_charge: "0.00", amount_show: "0.00" }, { start_at: "2026-12-10T12:00:00", end_at: null, amount_charge: "100.00", amount_show: "100.00" }] },
+    });
+    expect(buildRateRows([rate({ pts: [pt] })], CTX)[0]!.policyLines).toEqual([
+      "Until 10 December, 4:00 am Los Angeles time: free",
+      "From 10 December, 4:00 am Los Angeles time: you lose $110.00",
+      "Free cancellation deadline stated by the hotel: 10 December, 4:00 am Los Angeles time",
+    ]);
+    const bad = paymentType({ cancellation_penalties: { free_cancellation_before: "not-a-date", policies: [] } });
+    const [row] = buildRateRows([rate({ pts: [bad] })], CTX);
+    expect(row!.policyLines).toEqual([]);
+  });
   it("uses the fallback sentence for a row whose cancellation data is malformed, and keeps the other rows", () => {
     const bad = paymentType({ cancellation_penalties: { free_cancellation_before: "not-a-date", policies: [] } });
     const negative = paymentType({ cancellation_penalties: { free_cancellation_before: null, policies: [{ start_at: null, end_at: null, amount_charge: "1", amount_show: "-5" }] } });

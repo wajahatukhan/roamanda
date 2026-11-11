@@ -31,6 +31,8 @@ async function reads(context: BrowserContext): Promise<number> {
 const rows = (page: Page) => page.getByRole("list", { name: /Rooms and prices/ }).locator(":scope > li");
 const moreRows = (page: Page) => page.locator("details").getByRole("list", { name: /More rooms and prices/, includeHidden: true }).locator(":scope > li");
 const showAll = (page: Page) => page.getByText(/^Show all \d+ options$/);
+// Each row has its own "Full cancellation policy" <details>, so the fold is found by its summary.
+const fold = (page: Page) => page.locator("details", { has: showAll(page) });
 
 test.describe("with a passport country", () => {
   test.beforeEach(async ({ context }) => {
@@ -189,11 +191,32 @@ test.describe("with a passport country", () => {
     const control = showAll(page);
     await control.focus();
     await page.keyboard.press("Enter");
-    await expect(page.locator("details")).toHaveJSProperty("open", true);
+    await expect(fold(page)).toHaveJSProperty("open", true);
     await expect(moreRows(page)).toHaveCount(12);
     await expect(moreRows(page).last()).toBeVisible();
     await page.keyboard.press("Enter");
-    await expect(page.locator("details")).toHaveJSProperty("open", false);
+    await expect(fold(page)).toHaveJSProperty("open", false);
+  });
+
+  test("each row's full cancellation policy opens from the keyboard and lists the supplier's windows", async ({ page }) => {
+    await page.goto(HOTEL);
+    const row = rows(page).first();
+    await expect(row).toBeVisible();
+    const summary = row.locator("summary", { hasText: "Full cancellation policy" });
+    await expect(summary).toHaveText("Full cancellation policy");
+    const details = row.locator("details");
+    await expect(details).toHaveJSProperty("open", false);
+    await summary.focus();
+    await page.keyboard.press("Enter");
+    await expect(details).toHaveJSProperty("open", true);
+    const lines = details.locator("li");
+    expect(await lines.count()).toBeGreaterThan(0);
+    await expect(lines.first()).toBeVisible();
+    // The first row of this fixture is non-refundable: one window with no start or end, in selling-price terms.
+    await expect(lines.first()).toHaveText(/^At any time: you lose \$[\d,]+\.\d\d$/);
+    // Every visible row has the control directly under its sentence.
+    await expect(rows(page).locator("summary", { hasText: "Full cancellation policy" })).toHaveCount(6);
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   });
 
   test("the loading state reserves space and is announced, then the rates replace it without moving what is above", async ({ page, context }) => {

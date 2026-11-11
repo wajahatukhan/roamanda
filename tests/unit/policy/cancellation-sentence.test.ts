@@ -39,8 +39,9 @@ describe("cancellationSentence", () => {
       "Non-refundable. If you cancel you lose $200.00.",
     );
   });
-  test("no policies is treated as non-refundable", () => {
-    expect(s({ free_cancellation_before: null, policies: [] })).toBe("Non-refundable. If you cancel you lose $200.00.");
+  test("no policies gives the fallback: the supplier stated no terms", () => {
+    expect(s({ free_cancellation_before: null, policies: [] })).toBe(CANCELLATION_FALLBACK);
+    expect(s({ free_cancellation_before: "2026-12-10T00:00:00", policies: [] })).toBe(CANCELLATION_FALLBACK);
   });
   test("deadline already passed never prints a past date", () => {
     expect(s(freeThenFull, { now: new Date("2026-06-28T00:00:00Z") })).toBe("Non-refundable. If you cancel you lose $200.00.");

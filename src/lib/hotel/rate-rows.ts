@@ -1,6 +1,7 @@
 import Decimal from "decimal.js";
 import type { Rate } from "@/lib/etg/schemas";
 import { CANCELLATION_FALLBACK, cancellationSentence } from "@/lib/policy/cancellation-sentence";
+import { policyLines } from "@/lib/policy/policy-lines";
 import { priceRate, type StayPrice } from "@/lib/pricing/price-rate";
 
 /**
@@ -18,6 +19,8 @@ export type RateRow = {
   paymentLabel: string;
   price: StayPrice;
   cancellation: string;
+  /** The full cancellation policy, one line per window (see policy-lines.ts); empty when there is nothing we can show. */
+  policyLines: string[];
 };
 
 export type RateRowContext = {
@@ -37,8 +40,8 @@ const SOLD_TYPES = new Set(["now", "deposit"]);
 
 /**
  * One row for each rate and each payment type that is paid at booking and priced in the requested currency,
- * lowest total first. A malformed cancellation schedule gives that row the fallback sentence; a row that
- * cannot be priced is left out. Neither can break the others.
+ * lowest total first. A malformed cancellation schedule gives that row the fallback sentence (and no policy
+ * lines); a row that cannot be priced is left out. Neither can break the others.
  */
 export function buildRateRows(rates: Rate[], ctx: RateRowContext): RateRow[] {
   const timeZone = ctx.timeZone || "UTC";
@@ -64,6 +67,7 @@ export function buildRateRows(rates: Rate[], ctx: RateRowContext): RateRow[] {
       } catch {
         cancellation = CANCELLATION_FALLBACK;
       }
+      const lines = policyLines({ penalties: pt.cancellation_penalties, total: price.total, markupPercent: ctx.markupPercent, timeZone, now: ctx.now });
       rows.push({
         // The index, not the hash, so the key (which reaches the page payload) never carries the hash.
         key: `${rateIndex}-${ptIndex}`,
@@ -76,6 +80,7 @@ export function buildRateRows(rates: Rate[], ctx: RateRowContext): RateRow[] {
         paymentLabel: PAYMENT_LABELS[pt.type],
         price,
         cancellation,
+        policyLines: lines,
       });
     });
   });

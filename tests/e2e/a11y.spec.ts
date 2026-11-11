@@ -113,7 +113,7 @@ test("the hotel page's Show all control is in the tab order and opens from the k
   }
   await expect(summary).toBeFocused();
   await page.keyboard.press("Enter");
-  await expect(page.locator("details")).toHaveJSProperty("open", true);
+  await expect(page.locator("details", { has: summary })).toHaveJSProperty("open", true);
 });
 
 test("every page has a descriptive document title", async ({ page }) => {

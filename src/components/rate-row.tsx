@@ -1,6 +1,7 @@
 import { BedDouble, Utensils } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { RateRow } from "@/lib/hotel/rate-rows";
+import { POLICY_LINES_FALLBACK } from "@/lib/policy/policy-lines";
 import { Price } from "./price";
 import { Reveal } from "./reveal";
 
@@ -33,6 +34,21 @@ export function RateRowView({ row, index, nights }: { row: RateRow; index: numbe
             <span className="font-medium text-foreground">Cancellation: </span>
             {row.cancellation}
           </p>
+          {/* The full structured policy, one tap away. Native <details>: keyboard and screen readers work without script. */}
+          <details className="text-sm">
+            <summary className="w-fit cursor-pointer rounded-sm font-medium text-foreground underline underline-offset-4 outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+              Full cancellation policy
+            </summary>
+            {row.policyLines.length > 0 ? (
+              <ul className="mt-2 flex max-w-prose flex-col gap-1 text-muted-foreground">
+                {row.policyLines.map((line, i) => (
+                  <li key={i}>{line}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-2 max-w-prose text-muted-foreground">{POLICY_LINES_FALLBACK}</p>
+            )}
+          </details>
         </div>
         <div className="flex flex-col justify-between gap-4 sm:w-60 sm:shrink-0 sm:items-end sm:text-right">
           <div className="flex flex-col gap-1 sm:items-end">
