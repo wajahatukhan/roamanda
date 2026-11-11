@@ -24,3 +24,16 @@ export function fixtureDelayMs(mode: Mode, value: string | undefined): number {
 export function fixtureEmpty(mode: Mode, value: string | undefined): boolean {
   return mode === "fixture" && value === "serp-empty";
 }
+
+/** `etg_fixture_fail=hp` (retryable) or `hp-fatal` (not retryable) makes the hotel-page rates request fail. */
+export function hotelPageFailure(mode: Mode, value: string | undefined): EtgError | null {
+  if (mode !== "fixture") return null;
+  if (value === "hp") return new EtgError({ code: "timeout", httpStatus: 504, retryable: true, message: "Simulated hotel page timeout (fixture mode)" });
+  if (value === "hp-fatal") return new EtgError({ code: "unexpected_response", httpStatus: 200, retryable: false, message: "Simulated hotel page failure (fixture mode)" });
+  return null;
+}
+
+/** `etg_fixture_fail=hp-empty` makes the hotel page return no rates at all. */
+export function hotelPageEmpty(mode: Mode, value: string | undefined): boolean {
+  return mode === "fixture" && value === "hp-empty";
+}

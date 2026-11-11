@@ -42,14 +42,10 @@ function dayNumber(s: string | undefined): number | null {
   return t / 86_400_000;
 }
 
-export function parseSearchParams(sp: RawParams, today: Date): ParsedSearch {
-  const problems: string[] = [];
-  const add = (p: string) => { if (!problems.includes(p)) problems.push(p); };
+type StayParts = { checkin: string; checkout: string; guests: Guests };
 
-  const regionRaw = first(sp.region);
-  const regionId = regionRaw && /^\d{1,12}$/.test(regionRaw) ? Number(regionRaw) : 0;
-  if (!regionId) add("Choose a destination.");
-
+/** Dates and rooms validation shared by every page that takes a stay. Adds problems through `add`. */
+function checkStay(sp: RawParams, today: Date, add: (problem: string) => void): StayParts {
   const checkin = first(sp.in);
   const checkout = first(sp.out);
   const inDay = dayNumber(checkin);
@@ -82,12 +78,37 @@ export function parseSearchParams(sp: RawParams, today: Date): ParsedSearch {
       }
     }
   }
+  return { checkin: checkin ?? "", checkout: checkout ?? "", guests };
+}
+
+export function parseSearchParams(sp: RawParams, today: Date): ParsedSearch {
+  const problems: string[] = [];
+  const add = (p: string) => { if (!problems.includes(p)) problems.push(p); };
+
+  const regionRaw = first(sp.region);
+  const regionId = regionRaw && /^\d{1,12}$/.test(regionRaw) ? Number(regionRaw) : 0;
+  if (!regionId) add("Choose a destination.");
+
+  const stay = checkStay(sp, today, add);
 
   if (problems.length > 0) return { ok: false, problems };
   return {
     ok: true,
     regionId,
     regionName: first(sp.name)?.trim() ?? "",
-    query: { checkin: checkin!, checkout: checkout!, guests, currency: "USD" },
+    query: { checkin: stay.checkin, checkout: stay.checkout, guests: stay.guests, currency: "USD" },
   };
+}
+
+export type ParsedStay =
+  | { ok: true; query: Omit<StayQuery, "residency"> }
+  | { ok: false; problems: string[] };
+
+/** Dates and rooms only (no destination), with the same rules and messages as parseSearchParams. */
+export function parseStayParams(sp: RawParams, today: Date): ParsedStay {
+  const problems: string[] = [];
+  const add = (p: string) => { if (!problems.includes(p)) problems.push(p); };
+  const stay = checkStay(sp, today, add);
+  if (problems.length > 0) return { ok: false, problems };
+  return { ok: true, query: { checkin: stay.checkin, checkout: stay.checkout, guests: stay.guests, currency: "USD" } };
 }

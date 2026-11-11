@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { decodeRooms, encodeRooms, parseSearchParams } from "@/lib/search/params";
+import { decodeRooms, encodeRooms, parseSearchParams, parseStayParams } from "@/lib/search/params";
 
 const today = new Date("2026-11-11T09:00:00Z");
 const valid = { region: "2011", name: "Berlin", in: "2026-12-10", out: "2026-12-12", rooms: "2-5.9,1" };
@@ -106,5 +106,48 @@ describe("encodeRooms / decodeRooms", () => {
 
   it("returns null for malformed input", () => {
     for (const s of ["", "a", "2-", "2-x", "2--1", ",", "2,,1", "1.5"]) expect(decodeRooms(s)).toBeNull();
+  });
+});
+
+describe("parseStayParams", () => {
+  const stay = { in: "2026-12-10", out: "2026-12-12", rooms: "2-5.9,1" };
+
+  it("parses dates and rooms without a destination", () => {
+    expect(parseStayParams(stay, today)).toEqual({
+      ok: true,
+      query: {
+        checkin: "2026-12-10",
+        checkout: "2026-12-12",
+        currency: "USD",
+        guests: [
+          { adults: 2, children: [5, 9] },
+          { adults: 1, children: [] },
+        ],
+      },
+    });
+  });
+
+  it("does not ask for a destination", () => {
+    const r = parseStayParams({ ...stay, rooms: "" }, today);
+    expect(r.ok ? [] : r.problems).not.toContain("Choose a destination.");
+  });
+
+  it("gives the same messages as the search validation", () => {
+    const cases: Record<string, string | undefined>[] = [
+      { in: "2026-11-09", out: "2026-11-12" },
+      { out: "2026-12-10" },
+      { in: "2026-12-01", out: "2027-01-01" },
+      { rooms: "7" },
+      { rooms: "2-18" },
+      { rooms: "" },
+      { in: undefined },
+      { rooms: "x" },
+    ];
+    for (const c of cases) {
+      const a = parseStayParams({ ...stay, ...c }, today);
+      const b = parseSearchParams({ ...valid, ...c }, today);
+      expect(a.ok).toBe(false);
+      expect(a.ok ? [] : a.problems).toEqual(b.ok ? [] : b.problems);
+    }
   });
 });
