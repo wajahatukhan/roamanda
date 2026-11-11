@@ -1,5 +1,5 @@
 import "server-only";
-import { getEnv } from "@/env";
+import { isFixtureMode } from "@/env";
 import { z } from "zod";
 import { etgRequest } from "./client";
 import { countHotelPageFixtureRead } from "./fixture-reads";
@@ -14,8 +14,6 @@ const hotelPageFixtures: Record<number, () => Promise<unknown>> = {
   8819557: async () => (await import("../../../tests/fixtures/etg/hp-8819557.json")).default,
 };
 const DEFAULT_HOTEL_PAGE_FIXTURE = 10004834;
-
-const isFixtureMode = () => getEnv().ETG_MODE === "fixture";
 
 // Envelope is strict; each rate is validated on its own so one bad rate does not reject the response.
 const LooseHotelsResponse = z.object({ hotels: z.array(z.unknown()) }).loose();

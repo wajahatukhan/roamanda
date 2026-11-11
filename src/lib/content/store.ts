@@ -1,7 +1,7 @@
 import "server-only";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { z } from "zod";
-import { getEnv } from "@/env";
+import { getEnv, isFixtureMode } from "@/env";
 import { chunk } from "./chunk";
 import { mapEtgHotels } from "./map-hotel";
 import type { Dictionaries, Hotel, HotelCard } from "./types";
@@ -14,8 +14,6 @@ const MARKUP_TTL_MS = 60_000;
 const DICTIONARIES_TTL_MS = 10 * 60_000;
 const FIXTURE_MARKUP_PERCENT = 12;
 const FIXTURE_SYNCED_AT = "2026-11-11T00:00:00.000Z";
-
-const isFixtureMode = () => getEnv().ETG_MODE === "fixture";
 
 // ---------------------------------------------------------------------------------------------
 // Supabase client (lazy)

@@ -46,6 +46,9 @@ export function getEnv(): Env {
   return cached;
 }
 
+/** True when ETG_MODE is "fixture": recorded responses replace the live suppliers. */
+export const isFixtureMode = () => getEnv().ETG_MODE === "fixture";
+
 /** Test-only: clears the memoized env so the next getEnv() re-parses process.env. */
 export function resetEnvCache(): void {
   cached = undefined;
