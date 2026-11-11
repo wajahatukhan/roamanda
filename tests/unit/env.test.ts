@@ -13,3 +13,26 @@ test("fixture mode does not require ETG credentials", () => {
   });
   expect(e.ETG_MODE).toBe("fixture");
 });
+
+describe("production safety gate for fixture mode", () => {
+  const base = { ETG_BASE_URL: "https://x", SUPABASE_URL: "https://s", SUPABASE_SERVICE_ROLE_KEY: "k" };
+
+  test("production + fixture without the flag throws, naming both variables", () => {
+    const run = () => parseEnv({ ...base, ETG_MODE: "fixture", NODE_ENV: "production" });
+    expect(run).toThrow(/ETG_MODE/);
+    expect(run).toThrow(/ALLOW_FIXTURE_MODE/);
+  });
+  test("production + fixture with a flag other than exactly 1 throws", () => {
+    expect(() => parseEnv({ ...base, ETG_MODE: "fixture", NODE_ENV: "production", ALLOW_FIXTURE_MODE: "true" })).toThrow(/ALLOW_FIXTURE_MODE/);
+  });
+  test("production + fixture with ALLOW_FIXTURE_MODE=1 passes", () => {
+    expect(parseEnv({ ...base, ETG_MODE: "fixture", NODE_ENV: "production", ALLOW_FIXTURE_MODE: "1" }).ETG_MODE).toBe("fixture");
+  });
+  test("development + fixture passes without the flag", () => {
+    expect(parseEnv({ ...base, ETG_MODE: "fixture", NODE_ENV: "development" }).ETG_MODE).toBe("fixture");
+  });
+  test("live mode in production is unaffected", () => {
+    const e = parseEnv({ ...base, ETG_MODE: "live", ETG_KEY_ID: "a", ETG_API_KEY: "b", NODE_ENV: "production" });
+    expect(e.ETG_MODE).toBe("live");
+  });
+});

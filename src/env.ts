@@ -28,6 +28,10 @@ export function parseEnv(raw: Record<string, string | undefined>): Env {
       if (!raw[key]) problems.push(`${key}: required when ETG_MODE is "live"`);
     }
   }
+  // Fixture mode replays recorded prices, so it must never be switched on by accident in a real deployment.
+  if (raw.ETG_MODE === "fixture" && raw.NODE_ENV === "production" && raw.ALLOW_FIXTURE_MODE !== "1") {
+    problems.push('ETG_MODE: "fixture" is not allowed when NODE_ENV is "production" unless ALLOW_FIXTURE_MODE is exactly "1"');
+  }
   if (!result.success || problems.length > 0) {
     throw new Error(`Invalid environment: ${problems.join("; ")}`);
   }

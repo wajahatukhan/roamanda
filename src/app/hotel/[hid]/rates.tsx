@@ -30,7 +30,7 @@ const h3 = "text-lg font-semibold tracking-[0.01em] [word-spacing:0.1em]";
 
 /** Placeholder rows with the same shell and minimum height as real ones, so rates arrive without moving the page. */
 export function RatesSkeleton({ count = 3 }: { count?: number }) {
-  const bar = "rounded-md bg-muted motion-safe:animate-pulse";
+  const bar = "rounded-md bg-muted";
   return (
     <div data-testid="rates-skeleton" aria-busy="true">
       <p role="status" className="sr-only">Loading prices for your stay</p>

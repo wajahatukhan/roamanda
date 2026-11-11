@@ -49,8 +49,8 @@ function PageFallback() {
   return (
     <>
       <div className="flex flex-col gap-3" aria-hidden>
-        <div className="h-9 w-72 max-w-full rounded-md bg-muted motion-safe:animate-pulse" />
-        <div className="h-4 w-64 max-w-full rounded-md bg-muted motion-safe:animate-pulse" />
+        <div className="h-9 w-72 max-w-full rounded-md bg-muted" />
+        <div className="h-4 w-64 max-w-full rounded-md bg-muted" />
       </div>
       <ResultsSkeleton />
     </>

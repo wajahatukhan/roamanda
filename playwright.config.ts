@@ -15,6 +15,7 @@ export default defineConfig({
     timeout: 240_000,
     env: {
       ETG_MODE: "fixture",
+      ALLOW_FIXTURE_MODE: "1",
       ETG_BASE_URL: "https://api-sandbox.ratehawk.com",
       SUPABASE_URL: "http://localhost:54321",
       SUPABASE_SERVICE_ROLE_KEY: "dummy-service-role-key",
