@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Travel portal
 
-## Getting Started
+A hotel booking site built on the RateHawk (ETG) API. Plan 1 covers search, the results list and the hotel page.
+Hotel content (names, photos, policies) is stored in Supabase and synced from RateHawk; prices and availability
+come from RateHawk on each request.
 
-First, run the development server:
+## Requirements
+
+- Node 26 (the version CI uses, see `.github/workflows/ci.yml`)
+- npm
+
+## Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm ci
+cp .env.example .env.local   # then fill in the values; never commit .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Commands
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `npm run dev` starts the development server on http://localhost:3000.
+- `npm run ci` runs typecheck, unit tests, lint, build and the end-to-end tests. This is what CI runs.
+- `npm run ci:speed` builds if needed and runs the Lighthouse speed checks.
+- `npm run sync:content -- --hids 10004834,8819557` fetches content for those hotel ids and stores it.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Modes
 
-## Learn More
+`ETG_MODE` in `.env.local` picks where data comes from:
 
-To learn more about Next.js, take a look at the following resources:
+- `live` calls RateHawk. It needs `ETG_KEY_ID` and `ETG_API_KEY`.
+- `fixture` replays recorded responses and needs no RateHawk credentials. Production builds refuse it unless
+  `ALLOW_FIXTURE_MODE=1` is set.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Documents
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The design, the plan and the follow-ups live under `docs/superpowers/`:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `specs/2026-11-11-travel-portal-design.md`: the design
+- `plans/2026-11-11-plan-1-foundation-and-browse.md`: plan 1
+- `plans/2026-11-12-plan-1-outcome-and-follow-ups.md`: what plan 1 delivered and what is left
