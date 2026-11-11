@@ -1,5 +1,5 @@
 import { resetEnvCache } from "@/env";
-import { getDictionaries, getHotel, getHotels, getMarkupPercent, hotelToRow, recordMissing, resetStoreCache, rowToHotel } from "@/lib/content/store";
+import { getDictionaries, getHotel, getHotelCards, getMarkupPercent, hotelToRow, recordMissing, resetStoreCache, rowToHotel } from "@/lib/content/store";
 import { mapEtgHotel } from "@/lib/content/map-hotel";
 import serp from "../../fixtures/etg/serp-region.json";
 import raw from "../../fixtures/etg/content-10004834.json";
@@ -24,15 +24,23 @@ const serpHids = (serp as { hotels: { hid: number }[] }).hotels.map((h) => h.hid
 
 describe("fixture mode", () => {
   test("serves every hid in the recorded search and both feature hotels, without the network", async () => {
-    const map = await getHotels([...serpHids, 10004834, 8819557]);
+    const map = await getHotelCards([...serpHids, 10004834, 8819557]);
     expect(map.size).toBe(new Set([...serpHids, 10004834, 8819557]).size);
     for (const h of map.values()) expect(h.name.length).toBeGreaterThan(0);
     expect(fetch).not.toHaveBeenCalled();
   });
 
+  test("cards carry only the card's fields and at most the first photo", async () => {
+    const card = (await getHotelCards([10004834])).get(10004834)!;
+    expect(Object.keys(card).sort()).toEqual(["address", "hid", "images", "name", "reviewRating", "starRating"]);
+    const full = (await getHotel(10004834))!;
+    expect(full.images.length).toBeGreaterThan(1);
+    expect(card.images).toEqual(full.images.slice(0, 1));
+  });
+
   test("omits unknown hids and handles an empty list", async () => {
-    expect((await getHotels([1])).size).toBe(0);
-    expect((await getHotels([])).size).toBe(0);
+    expect((await getHotelCards([1])).size).toBe(0);
+    expect((await getHotelCards([])).size).toBe(0);
     expect(await getHotel(1)).toBeNull();
   });
 

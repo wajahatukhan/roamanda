@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { Rate } from "@/lib/etg/schemas";
 import type { Hotel } from "@/lib/content/types";
-import { buildList, filterItems, parseListParams, sortItems, type ListItem } from "@/lib/search/list";
+import { buildList, filterItems, parseListParams, resultsCountLine, sortItems, type ListItem } from "@/lib/search/list";
 
 const NOW = new Date("2026-11-11T00:00:00Z");
 const CTX = { markupPercent: 10, taxNames: { city_tax: "City tax" }, now: NOW, currency: "USD" };
@@ -144,6 +144,48 @@ describe("buildList", () => {
     it("omits a hotel whose payments are all in another currency", () => {
       expect(run([rate("40.00", { currency: "EUR" })])).toEqual([]);
     });
+  });
+});
+
+describe("buildList when a hotel cannot be priced", () => {
+  it("leaves that hotel out, keeps the others, and warns once with counts only", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    try {
+      const bad = rate("80.00", { tax: true });
+      bad.payment_options.payment_types[0]!.tax_data.taxes[0]!.currency_code = "EURO"; // bypasses the schema, as if it had slipped through
+      const worse = rate("90.00");
+      worse.payment_options.payment_types[0]!.tax_data.taxes = [{ name: "city_tax", included_by_supplier: false, amount: "1.00", currency_code: "" }];
+      const { items } = buildList(
+        [{ hid: 1, rates: [rate("100.00")] }, { hid: 2, rates: [bad, rate("120.00")] }, { hid: 3, rates: [worse] }, { hid: 4, rates: [rate("70.00")] }],
+        hotels(hotel(1), hotel(2), hotel(3), hotel(4)),
+        CTX,
+      );
+      expect(items.map((i) => i.hotel.hid)).toEqual([1, 4]);
+      expect(warn).toHaveBeenCalledTimes(1);
+      expect(String(warn.mock.calls[0]![0])).toBe("Search list: left out 2 of 4 hotel(s) whose rates could not be priced");
+    } finally {
+      warn.mockRestore();
+    }
+  });
+
+  it("does not warn when everything prices", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    buildList([{ hid: 1, rates: [rate("100.00")] }], hotels(hotel(1)), CTX);
+    expect(warn).not.toHaveBeenCalled();
+    warn.mockRestore();
+  });
+});
+
+describe("resultsCountLine", () => {
+  it("counts plainly when the supplier returned everything it has", () => {
+    expect(resultsCountLine(12, 12, { filtersActive: false, partial: false })).toBe("12 hotels");
+    expect(resultsCountLine(1, 1, { filtersActive: false, partial: false })).toBe("1 hotel");
+    expect(resultsCountLine(3, 12, { filtersActive: true, partial: false })).toBe("3 of 12 hotels match");
+  });
+  it("says Showing, never a total, when the supplier has more than it returned", () => {
+    expect(resultsCountLine(97, 97, { filtersActive: false, partial: true })).toBe("Showing 97 hotels");
+    expect(resultsCountLine(1, 97, { filtersActive: false, partial: true })).toBe("Showing 1 hotel");
+    expect(resultsCountLine(5, 97, { filtersActive: true, partial: true })).toBe("Showing 5 matching hotels");
   });
 });
 

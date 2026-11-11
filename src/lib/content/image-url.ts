@@ -5,6 +5,15 @@ export function imageUrl(url: string, size: ImageSize): string {
   return url.replace("{size}", size);
 }
 
+/** True when the URL parses and is https. Pages never load a photo over anything else. */
+export function isHttpsUrl(url: string): boolean {
+  try {
+    return new URL(url).protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 /**
  * The one supplier image host and path prefix that Next's image optimiser may fetch from.
  * `images.remotePatterns` in next.config.ts must say the same (a unit test checks that).

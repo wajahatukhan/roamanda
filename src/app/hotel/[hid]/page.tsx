@@ -9,7 +9,7 @@ import { ReviewSummary } from "@/components/review-summary";
 import type { AmenityGroup } from "@/lib/content/types";
 import { getHotelContent } from "@/lib/hotel/content";
 import { formatClock, humanize } from "@/lib/hotel/format";
-import { FIXTURE_RATED_COOKIE, fixtureRated } from "@/lib/search/fixture-failure";
+import { FIXTURE_FAIL_COOKIE, FIXTURE_RATED_COOKIE, fixtureRated, hotelContentFailure } from "@/lib/search/fixture-failure";
 import { HID } from "./layout";
 import { RatesSection } from "./rates";
 
@@ -28,6 +28,9 @@ function amenityItems(g: AmenityGroup): { name: string; extra: boolean }[] {
 async function load(hidParam: string) {
   if (!HID.test(hidParam)) return null;
   const hid = Number(hidParam);
+  // Fixture mode only: a cookie can make the content read fail, so the error page can be tested.
+  const failure = hotelContentFailure(getEnv().ETG_MODE, (await cookies()).get(FIXTURE_FAIL_COOKIE)?.value);
+  if (failure) throw failure;
   return { hid, hotel: await getHotelContent(hid) };
 }
 

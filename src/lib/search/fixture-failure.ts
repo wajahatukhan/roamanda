@@ -50,3 +50,13 @@ export const FIXTURE_RATED_REVIEW = {
 export function fixtureRated(mode: Mode, value: string | undefined): typeof FIXTURE_RATED_REVIEW | null {
   return mode === "fixture" && value === "1" ? FIXTURE_RATED_REVIEW : null;
 }
+
+/** `etg_fixture_fail=content` makes the hotel page's content read fail, as a database error would. Fixture mode only. */
+export function hotelContentFailure(mode: Mode, value: string | undefined): Error | null {
+  return mode === "fixture" && value === "content" ? new Error("Content store: reading hotel failed (simulated, fixture mode)") : null;
+}
+
+/** `etg_fixture_fail=serp-no-content` makes the search find hotels of which none has stored content. Fixture mode only. */
+export function fixtureNoContent(mode: Mode, value: string | undefined): boolean {
+  return mode === "fixture" && value === "serp-no-content";
+}

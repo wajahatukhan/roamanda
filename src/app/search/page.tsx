@@ -7,14 +7,14 @@ import { ResultsSkeleton } from "@/components/results-skeleton";
 import { SearchForm } from "@/components/search-form/search-form";
 import { initialFormValues } from "@/lib/search/initial";
 import { parseListParams } from "@/lib/search/list";
-import { parseSearchParams } from "@/lib/search/params";
+import { parseSearchParams, regionNameParam } from "@/lib/search/params";
 import { getResidency } from "@/lib/search/residency";
 import { describeStay } from "@/lib/search/summary";
 import { Filters } from "./filters";
 import { Results } from "./results";
 
 export async function generateMetadata({ searchParams }: PageProps<"/search">): Promise<Metadata> {
-  const name = (first((await searchParams).name) ?? "").trim().slice(0, 80);
+  const name = regionNameParam(await searchParams);
   return { title: name ? `Hotels in ${name}` : "Search hotels" };
 }
 

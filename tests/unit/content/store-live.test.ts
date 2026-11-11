@@ -1,24 +1,51 @@
 import { resetEnvCache } from "@/env";
 import { mapEtgHotel } from "@/lib/content/map-hotel";
-import { getDictionaries, getHotels, getMarkupPercent, hotelToRow, recordMissing, resetStoreCache, upsertHotels } from "@/lib/content/store";
+import { CONTENT_READ_TIMEOUT_MS, getDictionaries, getHotel, getHotelCards, getMarkupPercent, hotelToRow, recordMissing, resetStoreCache, upsertHotels } from "@/lib/content/store";
 import raw from "../../fixtures/etg/content-10004834.json";
 
 const calls: { table: string; op: string; arg: unknown }[] = [];
 let failWith: { message: string; code?: string } | null = null;
 let settingValue: unknown = 12;
+/** When true, hotel reads never answer (to test the time limit). */
+let hang = false;
+const signals: AbortSignal[] = [];
+
+const hotelRow = (hid: number) => hotelToRow(mapEtgHotel({ ...raw, hid }, "2026-11-11T00:00:00.000Z"));
 
 vi.mock("@supabase/supabase-js", () => ({
   createClient: () => ({
     from: (table: string) => {
       const result = (data: unknown) => ({ data, error: failWith });
+      const answer = <T,>(value: T) => (hang ? new Promise<never>(() => {}) : Promise.resolve(value));
       return {
-        select: () => ({
-          in: (_c: string, hids: number[]) => {
-            calls.push({ table, op: "in", arg: hids });
-            return Promise.resolve(result(hids.map((hid) => ({ ...hotelToRow(mapEtgHotel({ ...raw, hid }, "2026-11-11T00:00:00.000Z")) }))));
-          },
-          eq: () => ({ maybeSingle: () => Promise.resolve(result({ value: settingValue })) }),
-        }),
+        select: (columns: string) => {
+          const builder = {
+            abortSignal: (s: AbortSignal) => {
+              signals.push(s);
+              return builder;
+            },
+            in: (_c: string, hids: number[]) => {
+              calls.push({ table, op: "in", arg: hids });
+              calls.push({ table, op: "columns", arg: columns });
+              // What PostgREST returns for the card's columns: images reduced to the first entry.
+              return answer(result(hids.map((hid) => {
+                const row = hotelRow(hid);
+                return { hid: row.hid, name: row.name, address: row.address, star_rating: row.star_rating, review_rating: row.review_rating, first_image: row.images[0] ?? null };
+              })));
+            },
+            eq: (_c: string, value: unknown) => {
+              const single = {
+                abortSignal: (s: AbortSignal) => {
+                  signals.push(s);
+                  return single;
+                },
+                maybeSingle: () => (table === "hotels" ? answer(result(hotelRow(Number(value)))) : Promise.resolve(result({ value: settingValue }))),
+              };
+              return single;
+            },
+          };
+          return builder;
+        },
         upsert: (rows: unknown[], opts: unknown) => {
           calls.push({ table, op: "upsert", arg: { n: rows.length, opts } });
           return Promise.resolve({ error: failWith });
@@ -30,6 +57,8 @@ vi.mock("@supabase/supabase-js", () => ({
 
 beforeEach(() => {
   calls.length = 0;
+  signals.length = 0;
+  hang = false;
   failWith = null;
   settingValue = 12;
   vi.stubEnv("ETG_MODE", "live");
@@ -47,11 +76,49 @@ afterEach(() => {
   resetStoreCache();
 });
 
-test("getHotels chunks the in filter at 200 and dedupes", async () => {
+test("getHotelCards chunks the in filter at 200 and dedupes", async () => {
   const hids = Array.from({ length: 450 }, (_, i) => i + 1);
-  const map = await getHotels([...hids, 1, 2]);
+  const map = await getHotelCards([...hids, 1, 2]);
   expect(calls.filter((c) => c.op === "in").map((c) => (c.arg as number[]).length)).toEqual([200, 200, 50]);
   expect(map.size).toBe(450);
+});
+
+test("getHotelCards asks only for the card's columns, with images reduced to the first, and maps them", async () => {
+  const map = await getHotelCards([10004834]);
+  expect(calls.find((c) => c.op === "columns")?.arg).toBe("hid,name,address,star_rating,review_rating,first_image:images->0");
+  const card = map.get(10004834)!;
+  const full = hotelRow(10004834);
+  expect(card).toEqual({ hid: 10004834, name: full.name, address: full.address, starRating: full.star_rating, reviewRating: null, images: full.images.slice(0, 1) });
+});
+
+describe("time limit on page reads", () => {
+  test("is 3 seconds", () => {
+    expect(CONTENT_READ_TIMEOUT_MS).toBe(3000);
+  });
+
+  test("getHotelCards throws a clear error and aborts the query when the database does not answer in time", async () => {
+    hang = true;
+    await expect(getHotelCards([1, 2], { timeoutMs: 20 })).rejects.toThrow("Content store: reading hotels timed out after 20 ms");
+    expect(signals.length).toBeGreaterThan(0);
+    expect(signals.every((s) => s.aborted)).toBe(true);
+  });
+
+  test("getHotel throws a clear error and aborts the query when the database does not answer in time", async () => {
+    hang = true;
+    await expect(getHotel(10004834, { timeoutMs: 20 })).rejects.toThrow("Content store: reading hotel timed out after 20 ms");
+    expect(signals).toHaveLength(1);
+    expect(signals[0]!.aborted).toBe(true);
+  });
+
+  test("an answer within the limit is returned and nothing is aborted", async () => {
+    expect((await getHotel(10004834, { timeoutMs: 1000 }))?.hid).toBe(10004834);
+    expect(signals.every((s) => !s.aborted)).toBe(true);
+  });
+
+  test("getHotel reports a database error clearly", async () => {
+    failWith = { message: "permission denied", code: "42501" };
+    await expect(getHotel(1)).rejects.toThrow(/reading hotel failed \(42501\): permission denied/);
+  });
 });
 
 test("upsertHotels chunks writes at 200", async () => {
@@ -67,7 +134,7 @@ test("recordMissing ignores duplicates", async () => {
 
 test("database errors throw a clear message without key material", async () => {
   failWith = { message: "permission denied", code: "42501" };
-  const err = await getHotels([1]).catch((e: Error) => e);
+  const err = await getHotelCards([1]).catch((e: Error) => e);
   expect(err).toBeInstanceOf(Error);
   expect((err as Error).message).toContain("reading hotels");
   expect((err as Error).message).toContain("permission denied");

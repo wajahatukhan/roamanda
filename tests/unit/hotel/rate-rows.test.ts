@@ -164,6 +164,19 @@ describe("buildRateRows details", () => {
     const [row] = buildRateRows([rate({ pts: [bad] })], CTX);
     expect(row!.policyLines).toEqual([]);
   });
+  it("leaves out a row that cannot be priced, keeps the others, and warns once with counts only", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    try {
+      const badTax = paymentType({ amount: "50.00", tax_data: { taxes: [{ name: "city_tax", included_by_supplier: false, amount: "3.00", currency_code: "EURO" }] } });
+      const emptyTax = paymentType({ amount: "60.00", tax_data: { taxes: [{ name: "city_tax", included_by_supplier: false, amount: "3.00", currency_code: "" }] } });
+      const rows = buildRateRows([rate({ hash: "a", pts: [badTax] }), rate({ hash: "b", pts: [paymentType({ amount: "70.00" })] }), rate({ hash: "c", pts: [emptyTax] })], CTX);
+      expect(rows.map((r) => r.bookHash)).toEqual(["b"]);
+      expect(warn).toHaveBeenCalledTimes(1);
+      expect(String(warn.mock.calls[0]![0])).toBe("Hotel rates: left out 2 of 3 rate option(s) that could not be priced");
+    } finally {
+      warn.mockRestore();
+    }
+  });
   it("uses the fallback sentence for a row whose cancellation data is malformed, and keeps the other rows", () => {
     const bad = paymentType({ cancellation_penalties: { free_cancellation_before: "not-a-date", policies: [] } });
     const negative = paymentType({ cancellation_penalties: { free_cancellation_before: null, policies: [{ start_at: null, end_at: null, amount_charge: "1", amount_show: "-5" }] } });

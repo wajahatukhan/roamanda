@@ -78,17 +78,32 @@ export async function multicomplete(query: string): Promise<MulticompleteData> {
   });
 }
 
-export async function searchRegion(regionId: number, q: StayQuery): Promise<LenientHotels["hotels"]> {
+/** The most hotels a region search asks for. ETG returns at most this many and states how many it has in `total_hotels`. */
+export const REGION_HOTELS_LIMIT = 100;
+
+export type RegionSearch = {
+  hotels: LenientHotels["hotels"];
+  /** How many hotels the supplier has for this search (`total_hotels`), or null when it did not say. */
+  totalHotels: number | null;
+};
+
+function totalHotelsOf(data: unknown): number | null {
+  const t = (data as { total_hotels?: unknown } | null)?.total_hotels;
+  return typeof t === "number" && Number.isInteger(t) && t >= 0 ? t : null;
+}
+
+export async function searchRegion(regionId: number, q: StayQuery): Promise<RegionSearch> {
   if (isFixtureMode()) {
-    return parseHotelsLenient((await import("../../../tests/fixtures/etg/serp-region.json")).default).hotels;
+    const data = (await import("../../../tests/fixtures/etg/serp-region.json")).default;
+    return { hotels: parseHotelsLenient(data).hotels, totalHotels: totalHotelsOf(data) };
   }
   const data = await etgRequest({
     method: "POST",
     path: "/api/b2b/v3/search/serp/region/",
-    body: { ...stayBody(q), region_id: regionId },
+    body: { ...stayBody(q), region_id: regionId, hotels_limit: REGION_HOTELS_LIMIT },
     schema: z.unknown(),
-  }).then(parseHotelsLenient);
-  return data.hotels;
+  });
+  return { hotels: parseHotelsLenient(data).hotels, totalHotels: totalHotelsOf(data) };
 }
 
 /** `fixtureTag` only matters in fixture mode, where it groups the test-only read counter. */

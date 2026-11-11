@@ -64,8 +64,9 @@ test("fixture mode returns fixture data without fetch", async () => {
   });
   const rates = await hotelPage(10004834, query);
   expect(rates.length).toBe(hp10004834.hotels[0]!.rates.length);
-  const hotels = await searchRegion(2011, query);
-  expect(hotels.length).toBe(serpRegion.hotels.length);
+  const region = await searchRegion(2011, query);
+  expect(region.hotels.length).toBe(serpRegion.hotels.length);
+  expect(region.totalHotels).toBe(serpRegion.total_hotels);
   const found = await multicomplete("Paris");
   expect(found.regions.map((r) => r.id)).toContain(2734);
 });
@@ -88,6 +89,23 @@ test("live mode posts the stay to the hotel page endpoint with language en and r
   expect(rates.length).toBe(hp10004834.hotels[0]!.rates.length);
   expect(fetchSpy.mock.calls[0]?.[0]).toBe("https://etg.test/api/b2b/v3/search/hp/");
   expect(JSON.parse(String(fetchSpy.mock.calls[0]?.[1]?.body))).toEqual({ ...query, language: "en", hid: 10004834 });
+});
+
+test("live mode region search asks for at most 100 hotels and reports the supplier's total", async () => {
+  vi.stubEnv("ETG_MODE", "live");
+  vi.stubEnv("ETG_KEY_ID", "id");
+  vi.stubEnv("ETG_API_KEY", "key");
+  resetEnvCache();
+  const fetchSpy = vi.fn<typeof fetch>(async () => Response.json({ status: "ok", error: null, data: { ...serpRegion, total_hotels: 412 }, debug: {} }));
+  vi.stubGlobal("fetch", fetchSpy);
+  const region = await searchRegion(2011, query);
+  expect(fetchSpy.mock.calls[0]?.[0]).toBe("https://etg.test/api/b2b/v3/search/serp/region/");
+  expect(JSON.parse(String(fetchSpy.mock.calls[0]?.[1]?.body))).toEqual({ ...query, language: "en", region_id: 2011, hotels_limit: 100 });
+  expect(region.hotels.length).toBe(serpRegion.hotels.length);
+  expect(region.totalHotels).toBe(412);
+  // A missing or odd total is unknown, not zero.
+  fetchSpy.mockImplementation(async () => Response.json({ status: "ok", error: null, data: { hotels: [] }, debug: {} }));
+  expect((await searchRegion(2011, query)).totalHotels).toBeNull();
 });
 
 describe("lenient hotel parsing", () => {
@@ -118,6 +136,23 @@ describe("lenient hotel parsing", () => {
     expect(out.hotels[0]!.rates.length).toBe(total - 1);
     expect(warn).toHaveBeenCalledTimes(1);
     expect(String(warn.mock.calls[0]![0])).toContain("room_name");
+  });
+
+  test("a currency code that is not three capital letters drops only that rate (tax, payment and shown currency)", () => {
+    const hp = copy();
+    const total = hp.hotels[0]!.rates.length;
+    const withTax = hp.hotels[0]!.rates.findIndex((r) => r.payment_options.payment_types[0].tax_data.taxes?.length > 0);
+    expect(withTax).toBeGreaterThanOrEqual(0);
+    for (const [where, bad] of [["tax", ""], ["tax", "EURO"], ["tax", "usd"], ["payment", "US"], ["shown", "$"]] as const) {
+      const data = copy();
+      const pt = data.hotels[0]!.rates[withTax]!.payment_options.payment_types[0];
+      if (where === "tax") pt.tax_data.taxes[0].currency_code = bad;
+      else if (where === "payment") pt.currency_code = bad;
+      else pt.show_currency_code = bad;
+      const out = parseHotelsLenient(data);
+      expect(out.droppedRates, `${where} ${bad}`).toBe(1);
+      expect(out.hotels[0]!.rates.length).toBe(total - 1);
+    }
   });
 
   test("an unknown payment type drops only that rate", () => {

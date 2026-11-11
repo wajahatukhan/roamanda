@@ -120,6 +120,30 @@ test.describe("with a passport country", () => {
     await expect(page.getByRole("link", { name: "Clear filters" })).toHaveCount(0);
   });
 
+  test("when the search finds hotels but none has details yet, says so instead of 'no hotels available'", async ({ page, context }) => {
+    await cookie(context, "etg_fixture_fail", "serp-no-content");
+    await page.goto(SEARCH);
+    const status = page.getByRole("status").filter({ hasText: "still adding" });
+    await expect(status).toHaveText("We're still adding details for hotels in this destination.Please try another destination.");
+    await expect(page.getByRole("heading", { name: "We're still adding details for hotels in this destination." })).toBeVisible();
+    await expect(page.getByText("No hotels are available for these dates.")).toHaveCount(0);
+    await expect(page.getByRole("article")).toHaveCount(0);
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  });
+
+  test("the count says Showing when the supplier has more hotels than it returned", async ({ page }) => {
+    // The recorded search states total_hotels 30 but returns 22.
+    await page.goto(SEARCH);
+    await expect(page.getByRole("article").first()).toBeVisible();
+    await expect(page.getByRole("status").filter({ hasText: /hotels?$/ })).toHaveText(/^Showing \d+ hotels?$/);
+  });
+
+  test("an over-long destination name is not printed in the heading or title", async ({ page }) => {
+    await page.goto(SEARCH.replace("name=Paris", `name=${"x".repeat(81)}`));
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Hotels");
+    await expect(page).toHaveTitle("Search hotels");
+  });
+
   test("an invalid URL names the problem and shows the form, pre-filled", async ({ page }) => {
     await page.goto(`/search?region=2011&name=Paris&in=${iso(30)}&out=${iso(32)}`);
     const alert = page.getByRole("alert").filter({ hasText: "Choose guests and rooms." });

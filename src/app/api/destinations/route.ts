@@ -4,10 +4,12 @@ import { multicomplete } from "@/lib/etg/search";
 import { MIN_QUERY_LENGTH, type DestinationsResponse } from "@/lib/search/destinations";
 
 const MAX_PER_GROUP = 6;
+/** Longer queries are not destination names; they get no suggestions and never reach the supplier. */
+export const MAX_QUERY_LENGTH = 80;
 
 export async function GET(request: Request): Promise<Response> {
   const q = (new URL(request.url).searchParams.get("q") ?? "").trim();
-  if (q.length < MIN_QUERY_LENGTH) {
+  if (q.length < MIN_QUERY_LENGTH || q.length > MAX_QUERY_LENGTH) {
     return Response.json({ regions: [], hotels: [] } satisfies DestinationsResponse);
   }
   try {

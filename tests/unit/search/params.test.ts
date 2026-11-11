@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { decodeRooms, encodeRooms, parseSearchParams, parseStayParams } from "@/lib/search/params";
+import { decodeRooms, encodeRooms, MAX_NAME_LENGTH, parseSearchParams, parseStayParams, regionNameParam } from "@/lib/search/params";
 
 const today = new Date("2026-11-11T09:00:00Z");
 const valid = { region: "2011", name: "Berlin", in: "2026-12-10", out: "2026-12-12", rooms: "2-5.9,1" };
@@ -91,6 +91,23 @@ describe("parseSearchParams", () => {
   it("uses the first value of a repeated parameter", () => {
     const r = parseSearchParams({ ...valid, region: ["2011", "5"] }, today);
     expect(r.ok && r.regionId).toBe(2011);
+  });
+});
+
+describe("the destination name used in the heading and title", () => {
+  it("is trimmed and kept up to 80 characters", () => {
+    expect(MAX_NAME_LENGTH).toBe(80);
+    const eighty = "x".repeat(80);
+    expect(regionNameParam({ name: `  ${eighty}  ` })).toBe(eighty);
+    const r = parseSearchParams({ ...valid, name: eighty }, today);
+    expect(r.ok && r.regionName).toBe(eighty);
+  });
+  it("is treated as missing when longer than 80 characters after trimming, without making the search invalid", () => {
+    expect(regionNameParam({ name: "x".repeat(81) })).toBe("");
+    expect(regionNameParam({ name: undefined })).toBe("");
+    const r = parseSearchParams({ ...valid, name: "y".repeat(81) }, today);
+    expect(r.ok).toBe(true);
+    expect(r.ok && r.regionName).toBe("");
   });
 });
 

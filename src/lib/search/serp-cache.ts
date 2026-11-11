@@ -1,10 +1,9 @@
 import "server-only";
-import type { Rate, StayQuery } from "@/lib/etg/schemas";
-import { searchRegion } from "@/lib/etg/search";
+import type { StayQuery } from "@/lib/etg/schemas";
+import { searchRegion, type RegionSearch } from "@/lib/etg/search";
 import { encodeRooms } from "@/lib/search/params";
 
-type Hotels = { hid: number; rates: Rate[] }[];
-type Entry = { at: number; promise: Promise<Hotels> };
+type Entry = { at: number; promise: Promise<RegionSearch> };
 
 const TTL_MS = 5 * 60 * 1000;
 const MAX_ENTRIES = 200;
@@ -24,7 +23,7 @@ export async function cachedSearchRegion(
   regionId: number,
   q: StayQuery,
   deps: { search?: typeof searchRegion; now?: () => number } = {},
-): Promise<Hotels> {
+): Promise<RegionSearch> {
   const search = deps.search ?? searchRegion;
   const now = (deps.now ?? Date.now)();
   const key = keyOf(regionId, q);

@@ -1,4 +1,4 @@
-import { canOptimise, imageUrl } from "@/lib/content/image-url";
+import { canOptimise, imageUrl, isHttpsUrl } from "@/lib/content/image-url";
 import type { HotelImage } from "@/lib/content/types";
 import { humanize } from "./format";
 
@@ -8,17 +8,17 @@ export type Photo = { n: number; large: string; medium: string; small: string; a
 /** How many photos the page shows; the rest are counted, not rendered. */
 export const MAX_PHOTOS = 12;
 
-function secure(url: string): boolean {
-  try {
-    return new URL(url).protocol === "https:";
-  } catch {
-    return false;
-  }
+/** The search card's photo: the first image at 640x350, only when that URL is https; otherwise null (the no-photo state). */
+export function cardPhotoUrl(images: HotelImage[]): string | null {
+  const first = images[0];
+  if (!first) return null;
+  const url = imageUrl(first.url, "640x350");
+  return isHttpsUrl(url) ? url : null;
 }
 
 /** Photos whose URL is https once sized, with alt text that says which photo it is, not the hotel name again. */
 export function galleryPhotos(images: HotelImage[]): { photos: Photo[]; total: number } {
-  const usable = images.filter((i) => secure(imageUrl(i.url, "1024x768")));
+  const usable = images.filter((i) => isHttpsUrl(imageUrl(i.url, "1024x768")));
   const total = usable.length;
   const photos = usable.slice(0, MAX_PHOTOS).map((image, index) => {
     const category = image.category && image.category !== "unspecified" ? humanize(image.category) : null;

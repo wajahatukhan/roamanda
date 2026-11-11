@@ -81,6 +81,15 @@ function checkStay(sp: RawParams, today: Date, add: (problem: string) => void): 
   return { checkin: checkin ?? "", checkout: checkout ?? "", guests };
 }
 
+/** Longest destination name the page will print; a longer `name` is treated as missing. */
+export const MAX_NAME_LENGTH = 80;
+
+/** The destination name from the URL, trimmed; "" when absent or longer than MAX_NAME_LENGTH. */
+export function regionNameParam(sp: RawParams): string {
+  const name = first(sp.name)?.trim() ?? "";
+  return name.length <= MAX_NAME_LENGTH ? name : "";
+}
+
 export function parseSearchParams(sp: RawParams, today: Date): ParsedSearch {
   const problems: string[] = [];
   const add = (p: string) => { if (!problems.includes(p)) problems.push(p); };
@@ -95,7 +104,7 @@ export function parseSearchParams(sp: RawParams, today: Date): ParsedSearch {
   return {
     ok: true,
     regionId,
-    regionName: first(sp.name)?.trim() ?? "",
+    regionName: regionNameParam(sp),
     query: { checkin: stay.checkin, checkout: stay.checkout, guests: stay.guests, currency: "USD" },
   };
 }

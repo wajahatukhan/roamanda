@@ -4,11 +4,11 @@ import { z } from "zod";
 import { getEnv } from "@/env";
 import { chunk } from "./chunk";
 import { mapEtgHotels } from "./map-hotel";
-import type { Dictionaries, Hotel } from "./types";
+import type { Dictionaries, Hotel, HotelCard } from "./types";
 
 export { imageUrl } from "./image-url";
 export { mapEtgHotel } from "./map-hotel";
-export type { Hotel } from "./types";
+export type { Hotel, HotelCard } from "./types";
 
 /** Rows per `in` filter (reads) and per write batch. */
 export const STORE_CHUNK_SIZE = 200;
@@ -137,31 +137,90 @@ function loadFixtureHotels(): Promise<Map<number, Hotel>> {
 // Hotels
 // ---------------------------------------------------------------------------------------------
 
-/** Hotels by hid. Unknown hids are simply absent from the map. */
-export async function getHotels(hids: number[]): Promise<Map<number, Hotel>> {
-  const out = new Map<number, Hotel>();
+/** Page reads of hotel content give up after this long, so a slow database fails the page instead of hanging it. */
+export const CONTENT_READ_TIMEOUT_MS = 3000;
+
+/**
+ * Runs a read with an abort signal and a time limit, like `hotelExists` does, but throws a clear error when the time
+ * runs out (a page cannot do without the answer). The query is aborted on timeout; a late failure is swallowed.
+ */
+async function bounded<T>(op: string, run: (signal: AbortSignal) => Promise<T>, timeoutMs: number): Promise<T> {
+  const controller = new AbortController();
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timedOut = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => {
+      controller.abort();
+      reject(new Error(`Content store: ${op} timed out after ${timeoutMs} ms`));
+    }, timeoutMs);
+  });
+  const work = run(controller.signal);
+  work.catch(() => {}); // Handled by the race below; a failure after the timeout must not become an unhandled rejection.
+  try {
+    return await Promise.race([work, timedOut]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/** One hotel's full content, or null when the store has none. Throws on a database error or after 3 seconds. */
+export async function getHotel(hid: number, opts: { timeoutMs?: number } = {}): Promise<Hotel | null> {
+  if (isFixtureMode()) return (await loadFixtureHotels()).get(hid) ?? null;
+  return bounded(
+    "reading hotel",
+    async (signal) => {
+      const { data, error } = await db().from("hotels").select("*").eq("hid", hid).abortSignal(signal).maybeSingle();
+      check("reading hotel", error);
+      return data ? rowToHotel(data as HotelRow) : null;
+    },
+    opts.timeoutMs ?? CONTENT_READ_TIMEOUT_MS,
+  );
+}
+
+/** The columns a search-result card shows; `images` is reduced to its first entry by the database. */
+const CARD_COLUMNS = "hid,name,address,star_rating,review_rating,first_image:images->0";
+type CardRow = Pick<HotelRow, "hid" | "name" | "address" | "star_rating" | "review_rating"> & { first_image: Hotel["images"][number] | null };
+
+function toCard(h: Hotel): HotelCard {
+  return { hid: h.hid, name: h.name, address: h.address, starRating: h.starRating, reviewRating: h.reviewRating, images: h.images.slice(0, 1) };
+}
+
+/**
+ * Card data for the search list, by hid: only the card's columns, 200 hids per request, all within 3 seconds.
+ * Unknown hids are simply absent from the map. Throws on a database error or on timeout.
+ */
+export async function getHotelCards(hids: number[], opts: { timeoutMs?: number } = {}): Promise<Map<number, HotelCard>> {
+  const out = new Map<number, HotelCard>();
   if (hids.length === 0) return out;
   if (isFixtureMode()) {
     const all = await loadFixtureHotels();
     for (const hid of hids) {
       const h = all.get(hid);
-      if (h) out.set(hid, h);
+      if (h) out.set(hid, toCard(h));
     }
     return out;
   }
-  for (const part of chunk([...new Set(hids)], STORE_CHUNK_SIZE)) {
-    const { data, error } = await db().from("hotels").select("*").in("hid", part);
-    check("reading hotels", error);
-    for (const row of (data ?? []) as HotelRow[]) {
-      const h = rowToHotel(row);
-      out.set(h.hid, h);
-    }
-  }
-  return out;
-}
-
-export async function getHotel(hid: number): Promise<Hotel | null> {
-  return (await getHotels([hid])).get(hid) ?? null;
+  return bounded(
+    "reading hotels",
+    async (signal) => {
+      for (const part of chunk([...new Set(hids)], STORE_CHUNK_SIZE)) {
+        const { data, error } = await db().from("hotels").select(CARD_COLUMNS).abortSignal(signal).in("hid", part);
+        check("reading hotels", error);
+        for (const r of (data ?? []) as unknown as CardRow[]) {
+          const hid = Number(r.hid);
+          out.set(hid, {
+            hid,
+            name: r.name,
+            address: r.address,
+            starRating: r.star_rating,
+            reviewRating: r.review_rating === null ? null : Number(r.review_rating),
+            images: r.first_image ? [r.first_image] : [],
+          });
+        }
+      }
+      return out;
+    },
+    opts.timeoutMs ?? CONTENT_READ_TIMEOUT_MS,
+  );
 }
 
 // Existence check (used by proxy.ts on every hotel page request)

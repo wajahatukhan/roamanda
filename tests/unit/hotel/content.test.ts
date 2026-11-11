@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { Hotel } from "@/lib/content/types";
 import { formatClock, humanize } from "@/lib/hotel/format";
-import { galleryPhotos, MAX_PHOTOS } from "@/lib/hotel/gallery";
+import { cardPhotoUrl, galleryPhotos, MAX_PHOTOS } from "@/lib/hotel/gallery";
 import { htmlToLines, policyData, policyGroups } from "@/lib/hotel/policy";
 import { reviewModel } from "@/lib/hotel/review";
 import nextConfig from "../../../next.config";
@@ -34,6 +34,20 @@ describe("reviewModel", () => {
   it("matches the fixture: no hotel has a rating", () => {
     const all = (content as unknown as { reviews: { rating: number | null }[] }).reviews;
     expect(all.every((r) => r.rating === null)).toBe(true);
+  });
+});
+
+describe("cardPhotoUrl", () => {
+  it("is the first photo at 640x350 when that URL is https", () => {
+    expect(cardPhotoUrl([{ category: "x", url: "https://cdn.worldota.net/t/{size}/a.jpg" }, { category: "x", url: "https://cdn.worldota.net/t/{size}/b.jpg" }])).toBe(
+      "https://cdn.worldota.net/t/640x350/a.jpg",
+    );
+  });
+  it("is null (the no-photo state) for no photos or a first photo that is not https", () => {
+    expect(cardPhotoUrl([])).toBeNull();
+    for (const url of ["http://cdn.worldota.net/t/{size}/a.jpg", "//cdn.worldota.net/t/{size}/a.jpg", "javascript:alert(1)", "data:image/png;base64,AAAA", "not a url"]) {
+      expect(cardPhotoUrl([{ category: "x", url }]), url).toBeNull();
+    }
   });
 });
 

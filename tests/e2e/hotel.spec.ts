@@ -441,3 +441,54 @@ test.describe("hotels that are not available", () => {
     expect(await res.text()).toContain("We could not find that page.");
   });
 });
+
+test.describe("when the content store fails", () => {
+  test("the hotel page shows the designed error page, with no details of the failure", async ({ page, context }) => {
+    await cookie(context, "residency", "us");
+    await cookie(context, "etg_fixture_fail", "content");
+    const errors: string[] = [];
+    page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+    await page.goto(HOTEL);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Something went wrong");
+    await expect(page.getByText("Please try again in a moment.")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Try again" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Back to search" })).toHaveAttribute("href", "/");
+    await expect(page.getByText(/simulated|Content store|fixture/i)).toHaveCount(0);
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    // Once the cause is gone, Try again brings the hotel back without leaving the page.
+    await context.clearCookies({ name: "etg_fixture_fail" });
+    await page.getByRole("button", { name: "Try again" }).click();
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Conrad Los Angeles");
+    await expect(page).toHaveURL(new RegExp(`/hotel/${HID}\\?`));
+  });
+});
+
+test.describe("navigating in the browser to a hotel we have no details for", () => {
+  test("choosing a suggested hotel that is not in the content store ends on the designed missing-hotel page", async ({ page, context }) => {
+    await cookie(context, "residency", "us");
+    await page.goto("/");
+    await page.getByRole("combobox", { name: "Destination" }).fill("Par");
+    // All five recorded hotel suggestions are missing from the content fixture.
+    await page.getByRole("option", { name: /Paris Appartements Services/ }).click();
+    await page.getByRole("button", { name: DATES }).click();
+    await expect(page.getByRole("grid").first()).toBeVisible();
+    await page.keyboard.press("ArrowRight");
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("ArrowRight");
+    await page.keyboard.press("ArrowRight");
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Escape");
+    // The router asks for the page's data; the proxy answers 404 for a hotel with no stored content, and the
+    // router then loads the page as a document, which is the same designed 404 page.
+    const documents: { url: string; status: number }[] = [];
+    page.on("response", (r) => r.request().resourceType() === "document" && documents.push({ url: r.url(), status: r.status() }));
+    await page.getByRole("button", { name: "Search", exact: true }).click();
+    await page.waitForURL(/\/hotel\/8745530\?/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("We don't have details for this hotel yet.");
+    await expect(page.getByRole("link", { name: "Back to search" })).toHaveAttribute("href", "/");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+    await expect(page.getByText("Something went wrong")).toHaveCount(0);
+    for (const d of documents) expect(d.status, d.url).toBe(404);
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  });
+});

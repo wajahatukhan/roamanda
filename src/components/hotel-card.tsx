@@ -1,7 +1,7 @@
 import { Building2, Check, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { imageUrl } from "@/lib/content/image-url";
+import { cardPhotoUrl } from "@/lib/hotel/gallery";
 import type { ListItem } from "@/lib/search/list";
 import { Price } from "./price";
 import { Reveal } from "./reveal";
@@ -16,14 +16,14 @@ const EAGER_CARDS = 2;
 
 export function HotelCard({ item, index, nights, href }: { item: ListItem; index: number; nights: number; href: string }) {
   const { hotel, from } = item;
-  const photo = hotel.images[0];
+  const photo = cardPhotoUrl(hotel.images);
   return (
     <Reveal index={index}>
       <article className={`${CARD_SHELL} has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring`}>
         <div className={CARD_IMAGE}>
           {photo ? (
             <Image
-              src={imageUrl(photo.url, "640x350")}
+              src={photo}
               alt={hotel.name}
               fill
               unoptimized

@@ -3,6 +3,9 @@ import { z } from "zod";
 /** Non-negative decimal as ETG sends money: digits with an optional fractional part. */
 export const DecimalString = z.string().regex(/^\d+(\.\d+)?$/);
 
+/** ISO 4217 code: three capital letters. Anything else ("", "EURO") makes the rate invalid, so the lenient parser drops it. */
+export const CurrencyCode = z.string().regex(/^[A-Z]{3}$/);
+
 // Non-strict objects: unknown fields are tolerated, and fields this app does not use are omitted.
 // Shapes were checked against sandbox recordings in tests/fixtures/etg/.
 
@@ -14,7 +17,7 @@ export const StayQuery = z.object({
   checkout: z.string(),
   residency: z.string(),
   guests: Guests,
-  currency: z.string(),
+  currency: CurrencyCode,
 });
 export type StayQuery = z.infer<typeof StayQuery>;
 
@@ -22,7 +25,7 @@ export const Tax = z.object({
   name: z.string(),
   included_by_supplier: z.boolean(),
   amount: DecimalString,
-  currency_code: z.string(),
+  currency_code: CurrencyCode,
 });
 export type Tax = z.infer<typeof Tax>;
 
@@ -41,9 +44,9 @@ export type CancellationPenalties = z.infer<typeof CancellationPenalties>;
 
 export const PaymentType = z.object({
   amount: DecimalString,
-  currency_code: z.string(),
+  currency_code: CurrencyCode,
   show_amount: DecimalString,
-  show_currency_code: z.string(),
+  show_currency_code: CurrencyCode,
   type: z.enum(["now", "hotel", "deposit"]),
   // The sandbox sends tax_data as {} when a rate has no taxes, so a missing list becomes [].
   tax_data: z.object({ taxes: z.array(Tax).default([]) }),

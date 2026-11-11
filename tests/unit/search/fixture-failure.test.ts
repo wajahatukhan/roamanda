@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { EtgError } from "@/lib/etg/errors";
-import { fixtureDelayMs, fixtureEmpty, fixtureFailure, hotelPageEmpty, hotelPageFailure, fixtureRated, FIXTURE_RATED_REVIEW } from "@/lib/search/fixture-failure";
+import { fixtureDelayMs, fixtureEmpty, fixtureFailure, fixtureNoContent, hotelContentFailure, hotelPageEmpty, hotelPageFailure, fixtureRated, FIXTURE_RATED_REVIEW } from "@/lib/search/fixture-failure";
 
 describe("fixtureFailure", () => {
   it("serp makes a retryable EtgError in fixture mode", () => {
@@ -83,5 +83,31 @@ describe("fixtureRated", () => {
     expect(fixtureRated("live", "1")).toBeNull();
     expect(fixtureRated("fixture", "0")).toBeNull();
     expect(fixtureRated("fixture", undefined)).toBeNull();
+  });
+});
+
+describe("hotelContentFailure (etg_fixture_fail=content)", () => {
+  it("makes the hotel content read fail in fixture mode only", () => {
+    const e = hotelContentFailure("fixture", "content");
+    expect(e).toBeInstanceOf(Error);
+    expect(e?.message).toMatch(/Content store/);
+    expect(hotelContentFailure("live", "content")).toBeNull();
+  });
+  it("ignores other values, and other values ignore it", () => {
+    expect(hotelContentFailure("fixture", "hp")).toBeNull();
+    expect(hotelContentFailure("fixture", undefined)).toBeNull();
+    expect(hotelPageFailure("fixture", "content")).toBeNull();
+    expect(fixtureFailure("fixture", "content")).toBeNull();
+  });
+});
+
+describe("fixtureNoContent (etg_fixture_fail=serp-no-content)", () => {
+  it("is on in fixture mode only, for that value only", () => {
+    expect(fixtureNoContent("fixture", "serp-no-content")).toBe(true);
+    expect(fixtureNoContent("live", "serp-no-content")).toBe(false);
+    expect(fixtureNoContent("fixture", "serp-empty")).toBe(false);
+    expect(fixtureNoContent("fixture", undefined)).toBe(false);
+    expect(fixtureFailure("fixture", "serp-no-content")).toBeNull();
+    expect(fixtureEmpty("fixture", "serp-no-content")).toBe(false);
   });
 });

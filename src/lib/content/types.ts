@@ -29,4 +29,7 @@ export type Hotel = {
   syncedAt: string;
 };
 
+/** What a search-result card needs: a few columns, and at most the first photo. */
+export type HotelCard = Pick<Hotel, "hid" | "name" | "address" | "starRating" | "reviewRating" | "images">;
+
 export type Dictionaries = { taxNames: Record<string, string>; mealNames: Record<string, string> };

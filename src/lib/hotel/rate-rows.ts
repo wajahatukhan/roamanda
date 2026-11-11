@@ -46,6 +46,8 @@ const SOLD_TYPES = new Set(["now", "deposit"]);
 export function buildRateRows(rates: Rate[], ctx: RateRowContext): RateRow[] {
   const timeZone = ctx.timeZone || "UTC";
   const rows: RateRow[] = [];
+  let unpriceable = 0;
+  let eligible = 0;
 
   rates.forEach((rate, rateIndex) => {
     // A rate without a booking hash cannot be booked, so it is not offered.
@@ -55,10 +57,12 @@ export function buildRateRows(rates: Rate[], ctx: RateRowContext): RateRow[] {
 
     rate.payment_options.payment_types.forEach((pt, ptIndex) => {
       if (!SOLD_TYPES.has(pt.type) || pt.show_currency_code !== ctx.currency) return;
+      eligible++;
       let price: StayPrice;
       try {
         price = priceRate(pt, ctx.markupPercent, ctx.taxNames);
       } catch {
+        unpriceable++;
         return;
       }
       let cancellation: string;
@@ -85,6 +89,7 @@ export function buildRateRows(rates: Rate[], ctx: RateRowContext): RateRow[] {
     });
   });
 
+  if (unpriceable > 0) console.warn(`Hotel rates: left out ${unpriceable} of ${eligible} rate option(s) that could not be priced`);
   // Array.prototype.sort is stable, so equal totals keep the supplier's order.
   return rows.sort((a, b) => new Decimal(a.price.total.amount).comparedTo(b.price.total.amount));
 }
