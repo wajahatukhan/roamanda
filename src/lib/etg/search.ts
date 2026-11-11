@@ -93,16 +93,14 @@ function totalHotelsOf(data: unknown): number | null {
 }
 
 export async function searchRegion(regionId: number, q: StayQuery): Promise<RegionSearch> {
-  if (isFixtureMode()) {
-    const data = (await import("../../../tests/fixtures/etg/serp-region.json")).default;
-    return { hotels: parseHotelsLenient(data).hotels, totalHotels: totalHotelsOf(data) };
-  }
-  const data = await etgRequest({
-    method: "POST",
-    path: "/api/b2b/v3/search/serp/region/",
-    body: { ...stayBody(q), region_id: regionId, hotels_limit: REGION_HOTELS_LIMIT },
-    schema: z.unknown(),
-  });
+  const data = isFixtureMode()
+    ? (await import("../../../tests/fixtures/etg/serp-region.json")).default
+    : await etgRequest({
+        method: "POST",
+        path: "/api/b2b/v3/search/serp/region/",
+        body: { ...stayBody(q), region_id: regionId, hotels_limit: REGION_HOTELS_LIMIT },
+        schema: z.unknown(),
+      });
   return { hotels: parseHotelsLenient(data).hotels, totalHotels: totalHotelsOf(data) };
 }
 
