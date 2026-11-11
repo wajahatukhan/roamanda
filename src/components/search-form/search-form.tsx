@@ -16,11 +16,14 @@ import { ResidencyDialog } from "./residency-dialog";
 
 type Errors = { destination?: string; dates?: string; guests?: string };
 
-export function SearchForm() {
+/** Values to start the form with, for example from a search URL. Everything is optional. */
+export type SearchFormInitial = { destination?: Destination | null; range?: DateRange; rooms?: Guests };
+
+export function SearchForm({ initial }: { initial?: SearchFormInitial } = {}) {
   const router = useRouter();
-  const [destination, setDestination] = useState<Destination | null>(null);
-  const [range, setRange] = useState<DateRange | undefined>();
-  const [rooms, setRooms] = useState<Guests>(DEFAULT_GUESTS);
+  const [destination, setDestination] = useState<Destination | null>(initial?.destination ?? null);
+  const [range, setRange] = useState<DateRange | undefined>(initial?.range);
+  const [rooms, setRooms] = useState<Guests>(initial?.rooms ?? DEFAULT_GUESTS);
   const [errors, setErrors] = useState<Errors>({});
   const [guestsOpen, setGuestsOpen] = useState(false);
   const [ageFocusTick, setAgeFocusTick] = useState(0);
