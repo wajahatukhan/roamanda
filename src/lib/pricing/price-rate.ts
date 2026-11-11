@@ -9,7 +9,7 @@ export type StayPrice = {
 };
 
 /** Whether the payment is taken at booking ("deposit" or "now") in the requested currency. "hotel" payments are not sold. */
-export function isSoldAtBooking(pt: PaymentType, currency: string): boolean {
+export function isSoldAtBooking(pt: PaymentType, currency: string): pt is PaymentType & { type: "now" | "deposit" } {
   return (pt.type === "deposit" || pt.type === "now") && pt.show_currency_code === currency;
 }
 

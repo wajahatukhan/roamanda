@@ -15,7 +15,7 @@ export type RateRow = {
   bedding: string | null;
   meal: string;
   mealLabel: string;
-  paymentType: "now" | "hotel" | "deposit";
+  paymentType: "now" | "deposit";
   paymentLabel: string;
   price: StayPrice;
   cancellation: string;
@@ -34,7 +34,7 @@ export type RateRowContext = {
   taxNames: Record<string, string>;
 };
 
-const PAYMENT_LABELS = { now: "Pay now", deposit: "Pay now", hotel: "Pay at the hotel" } as const;
+const PAYMENT_LABELS = { now: "Pay now", deposit: "Pay now" } as const;
 
 /**
  * One row for each rate and each payment type that is paid at booking and priced in the requested currency,
