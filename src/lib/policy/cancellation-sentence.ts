@@ -16,8 +16,13 @@ function parseTimestamp(value: string): number {
   let v = value;
   if (!/(Z|[+-]\d{2}:?\d{2})$/.test(v)) v += "Z";
   else v = v.replace(/([+-]\d{2})(\d{2})$/, "$1:$2");
+  const [, y, mo, d, h, mi, s] = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?/.exec(v) as RegExpExecArray;
+  const check = new Date(Date.UTC(+y!, +mo! - 1, +d!, +h!, +mi!, +(s ?? 0)));
+  const calendarOk =
+    check.getUTCFullYear() === +y! && check.getUTCMonth() === +mo! - 1 && check.getUTCDate() === +d! &&
+    check.getUTCHours() === +h! && check.getUTCMinutes() === +mi! && check.getUTCSeconds() === +(s ?? 0);
   const ms = Date.parse(v);
-  if (Number.isNaN(ms)) throw new Error(`Unparseable cancellation timestamp: ${value}`);
+  if (!calendarOk || Number.isNaN(ms)) throw new Error(`Unparseable cancellation timestamp: ${value}`);
   return ms;
 }
 
@@ -52,47 +57,67 @@ export function cancellationSentence(input: {
   const money = (m: Money) => formatMoney(m);
   const nonRefundable = `Non-refundable. If you cancel you lose ${money(total)}.`;
 
+  // Validate every timestamp up front so bad data throws whichever rule would have applied.
+  const declared = penalties.free_cancellation_before === null ? null : parseTimestamp(penalties.free_cancellation_before);
+  const parsed = penalties.policies.map((p) => ({
+    p,
+    start: p.start_at === null ? -Infinity : parseTimestamp(p.start_at),
+    end: p.end_at === null ? Infinity : parseTimestamp(p.end_at),
+  }));
+
   if (penalties.policies.length === 0) return nonRefundable;
 
-  const tiers = penalties.policies
-    .map((p) => {
+  const tiers = parsed
+    .map(({ p, start, end }) => {
       const selling = applyMarkup({ amount: p.amount_show, currency: total.currency }, markupPercent);
-      const sellingDec = new Decimal(selling.amount);
-      const capped = sellingDec.greaterThan(totalDec) ? total : selling;
+      const capped = new Decimal(selling.amount).greaterThan(totalDec) ? total : selling;
       const dec = new Decimal(capped.amount);
-      return {
-        start: p.start_at === null ? -Infinity : parseTimestamp(p.start_at),
-        end: p.end_at === null ? Infinity : parseTimestamp(p.end_at),
-        amount: capped,
-        isZero: dec.isZero(),
-        atTotal: dec.greaterThanOrEqualTo(totalDec),
-      };
+      return { start, end, amount: capped, dec, isZero: dec.isZero(), atTotal: dec.greaterThanOrEqualTo(totalDec) };
     })
     .sort((a, b) => a.start - b.start);
 
-  const current = tiers.find((t) => t.start <= nowMs && nowMs < t.end);
-  const later = tiers.filter((t) => t.start > nowMs && !t.isZero);
-  if (!current) return CANCELLATION_FALLBACK;
+  // Overlapping windows are ambiguous; touching at a shared instant is fine.
+  for (let i = 0; i < tiers.length - 1; i++) {
+    if ((tiers[i] as (typeof tiers)[number]).end > (tiers[i + 1] as (typeof tiers)[number]).start) return CANCELLATION_FALLBACK;
+  }
 
-  if (current.atTotal && later.length === 0) return nonRefundable;
+  const currentIdx = tiers.findIndex((t) => t.start <= nowMs && nowMs < t.end);
+  if (currentIdx === -1) return CANCELLATION_FALLBACK;
+  const current = tiers[currentIdx] as (typeof tiers)[number];
+
+  if (current.atTotal) return nonRefundable;
+
+  const ahead = tiers.slice(currentIdx + 1);
+  for (let i = 0; i < ahead.length; i++) {
+    const prev = i === 0 ? current : (ahead[i - 1] as (typeof tiers)[number]);
+    if ((ahead[i] as (typeof tiers)[number]).dec.lessThan(prev.dec)) return CANCELLATION_FALLBACK;
+  }
+  const later = ahead.filter((t) => !t.isZero);
 
   const when = (ms: number) => `${formatDate(ms, now, timeZone)}, ${formatTime(ms, timeZone)} ${zoneLabel(timeZone)}`;
 
   if (current.isZero) {
-    if (later.length === 0) return "Free to cancel.";
-    const declared = penalties.free_cancellation_before === null ? null : parseTimestamp(penalties.free_cancellation_before);
-    const deadline = declared !== null && declared > nowMs ? declared : (later[0] as Tier).start;
-    const head = `Free to cancel until ${when(deadline)}.`;
-    if (later.length === 1) return `${head} After that you lose ${money((later[0] as Tier).amount)}.`;
+    if (later.length === 0) return current.end === Infinity ? "Free to cancel." : CANCELLATION_FALLBACK;
     const first = later[0] as Tier;
     const last = later[later.length - 1] as Tier;
-    return `${head} After that you lose ${money(first.amount)}, rising to ${money(last.amount)} from ${formatDate(last.start, now, timeZone)}.`;
+    const deadline = declared !== null && declared > nowMs ? Math.min(declared, first.start) : first.start;
+    const head = `Free to cancel until ${when(deadline)}.`;
+    if (later.length === 1) return `${head} After that you lose ${money(first.amount)}.`;
+    if (later.length === 2) {
+      return `${head} After that you lose ${money(first.amount)}, rising to ${money(last.amount)} from ${formatDate(last.start, now, timeZone)}.`;
+    }
+    return `${head} After that you lose ${money(first.amount)}, rising in steps to ${money(last.amount)} by ${formatDate(last.start, now, timeZone)}.`;
   }
 
   let out = `If you cancel now you lose ${money(current.amount)}.`;
   if (later.length > 0) {
+    const first = later[0] as Tier;
     const last = later[later.length - 1] as Tier;
-    out += ` From ${when(last.start)} you lose ${money(last.amount)}.`;
+    out += ` From ${when(first.start)} you lose ${money(first.amount)}`;
+    out +=
+      later.length === 1
+        ? "."
+        : `, rising in steps to ${money(last.amount)} by ${formatDate(last.start, now, timeZone)}.`;
   }
   return out;
 }
