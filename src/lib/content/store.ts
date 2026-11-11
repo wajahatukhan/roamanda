@@ -6,9 +6,7 @@ import { chunk } from "./chunk";
 import { mapEtgHotels } from "./map-hotel";
 import type { Dictionaries, Hotel, HotelCard } from "./types";
 
-export { imageUrl } from "./image-url";
-export { mapEtgHotel } from "./map-hotel";
-export type { Hotel, HotelCard } from "./types";
+export type { HotelCard } from "./types";
 
 /** Rows per `in` filter (reads) and per write batch. */
 export const STORE_CHUNK_SIZE = 200;
