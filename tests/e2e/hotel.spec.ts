@@ -116,9 +116,15 @@ test.describe("with a passport country", () => {
     await expect(imgs.nth(1)).not.toHaveAttribute("src", /1024x768|640x350|_next\/image/);
     await expect(imgs.nth(1)).toHaveAttribute("alt", "Photo 2 of 50");
     const srcs = await imgs.evaluateAll((els) => els.map((e) => (e as HTMLImageElement).getAttribute("src")));
+    // The thumbnails' photos sit in a <source> that only matches from 640 px up (the <img> holds an inline blank).
+    const thumbSources = await imgs.evaluateAll((els) => els.slice(1).map((e) => e.parentElement!.querySelector("source")?.getAttribute("srcset") ?? null));
     // The lead photo goes through the optimiser; the thumbnails are the supplier's own https files.
     expect(srcs[0]).toMatch(/^\/_next\/image\?url=/);
-    expect(srcs.slice(1).every((s) => s?.startsWith("https://cdn.worldota.net/t/x220/"))).toBe(true);
+    expect(srcs.slice(1).every((s) => s?.startsWith("data:image/gif;base64,"))).toBe(true);
+    expect(thumbSources.every((s) => s?.startsWith("https://cdn.worldota.net/t/x220/"))).toBe(true);
+    // At this desktop width the thumbnails are shown and, once scrolled to, really load.
+    await imgs.nth(1).scrollIntoViewIfNeeded();
+    await expect.poll(() => imgs.nth(1).evaluate((e) => (e as HTMLImageElement).currentSrc)).toMatch(/^https:\/\/cdn\.worldota\.net\/t\/x220\//);
     // Aspect boxes are fixed: the box has a height before any photo has loaded.
     const box = await imgs.first().evaluate((e) => e.closest("div")!.getBoundingClientRect().height);
     expect(box).toBeGreaterThan(100);
@@ -141,6 +147,29 @@ test.describe("with a passport country", () => {
     expect(res.status()).toBe(200);
     expect(res.headers()["content-type"]).toMatch(/^image\/(avif|webp)$/);
     expect((await res.body()).length).toBeLessThan(60_000);
+  });
+
+  test("on a phone the gallery is the lead photo and a photo count, and no thumbnail is downloaded", async ({ page }) => {
+    const thumbnailRequests: string[] = [];
+    page.on("request", (r) => r.url().includes("/t/x220/") && thumbnailRequests.push(r.url()));
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(HOTEL);
+    await expect(rows(page).first()).toBeVisible();
+    const gallery = page.getByRole("region", { name: "Photos" });
+    await expect(gallery.getByRole("img")).toHaveCount(1);
+    await expect(gallery.getByRole("img").first()).toHaveAttribute("alt", "Photo 1 of 50");
+    await expect(gallery.getByText("50 photos", { exact: true })).toBeVisible();
+    await expect(gallery.getByText("Showing 12 of 50 photos.")).toBeHidden();
+    // Scroll the whole page so any lazy image would have been asked for, then let the network settle.
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForLoadState("networkidle");
+    expect(thumbnailRequests).toEqual([]);
+    // From 640 px up the thumbnail grid is there and its photos load.
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await expect(gallery.getByRole("img")).toHaveCount(12);
+    await expect(gallery.getByText("50 photos", { exact: true })).toBeHidden();
+    await gallery.scrollIntoViewIfNeeded();
+    await expect.poll(() => thumbnailRequests.length).toBeGreaterThan(0);
   });
 
   test("the lead photo box keeps its aspect ratio: 64:35 on a phone, 4:3 from 640 px up", async ({ page }) => {

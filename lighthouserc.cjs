@@ -32,30 +32,14 @@ module.exports = {
       },
     },
     assert: {
-      // The hotel page's main content is a photograph, so its LCP gets the Core Web Vitals "good" boundary (2500 ms).
-      // `/` and `/search` keep 2000 ms. Every other assertion is the same on all three pages.
-      assertMatrix: [
-        {
-          matchingUrlPattern: "/hotel/",
-          aggregationMethod: "median",
-          assertions: {
-            "largest-contentful-paint": ["error", { maxNumericValue: 2500 }],
-            "cumulative-layout-shift": ["error", { maxNumericValue: 0.1 }],
-            "total-blocking-time": ["error", { maxNumericValue: 200 }],
-            "categories:accessibility": ["error", { minScore: 0.95 }],
-          },
-        },
-        {
-          matchingUrlPattern: `^${base}/(search\\?.*)?$`,
-          aggregationMethod: "median",
-          assertions: {
-            "largest-contentful-paint": ["error", { maxNumericValue: 2000 }],
-            "cumulative-layout-shift": ["error", { maxNumericValue: 0.1 }],
-            "total-blocking-time": ["error", { maxNumericValue: 200 }],
-            "categories:accessibility": ["error", { minScore: 0.95 }],
-          },
-        },
-      ],
+      // The spec's targets, the same on all three pages (median of the runs).
+      aggregationMethod: "median",
+      assertions: {
+        "largest-contentful-paint": ["error", { maxNumericValue: 2000 }],
+        "cumulative-layout-shift": ["error", { maxNumericValue: 0.1 }],
+        "total-blocking-time": ["error", { maxNumericValue: 200 }],
+        "categories:accessibility": ["error", { minScore: 0.95 }],
+      },
     },
     upload: { target: "filesystem", outputDir: ".lighthouseci" },
   },

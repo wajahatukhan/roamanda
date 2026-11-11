@@ -1,9 +1,15 @@
 import { Building2 } from "lucide-react";
-import Image, { getImageProps } from "next/image";
+import { getImageProps } from "next/image";
 import { galleryPhotos, type Photo } from "@/lib/hotel/gallery";
 import type { HotelImage } from "@/lib/content/types";
 
-/** Aspect boxes are fixed, so photos arriving later never move the page. */
+/** A 1x1 transparent GIF: what a thumbnail's <img> holds on a phone, so no request is made for it there. */
+const BLANK = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+/**
+ * Aspect boxes are fixed, so photos arriving later never move the page. On a phone only the lead photo shows, with
+ * the photo count under it; the thumbnails appear from the `sm` breakpoint (640 px) up and are only fetched there.
+ */
 export function Gallery({ images }: { images: HotelImage[] }) {
   const { photos, total } = galleryPhotos(images);
 
@@ -24,17 +30,31 @@ export function Gallery({ images }: { images: HotelImage[] }) {
           <LeadPhoto photo={first!} />
         </div>
         {rest.map((p) => (
-          <div key={p.n} className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted">
-            <Image src={p.small} alt={p.alt} fill unoptimized loading="lazy" fetchPriority="low" sizes="(min-width: 1024px) 250px, 50vw" className="object-cover" />
+          <div key={p.n} className="relative hidden aspect-[4/3] overflow-hidden rounded-xl bg-muted sm:block">
+            <Thumbnail photo={p} />
           </div>
         ))}
       </div>
-      {total > photos.length && <p className="text-sm text-muted-foreground">Showing {photos.length} of {total} photos.</p>}
+      {total > 1 && <p className="text-sm text-muted-foreground sm:hidden">{total} photos</p>}
+      {total > photos.length && <p className="hidden text-sm text-muted-foreground sm:block">Showing {photos.length} of {total} photos.</p>}
     </section>
   );
 }
 
 const IMG_CLASS = "absolute inset-0 size-full object-cover";
+
+/**
+ * A thumbnail. Hiding it with CSS alone would not stop the download, so the photo itself sits in a <source> that only
+ * matches from 640 px up; below that the <img> keeps an inline blank and the browser requests nothing.
+ */
+function Thumbnail({ photo }: { photo: Photo }) {
+  return (
+    <picture>
+      <source media="(min-width: 640px)" srcSet={photo.small} />
+      <img src={BLANK} alt={photo.alt} loading="lazy" decoding="async" fetchPriority="low" className={IMG_CLASS} />
+    </picture>
+  );
+}
 
 /**
  * The lead photo, as plain server-rendered markup so the browser finds it in the first HTML. Phones get the supplier's
