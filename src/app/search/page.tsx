@@ -7,7 +7,7 @@ import { ResultsSkeleton } from "@/components/results-skeleton";
 import { SearchForm } from "@/components/search-form/search-form";
 import { initialFormValues } from "@/lib/search/initial";
 import { parseListParams } from "@/lib/search/list";
-import { parseSearchParams, regionNameParam } from "@/lib/search/params";
+import { first, parseSearchParams, regionNameParam, type RawParams } from "@/lib/search/params";
 import { getResidency } from "@/lib/search/residency";
 import { describeStay } from "@/lib/search/summary";
 import { Filters } from "./filters";
@@ -18,12 +18,8 @@ export async function generateMetadata({ searchParams }: PageProps<"/search">): 
   return { title: name ? `Hotels in ${name}` : "Search hotels" };
 }
 
-type RawParams = Record<string, string | string[] | undefined>;
-
 const SEARCH_KEYS = ["region", "name", "in", "out", "rooms"] as const;
 const FILTER_KEYS = ["sort", "stars", "rating", "free", "breakfast", "max"] as const;
-
-const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 
 /** The known params that are present, with their first value; anything else in the URL is dropped. */
 function pick(sp: RawParams, keys: readonly string[]): Record<string, string> {

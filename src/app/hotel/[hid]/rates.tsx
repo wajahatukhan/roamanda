@@ -16,7 +16,7 @@ import { hotelPage } from "@/lib/etg/search";
 import { buildRateRows } from "@/lib/hotel/rate-rows";
 import { FIXTURE_DELAY_COOKIE, FIXTURE_FAIL_COOKIE, fixtureDelayMs, hotelPageEmpty, hotelPageFailure } from "@/lib/search/fixture-failure";
 import { initialFormValues } from "@/lib/search/initial";
-import { parseStayParams } from "@/lib/search/params";
+import { first, parseStayParams, type RawParams } from "@/lib/search/params";
 import { getResidency } from "@/lib/search/residency";
 import { nightsBetween, describeStay } from "@/lib/search/summary";
 import { buttonVariants } from "@/components/ui/button";
@@ -24,9 +24,6 @@ import { cn } from "@/lib/utils";
 
 /** Rows shown before the rest are folded into a "Show all" control. Also the number of rows the skeleton reserves. */
 const RATES_SHOWN_FIRST = 6;
-
-type RawParams = Record<string, string | string[] | undefined>;
-const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 
 const panel = "flex flex-col items-start gap-5 rounded-2xl bg-card p-6 ring-1 ring-foreground/10 sm:p-8";
 const h3 = "text-lg font-semibold tracking-[0.01em] [word-spacing:0.1em]";

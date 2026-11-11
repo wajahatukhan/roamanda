@@ -1,9 +1,6 @@
 import type { Guests } from "@/lib/etg/schemas";
-import { decodeRooms, LIMITS } from "./params";
+import { decodeRooms, first, LIMITS, type RawParams } from "./params";
 import { isoToLocalDate } from "./stay-dates";
-
-type RawParams = Record<string, string | string[] | undefined>;
-const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 
 export type InitialFormValues = {
   destination: { kind: "region"; id: number; name: string } | null;

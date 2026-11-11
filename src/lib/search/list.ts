@@ -3,6 +3,7 @@ import type { HotelCard } from "@/lib/content/types";
 import type { Rate } from "@/lib/etg/schemas";
 import { cancellationStatus, isFreeCancellation } from "@/lib/policy/cancellation-status";
 import { priceRate, type StayPrice } from "@/lib/pricing/price-rate";
+import { first, type RawParams } from "./params";
 
 export type ListItem = { hotel: HotelCard; from: StayPrice; freeCancellation: boolean; hasBreakfast: boolean };
 export type SortKey = "recommended" | "price" | "rating";
@@ -104,9 +105,6 @@ export function resultsCountLine(shown: number, total: number, o: { filtersActiv
   if (o.partial) return o.filtersActive ? `Showing ${shown} matching ${hotelsWord(shown)}` : `Showing ${shown} ${hotelsWord(shown)}`;
   return o.filtersActive ? `${shown} of ${total} hotels match` : `${shown} ${hotelsWord(shown)}`;
 }
-
-type RawParams = Record<string, string | string[] | undefined>;
-const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 
 /** Sort and filter state from the URL. Invalid values are ignored; `active` means at least one filter is set. */
 export function parseListParams(sp: RawParams): { sort: SortKey; filters: ListFilters; active: boolean } {

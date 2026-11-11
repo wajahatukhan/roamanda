@@ -1,6 +1,6 @@
 import type { Guests, StayQuery } from "@/lib/etg/schemas";
 
-type RawParams = Record<string, string | string[] | undefined>;
+export type RawParams = Record<string, string | string[] | undefined>;
 
 export const LIMITS = { maxNights: 30, maxAdults: 6, maxChildren: 4, maxChildAge: 17, maxRooms: 9 } as const;
 export const DEFAULT_GUESTS: Guests = [{ adults: 2, children: [] }];
@@ -9,7 +9,7 @@ export type ParsedSearch =
   | { ok: true; regionId: number; regionName: string; query: Omit<StayQuery, "residency"> }
   | { ok: false; problems: string[] };
 
-const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
+export const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 const DIGITS = /^\d{1,3}$/;
 
 export function encodeRooms(g: Guests): string {
