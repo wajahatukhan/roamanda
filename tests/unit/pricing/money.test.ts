@@ -39,6 +39,11 @@ describe("money", () => {
   test("formatMoney never uses floats", () => {
     expect(formatMoney({ amount: "1234567.10", currency: "USD" }, "en-US")).toBe("$1,234,567.10");
   });
+  test("formatMoney throws on invalid amounts instead of rendering NaN", () => {
+    for (const amount of ["abc", "", "Infinity", "NaN"]) {
+      expect(() => formatMoney({ amount, currency: "USD" }, "en-US")).toThrow();
+    }
+  });
   test("formatMoney keeps precision beyond float range", () => {
     expect(formatMoney({ amount: "12345678901234567.89", currency: "USD" }, "en-US")).toBe("$12,345,678,901,234,567.89");
   });

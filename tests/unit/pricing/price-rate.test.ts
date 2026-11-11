@@ -4,8 +4,8 @@ import { priceRate } from "@/lib/pricing/price-rate";
 
 function pt({ show_amount, taxes = [] }: { show_amount: string; taxes?: Tax[] }): PaymentType {
   return {
-    amount: show_amount,
-    currency_code: "USD",
+    amount: "90.00",
+    currency_code: "EUR",
     show_amount,
     show_currency_code: "USD",
     type: "now",

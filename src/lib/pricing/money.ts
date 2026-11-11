@@ -26,7 +26,7 @@ export function roundMoney(amount: Decimal.Value, currency: string): Money {
 
 export function formatMoney(m: Money, locale = "en-US"): string {
   // Intl.NumberFormat formats decimal strings exactly (no float conversion).
-  return new Intl.NumberFormat(locale, { style: "currency", currency: m.currency }).format(m.amount as `${number}`);
+  return new Intl.NumberFormat(locale, { style: "currency", currency: m.currency }).format(toDecimal(m.amount).toFixed() as `${number}`);
 }
 
 export function applyMarkup(base: Money, markupPercent: number): Money {
