@@ -12,7 +12,8 @@
     "e2e": "playwright test",
     "typecheck": "tsc --noEmit",
     "sync:content": "tsx --conditions=react-server scripts/sync-content.ts",
-    "lhci": "CHROME_PATH=\"$(node scripts/chrome-path.mjs)\" lhci autorun"
+    "lhci": "CHROME_PATH=\"$(node scripts/chrome-path.mjs)\" lhci autorun",
+    "ci": "npm run typecheck && npm run test && npm run lint && npm run build && npm run e2e && npm run lhci"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
