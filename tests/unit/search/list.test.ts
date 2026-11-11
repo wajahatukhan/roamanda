@@ -4,15 +4,15 @@ import type { Hotel } from "@/lib/content/types";
 import { buildList, filterItems, parseListParams, sortItems, type ListItem } from "@/lib/search/list";
 
 const NOW = new Date("2026-11-11T00:00:00Z");
-const CTX = { markupPercent: 10, taxNames: { city_tax: "City tax" }, now: NOW };
+const CTX = { markupPercent: 10, taxNames: { city_tax: "City tax" }, now: NOW, currency: "USD" };
 
-function rate(amount: string, o: { free?: string | null; breakfast?: boolean; tax?: boolean; extraType?: string } = {}): Rate {
+function rate(amount: string, o: { free?: string | null; breakfast?: boolean; tax?: boolean; type?: "now" | "hotel" | "deposit"; currency?: string } = {}): Rate {
   const pt = {
     amount,
     currency_code: "USD",
     show_amount: amount,
-    show_currency_code: "USD",
-    type: "now" as const,
+    show_currency_code: o.currency ?? "USD",
+    type: o.type ?? ("now" as const),
     tax_data: { taxes: o.tax ? [{ name: "city_tax", included_by_supplier: false, amount: "7.00", currency_code: "USD" }] : [] },
     cancellation_penalties: { free_cancellation_before: o.free ?? null, policies: [] },
   };
@@ -78,9 +78,63 @@ describe("buildList", () => {
     expect(run(null)).toBe(false);
   });
 
-  it("flags breakfast when any rate includes it", () => {
-    const { items } = buildList([{ hid: 1, rates: [rate("100.00"), rate("120.00", { breakfast: true })] }], hotels(hotel(1)), CTX);
-    expect(items[0]!.hasBreakfast).toBe(true);
+  describe("the priced rate", () => {
+    const FUTURE = "2026-12-10T00:00:00";
+    const cheapPlain = rate("62.00");
+    const dearGood = rate("100.00", { free: FUTURE, breakfast: true });
+    const run = (rates: Rate[], req = {}) => buildList([{ hid: 1, rates }], hotels(hotel(1)), CTX, req).items;
+
+    it("with no requirement is the cheapest, and its flags describe it", () => {
+      const [i] = run([dearGood, cheapPlain]);
+      expect(i!.from.total.amount).toBe("68.20");
+      expect(i!.freeCancellation).toBe(false);
+      expect(i!.hasBreakfast).toBe(false);
+    });
+
+    it("with require.freeCancellation is the cheapest refundable rate", () => {
+      const [i] = run([dearGood, cheapPlain], { freeCancellation: true });
+      expect(i!.from.total.amount).toBe("110.00");
+      expect(i!.freeCancellation).toBe(true);
+    });
+
+    it("with both requirements is the cheapest rate that has both", () => {
+      const refundableOnly = rate("80.00", { free: FUTURE });
+      const [i] = run([cheapPlain, refundableOnly, dearGood], { freeCancellation: true, breakfast: true });
+      expect(i!.from.total.amount).toBe("110.00");
+      expect(i!.freeCancellation).toBe(true);
+      expect(i!.hasBreakfast).toBe(true);
+    });
+
+    it("with require.breakfast alone is the cheapest rate with breakfast", () => {
+      const [i] = run([cheapPlain, dearGood], { breakfast: true });
+      expect(i!.from.total.amount).toBe("110.00");
+      expect(i!.hasBreakfast).toBe(true);
+    });
+
+    it("omits a hotel with no rate that satisfies the requirements", () => {
+      expect(run([cheapPlain], { freeCancellation: true })).toEqual([]);
+      expect(run([rate("80.00", { free: FUTURE })], { freeCancellation: true, breakfast: true })).toEqual([]);
+    });
+
+    it("ignores a cheaper pay-at-hotel payment type in favour of a dearer deposit", () => {
+      const r = rate("100.00", { type: "deposit" });
+      r.payment_options.payment_types.unshift({ ...rate("40.00", { type: "hotel" }).payment_options.payment_types[0]! });
+      const [i] = run([r]);
+      expect(i!.from.total.amount).toBe("110.00");
+    });
+
+    it("ignores a cheaper payment shown in another currency", () => {
+      const [i] = run([rate("30.00", { currency: "EUR" }), rate("100.00")]);
+      expect(i!.from.total.amount).toBe("110.00");
+    });
+
+    it("omits a hotel whose only payment types are pay-at-hotel", () => {
+      expect(run([rate("40.00", { type: "hotel" })])).toEqual([]);
+    });
+
+    it("omits a hotel whose payments are all in another currency", () => {
+      expect(run([rate("40.00", { currency: "EUR" })])).toEqual([]);
+    });
   });
 });
 
@@ -116,8 +170,7 @@ describe("filterItems", () => {
   const ids = (f: Parameters<typeof filterItems>[1]) => filterItems(items, f).map((i) => i.hotel.hid);
 
   it("no filters keeps everything", () => expect(ids({})).toEqual([1, 2, 3]));
-  it("freeCancellation keeps only hotels with a future free-cancellation rate", () => expect(ids({ freeCancellation: true })).toEqual([1]));
-  it("breakfast keeps hotels with a breakfast rate", () => expect(ids({ breakfast: true })).toEqual([2]));
+  it("leaves free cancellation and breakfast to buildList", () => expect(ids({ freeCancellation: true, breakfast: true })).toEqual([1, 2, 3]));
   it("minStars drops hotels with fewer or unknown stars", () => expect(ids({ minStars: 4 })).toEqual([2]));
   it("minRating drops hotels with a lower or missing rating", () => expect(ids({ minRating: 7 })).toEqual([2]));
   it("maxPrice compares decimals and is inclusive", () => {
@@ -125,7 +178,7 @@ describe("filterItems", () => {
     expect(ids({ maxPrice: "99.99" })).toEqual([1]);
     expect(ids({ maxPrice: "1000" })).toEqual([1, 2, 3]);
   });
-  it("combines filters with and", () => expect(ids({ freeCancellation: true, breakfast: true })).toEqual([]));
+  it("combines filters with and", () => expect(ids({ minStars: 4, maxPrice: "99" })).toEqual([]));
 });
 
 describe("parseListParams", () => {

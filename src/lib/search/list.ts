@@ -6,7 +6,9 @@ import { priceRate, type StayPrice } from "@/lib/pricing/price-rate";
 export type ListItem = { hotel: Hotel; from: StayPrice; freeCancellation: boolean; hasBreakfast: boolean };
 export type SortKey = "recommended" | "price" | "rating";
 export type ListFilters = { minStars?: number; minRating?: number; freeCancellation?: boolean; breakfast?: boolean; maxPrice?: string };
-export type ListContext = { markupPercent: number; taxNames: Record<string, string>; now: Date };
+/** What the priced rate must offer. Applied while choosing it, so a card describes the rate it shows. */
+export type ListRequirements = { freeCancellation?: boolean; breakfast?: boolean };
+export type ListContext = { markupPercent: number; taxNames: Record<string, string>; now: Date; currency: string };
 
 /** ETG sends deadlines in UTC, sometimes without a zone suffix. */
 function deadlineMs(s: string | null): number | null {
@@ -19,6 +21,7 @@ export function buildList(
   results: { hid: number; rates: Rate[] }[],
   hotels: Map<number, Hotel>,
   ctx: ListContext,
+  require: ListRequirements = {},
 ): { items: ListItem[]; missing: number[] } {
   const items: ListItem[] = [];
   const missing: number[] = [];
@@ -29,21 +32,23 @@ export function buildList(
       if (!missing.includes(hid)) missing.push(hid);
       continue;
     }
-    let cheapest: { pt: PaymentType; net: Decimal } | undefined;
-    let freeCancellation = false;
-    let hasBreakfast = false;
+    let cheapest: { pt: PaymentType; net: Decimal; freeCancellation: boolean; hasBreakfast: boolean } | undefined;
     for (const rate of rates) {
-      if (rate.meal_data.has_breakfast) hasBreakfast = true;
+      const hasBreakfast = rate.meal_data.has_breakfast;
+      if (require.breakfast && !hasBreakfast) continue;
       for (const pt of rate.payment_options.payment_types) {
-        const net = new Decimal(pt.show_amount);
-        if (!cheapest || net.lt(cheapest.net)) cheapest = { pt, net };
+        // Only amounts charged at booking, in the requested currency, are comparable as a "from" price.
+        if ((pt.type !== "deposit" && pt.type !== "now") || pt.show_currency_code !== ctx.currency) continue;
         const until = deadlineMs(pt.cancellation_penalties.free_cancellation_before);
-        if (until !== null && until > now) freeCancellation = true;
+        const freeCancellation = until !== null && until > now;
+        if (require.freeCancellation && !freeCancellation) continue;
+        const net = new Decimal(pt.show_amount);
+        if (!cheapest || net.lt(cheapest.net)) cheapest = { pt, net, freeCancellation, hasBreakfast };
       }
     }
     // Markup is monotonic, so the lowest net price is also the lowest selling price.
     if (!cheapest) continue;
-    items.push({ hotel, from: priceRate(cheapest.pt, ctx.markupPercent, ctx.taxNames), freeCancellation, hasBreakfast });
+    items.push({ hotel, from: priceRate(cheapest.pt, ctx.markupPercent, ctx.taxNames), freeCancellation: cheapest.freeCancellation, hasBreakfast: cheapest.hasBreakfast });
   }
   return { items, missing };
 }
@@ -70,14 +75,13 @@ export function sortItems(items: ListItem[], by: SortKey): ListItem[] {
   return [...items].sort(compare);
 }
 
+/** Stars, rating and price. Free cancellation and breakfast are applied in `buildList`, where the priced rate is chosen. */
 export function filterItems(items: ListItem[], f: ListFilters): ListItem[] {
   const max = f.maxPrice !== undefined && /^\d+(\.\d+)?$/.test(f.maxPrice) ? new Decimal(f.maxPrice) : null;
   return items.filter(
     (i) =>
       (f.minStars === undefined || (i.hotel.starRating !== null && i.hotel.starRating >= f.minStars)) &&
       (f.minRating === undefined || (i.hotel.reviewRating !== null && i.hotel.reviewRating >= f.minRating)) &&
-      (!f.freeCancellation || i.freeCancellation) &&
-      (!f.breakfast || i.hasBreakfast) &&
       (max === null || price(i).lte(max)),
   );
 }

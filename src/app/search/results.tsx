@@ -5,10 +5,10 @@ import { HotelCard } from "@/components/hotel-card";
 import { getEnv } from "@/env";
 import { getDictionaries, getHotels, getMarkupPercent } from "@/lib/content/store";
 import { EtgError } from "@/lib/etg/errors";
-import { searchRegion } from "@/lib/etg/search";
 import type { StayQuery } from "@/lib/etg/schemas";
 import { buildList, filterItems, sortItems, type ListFilters, type ListItem, type SortKey } from "@/lib/search/list";
 import { FIXTURE_DELAY_COOKIE, FIXTURE_FAIL_COOKIE, fixtureDelayMs, fixtureEmpty, fixtureFailure } from "@/lib/search/fixture-failure";
+import { cachedSearchRegion } from "@/lib/search/serp-cache";
 import { recordMissingSafely } from "@/lib/search/record-missing";
 import { nightsBetween } from "@/lib/search/summary";
 import { buttonVariants } from "@/components/ui/button";
@@ -33,22 +33,28 @@ export type ResultsProps = {
 type Loaded = { items: ListItem[]; total: number };
 
 /**
- * Live prices. This reads request-time data and nothing here is cached: no `use cache`, and the ETG call is
- * an uncached fetch, so every request asks RateHawk afresh.
+ * Search-list prices. This reads request-time data and uses no `use cache`. The region search itself is held
+ * for a few minutes (see serp-cache.ts) so sorting and filtering do not each spend a RateHawk request; these
+ * are approximate "From" prices that the hotel page refreshes.
  */
 async function load(props: ResultsProps, simulated: { failure: EtgError | null; delayMs: number; empty: boolean }): Promise<Loaded> {
   if (simulated.delayMs) await new Promise((resolve) => setTimeout(resolve, simulated.delayMs));
   if (simulated.failure) throw simulated.failure;
   const [results, markupPercent, dictionaries] = await Promise.all([
-    simulated.empty ? Promise.resolve([]) : searchRegion(props.regionId, { ...props.query, residency: props.residency }),
+    simulated.empty ? Promise.resolve([]) : cachedSearchRegion(props.regionId, { ...props.query, residency: props.residency }),
     getMarkupPercent(),
     getDictionaries(),
   ]);
   const hotels = await getHotels(results.map((r) => r.hid));
-  const { items, missing } = buildList(results, hotels, { markupPercent, taxNames: dictionaries.taxNames, now: new Date() });
+  const ctx = { markupPercent, taxNames: dictionaries.taxNames, now: new Date(), currency: props.query.currency };
+  const { items: all, missing } = buildList(results, hotels, ctx);
+  // Cancellation and breakfast requirements choose which rate is priced, so they go into the build, not a later filter.
+  const items = props.filters.freeCancellation || props.filters.breakfast
+    ? buildList(results, hotels, ctx, { freeCancellation: props.filters.freeCancellation, breakfast: props.filters.breakfast }).items
+    : all;
   // Hotels without stored content are left out; note them for the next content sync, after the response.
   after(() => recordMissingSafely(missing));
-  return { items: sortItems(filterItems(items, props.filters), props.sort), total: items.length };
+  return { items: sortItems(filterItems(items, props.filters), props.sort), total: all.length };
 }
 
 export async function Results(props: ResultsProps) {

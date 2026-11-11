@@ -68,13 +68,13 @@ export function HotelCard({ item, index, nights, href }: { item: ListItem; index
                 {item.freeCancellation && (
                   <li className="flex items-center gap-1.5">
                     <Check aria-hidden className="size-3.5 text-muted-foreground" />
-                    Free cancellation available
+                    Free cancellation
                   </li>
                 )}
                 {item.hasBreakfast && (
                   <li className="flex items-center gap-1.5">
                     <Check aria-hidden className="size-3.5 text-muted-foreground" />
-                    Breakfast available
+                    Breakfast included
                   </li>
                 )}
               </ul>

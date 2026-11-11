@@ -70,6 +70,17 @@ test.describe("with a passport country", () => {
     await expect(page).not.toHaveURL(/max=/);
   });
 
+  test("still lists hotels after changing the sort and then applying a filter", async ({ page }) => {
+    await page.goto(SEARCH);
+    await expect(page.getByRole("article").first()).toBeVisible();
+    await page.goto(`${SEARCH}&sort=rating`);
+    await expect(page.getByRole("article").first()).toBeVisible();
+    await page.getByLabel("Highest total price (USD)").fill("100000");
+    await page.getByRole("button", { name: "Apply" }).click();
+    await expect(page).toHaveURL(/max=100000/);
+    await expect(page.getByRole("article").first()).toBeVisible();
+  });
+
   test("shows a skeleton as tall as a card while prices load", async ({ page, context }) => {
     await cookie(context, "etg_fixture_delay", "1500");
     await page.goto(SEARCH, { waitUntil: "commit" });
