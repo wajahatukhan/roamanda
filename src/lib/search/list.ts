@@ -2,7 +2,7 @@ import Decimal from "decimal.js";
 import type { HotelCard } from "@/lib/content/types";
 import type { Rate } from "@/lib/etg/schemas";
 import { cancellationStatus, isFreeCancellation } from "@/lib/policy/cancellation-status";
-import { priceRate, type StayPrice } from "@/lib/pricing/price-rate";
+import { isSoldAtBooking, priceRate, type StayPrice } from "@/lib/pricing/price-rate";
 import { first, type RawParams } from "./params";
 
 export type ListItem = { hotel: HotelCard; from: StayPrice; freeCancellation: boolean; hasBreakfast: boolean };
@@ -49,7 +49,7 @@ function cheapestItem(hotel: HotelCard, rates: Rate[], ctx: ListContext, require
     if (require.breakfast && !hasBreakfast) continue;
     for (const pt of rate.payment_options.payment_types) {
       // Only amounts charged at booking, in the requested currency, are comparable as a "from" price.
-      if ((pt.type !== "deposit" && pt.type !== "now") || pt.show_currency_code !== ctx.currency) continue;
+      if (!isSoldAtBooking(pt, ctx.currency)) continue;
       const from = priceRate(pt, ctx.markupPercent, ctx.taxNames);
       // The same classification as the hotel page's sentence, so the label and the sentence always agree.
       const freeCancellation = isFreeCancellation(cancellationStatus(pt.cancellation_penalties, from.total, ctx.markupPercent, ctx.now));

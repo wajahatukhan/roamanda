@@ -8,6 +8,11 @@ export type StayPrice = {
   markupPercent: number;
 };
 
+/** Whether the payment is taken at booking ("deposit" or "now") in the requested currency. "hotel" payments are not sold. */
+export function isSoldAtBooking(pt: PaymentType, currency: string): boolean {
+  return (pt.type === "deposit" || pt.type === "now") && pt.show_currency_code === currency;
+}
+
 export function priceRate(pt: PaymentType, markupPercent: number, taxNames: Record<string, string>): StayPrice {
   const net = roundMoney(pt.show_amount, pt.show_currency_code);
   const total = applyMarkup(net, markupPercent);

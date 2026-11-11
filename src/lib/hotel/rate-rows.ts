@@ -2,7 +2,7 @@ import Decimal from "decimal.js";
 import type { Rate } from "@/lib/etg/schemas";
 import { CANCELLATION_FALLBACK, cancellationSentence } from "@/lib/policy/cancellation-sentence";
 import { policyLines } from "@/lib/policy/policy-lines";
-import { priceRate, type StayPrice } from "@/lib/pricing/price-rate";
+import { isSoldAtBooking, priceRate, type StayPrice } from "@/lib/pricing/price-rate";
 
 /**
  * One bookable option on the hotel page. Holds the selling price and the booking hash, so it is for server
@@ -35,8 +35,6 @@ export type RateRowContext = {
 };
 
 const PAYMENT_LABELS = { now: "Pay now", deposit: "Pay now", hotel: "Pay at the hotel" } as const;
-/** Only payments taken at booking are sold in this release; "hotel" payments get no row. */
-const SOLD_TYPES = new Set(["now", "deposit"]);
 
 /**
  * One row for each rate and each payment type that is paid at booking and priced in the requested currency,
@@ -56,7 +54,7 @@ export function buildRateRows(rates: Rate[], ctx: RateRowContext): RateRow[] {
     const mealLabel = (Object.hasOwn(ctx.mealNames, meal) ? ctx.mealNames[meal] : undefined) ?? meal;
 
     rate.payment_options.payment_types.forEach((pt, ptIndex) => {
-      if (!SOLD_TYPES.has(pt.type) || pt.show_currency_code !== ctx.currency) return;
+      if (!isSoldAtBooking(pt, ctx.currency)) return;
       eligible++;
       let price: StayPrice;
       try {
