@@ -2,27 +2,21 @@ import { NextRequest } from "next/server";
 import { config, proxy } from "@/proxy";
 
 const hotelExists = vi.fn();
-const recordMissing = vi.fn();
-vi.mock("@/lib/content/store", () => ({
-  hotelExists: (...a: unknown[]) => hotelExists(...a),
-  recordMissing: (...a: unknown[]) => recordMissing(...a),
-}));
+vi.mock("@/lib/content/store", () => ({ hotelExists: (...a: unknown[]) => hotelExists(...a) }));
 
 const req = (path: string, headers: Record<string, string> = {}) => new NextRequest(`http://localhost:3100${path}`, { headers });
 const rewritten = (res: Response) => res.headers.get("x-middleware-rewrite");
 
 beforeEach(() => {
   hotelExists.mockReset();
-  recordMissing.mockReset();
 });
 
 describe("proxy", () => {
-  test("an unknown hotel is rewritten to the 404 page and nothing is recorded", async () => {
+  test("an unknown hotel is rewritten to the 404 page", async () => {
     hotelExists.mockResolvedValue(false);
     const res = await proxy(req("/hotel/99999999"));
     expect(rewritten(res)).toContain("/hotel-not-found");
     expect(res.headers.get("x-middleware-request-x-missing-hotel")).toBe("1");
-    expect(recordMissing).not.toHaveBeenCalled();
   });
 
   test("a known hotel, or an unknown answer, falls through to the page", async () => {
@@ -32,7 +26,6 @@ describe("proxy", () => {
       expect(rewritten(res)).toBeNull();
       expect(res.headers.get("x-middleware-next")).toBe("1");
     }
-    expect(recordMissing).not.toHaveBeenCalled();
   });
 
   test("a bad id is a plain 404 without asking the store", async () => {
