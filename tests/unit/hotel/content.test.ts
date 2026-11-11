@@ -40,7 +40,7 @@ describe("galleryPhotos", () => {
   it("sizes the first photo large and the rest smaller, with alt text that names the photo", () => {
     const { photos, total } = galleryPhotos([img(1), img(2, "bedroom_view")]);
     expect(total).toBe(2);
-    expect(photos[0]).toEqual({ n: 1, large: "https://cdn.example.test/t/1024x768/p1.jpg", small: "https://cdn.example.test/t/640x350/p1.jpg", alt: "Photo 1 of 2" });
+    expect(photos[0]).toEqual({ n: 1, large: "https://cdn.example.test/t/1024x768/p1.jpg", small: "https://cdn.example.test/t/x220/p1.jpg", alt: "Photo 1 of 2" });
     expect(photos[1]!.alt).toBe("Photo 2 of 2: Bedroom view");
   });
   it("accepts https only and counts only the accepted photos", () => {

@@ -24,7 +24,7 @@ export function galleryPhotos(images: HotelImage[]): { photos: Photo[]; total: n
     return {
       n: index + 1,
       large: imageUrl(image.url, "1024x768"),
-      small: imageUrl(image.url, "640x350"),
+      small: imageUrl(image.url, "x220"),
       alt: `Photo ${index + 1} of ${total}${category ? `: ${category}` : ""}`,
     };
   });

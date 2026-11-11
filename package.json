@@ -11,7 +11,8 @@
     "test": "vitest run",
     "e2e": "playwright test",
     "typecheck": "tsc --noEmit",
-    "sync:content": "tsx --conditions=react-server scripts/sync-content.ts"
+    "sync:content": "tsx --conditions=react-server scripts/sync-content.ts",
+    "lhci": "CHROME_PATH=\"$(node scripts/chrome-path.mjs)\" lhci autorun"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
+    "@lhci/cli": "^0.16.0",
     "@playwright/test": "^1.65.0",
     "@tailwindcss/turbopack": "4.3.3",
     "@types/node": "^22.20.5",

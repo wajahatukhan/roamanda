@@ -25,7 +25,7 @@ export function Gallery({ images }: { images: HotelImage[] }) {
         </div>
         {rest.map((p) => (
           <div key={p.n} className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted">
-            <Image src={p.small} alt={p.alt} fill unoptimized loading="lazy" sizes="(min-width: 1024px) 250px, 50vw" className="object-cover" />
+            <Image src={p.small} alt={p.alt} fill unoptimized loading="lazy" fetchPriority="low" sizes="(min-width: 1024px) 250px, 50vw" className="object-cover" />
           </div>
         ))}
       </div>
