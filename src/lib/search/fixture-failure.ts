@@ -37,3 +37,16 @@ export function hotelPageFailure(mode: Mode, value: string | undefined): EtgErro
 export function hotelPageEmpty(mode: Mode, value: string | undefined): boolean {
   return mode === "fixture" && value === "hp-empty";
 }
+
+/** Cookie that gives the hotel page a fixed review score and category scores, so a rated hotel can be tested. Fixture mode only. */
+export const FIXTURE_RATED_COOKIE = "etg_fixture_rated";
+
+export const FIXTURE_RATED_REVIEW = {
+  reviewRating: 8.6,
+  reviewDetailed: { cleanness: 9.1, location: 8.4, price: 7.9, services: 8.8, wifi: 8.2 },
+};
+
+/** `etg_fixture_rated=1` overlays a fixed rating onto the hotel content for that request. Null otherwise, and always null in live mode. */
+export function fixtureRated(mode: Mode, value: string | undefined): typeof FIXTURE_RATED_REVIEW | null {
+  return mode === "fixture" && value === "1" ? FIXTURE_RATED_REVIEW : null;
+}

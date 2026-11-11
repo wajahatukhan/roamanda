@@ -1,14 +1,15 @@
 import { Clock, MapPin, Star } from "lucide-react";
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import { after } from "next/server";
+import { getEnv } from "@/env";
 import { Gallery } from "@/components/gallery";
 import { PolicyList } from "@/components/policy-list";
 import { ReviewSummary } from "@/components/review-summary";
 import type { AmenityGroup } from "@/lib/content/types";
 import { getHotelContent } from "@/lib/hotel/content";
 import { formatClock, humanize } from "@/lib/hotel/format";
-import { recordMissingSafely } from "@/lib/search/record-missing";
+import { FIXTURE_RATED_COOKIE, fixtureRated } from "@/lib/search/fixture-failure";
 import { HID } from "./layout";
 import { RatesSection } from "./rates";
 
@@ -38,12 +39,12 @@ export async function generateMetadata({ params }: PageProps<"/hotel/[hid]">): P
 export default async function HotelPage({ params, searchParams }: PageProps<"/hotel/[hid]">) {
   const found = await load((await params).hid);
   if (!found) notFound();
-  const { hid, hotel } = found;
-  if (!hotel) {
-    // Tell the next content sync about it, after the response has gone out.
-    after(() => recordMissingSafely([hid]));
-    notFound();
-  }
+  const { hid } = found;
+  // Fixture mode only: a cookie can overlay a review rating, since the recorded hotels have none.
+  const rated = fixtureRated(getEnv().ETG_MODE, (await cookies()).get(FIXTURE_RATED_COOKIE)?.value);
+  const hotel = found.hotel && rated ? { ...found.hotel, ...rated } : found.hotel;
+  // The proxy answers 404 for an unknown hotel first; this is the fallback. Neither records the visit anywhere.
+  if (!hotel) notFound();
 
   const sp = await searchParams;
   const checkIn = formatClock(hotel.checkInTime);

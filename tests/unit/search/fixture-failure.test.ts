@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { EtgError } from "@/lib/etg/errors";
-import { fixtureDelayMs, fixtureEmpty, fixtureFailure, hotelPageEmpty, hotelPageFailure } from "@/lib/search/fixture-failure";
+import { fixtureDelayMs, fixtureEmpty, fixtureFailure, hotelPageEmpty, hotelPageFailure, fixtureRated, FIXTURE_RATED_REVIEW } from "@/lib/search/fixture-failure";
 
 describe("fixtureFailure", () => {
   it("serp makes a retryable EtgError in fixture mode", () => {
@@ -71,5 +71,17 @@ describe("hotel page simulation (etg_fixture_fail=hp...)", () => {
   it("ignores absent or unknown values", () => {
     expect(hotelPageFailure("fixture", undefined)).toBeNull();
     expect(hotelPageFailure("fixture", "other")).toBeNull();
+  });
+});
+
+describe("fixtureRated", () => {
+  it("etg_fixture_rated=1 gives a fixed rating in fixture mode", () => {
+    expect(fixtureRated("fixture", "1")).toBe(FIXTURE_RATED_REVIEW);
+    expect(FIXTURE_RATED_REVIEW.reviewRating).toBe(8.6);
+  });
+  it("is ignored in live mode, and for other or missing values", () => {
+    expect(fixtureRated("live", "1")).toBeNull();
+    expect(fixtureRated("fixture", "0")).toBeNull();
+    expect(fixtureRated("fixture", undefined)).toBeNull();
   });
 });

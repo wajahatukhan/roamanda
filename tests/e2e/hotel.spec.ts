@@ -124,6 +124,19 @@ test.describe("with a passport country", () => {
     await expect(page.getByText("out of 10")).toHaveCount(0);
   });
 
+  test("a rated hotel shows the review score and category scores, and has no accessibility violations", async ({ page, context }) => {
+    await cookie(context, "etg_fixture_rated", "1");
+    await page.goto(HOTEL);
+    await expect(rows(page).first()).toBeVisible();
+    const reviews = page.getByRole("region", { name: "Guest reviews" });
+    await expect(reviews).toBeVisible();
+    await expect(reviews.getByText("8.6", { exact: true })).toBeVisible();
+    await expect(reviews.getByText("out of 10")).toBeVisible();
+    await expect(reviews.locator("dt")).toHaveText(["Cleanliness", "Location", "Value for money", "Service", "Wi-Fi"]);
+    await expect(reviews.locator("dd")).toHaveText(["9.1", "8.4", "7.9", "8.8", "8.2"]);
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  });
+
   test("the loading state reserves space and is announced, then the rates replace it without moving what is above", async ({ page, context }) => {
     await cookie(context, "etg_fixture_delay", "2500");
     // "commit": do not wait for the stream to finish, or the loading state would already be gone.

@@ -164,6 +164,57 @@ export async function getHotel(hid: number): Promise<Hotel | null> {
   return (await getHotels([hid])).get(hid) ?? null;
 }
 
+// Existence check (used by proxy.ts on every hotel page request)
+
+export const HOTEL_EXISTS_TIMEOUT_MS = 300;
+export const HOTEL_EXISTS_TRUE_TTL_MS = 5 * 60_000;
+export const HOTEL_EXISTS_FALSE_TTL_MS = 60_000;
+export const HOTEL_EXISTS_MAX_ENTRIES = 1000;
+
+// Insertion order is eviction order: a refreshed entry is deleted and set again, so the oldest is always first.
+const existsCache = new Map<number, { exists: boolean; expiresAt: number }>();
+let existsClock: () => number = Date.now;
+
+function rememberExists(hid: number, exists: boolean): void {
+  existsCache.delete(hid);
+  existsCache.set(hid, { exists, expiresAt: existsClock() + (exists ? HOTEL_EXISTS_TRUE_TTL_MS : HOTEL_EXISTS_FALSE_TTL_MS) });
+  while (existsCache.size > HOTEL_EXISTS_MAX_ENTRIES) existsCache.delete(existsCache.keys().next().value as number);
+}
+
+/**
+ * Whether the store has content for this hotel, asking for the `hid` column only. true / false, or null when the
+ * answer is unknown (database error or no answer within the timeout). Known answers are cached in memory (true for
+ * 5 minutes, false for 60 seconds, at most 1,000 entries); null is never cached. Never throws.
+ */
+export async function hotelExists(hid: number, opts: { timeoutMs?: number } = {}): Promise<boolean | null> {
+  if (isFixtureMode()) return (await loadFixtureHotels()).has(hid);
+  const now = existsClock();
+  const hit = existsCache.get(hid);
+  if (hit) {
+    if (hit.expiresAt > now) return hit.exists;
+    existsCache.delete(hid);
+  }
+  const controller = new AbortController();
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timedOut = new Promise<null>((resolve) => {
+    timer = setTimeout(() => {
+      controller.abort();
+      resolve(null);
+    }, opts.timeoutMs ?? HOTEL_EXISTS_TIMEOUT_MS);
+  });
+  const query = (async (): Promise<boolean | null> => {
+    const { data, error } = await db().from("hotels").select("hid").eq("hid", hid).abortSignal(controller.signal).maybeSingle();
+    return error ? null : data !== null;
+  })().catch(() => null); // Handled here, so a query that fails after the timeout cannot become an unhandled rejection.
+  try {
+    const exists = await Promise.race([query, timedOut]);
+    if (exists !== null) rememberExists(hid, exists);
+    return exists;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /** Inserts or updates hotels by hid, 200 rows per request. */
 export async function upsertHotels(hotels: Hotel[]): Promise<void> {
   for (const part of chunk(hotels, STORE_CHUNK_SIZE)) {
@@ -256,8 +307,16 @@ export async function saveDictionaries(dictionaries: Dictionaries): Promise<void
   dictionariesCache = undefined;
 }
 
+/** Test-only: replaces the clock the existence cache uses (pass nothing to restore the real one) and clears that cache. */
+export function setHotelExistsClock(clock?: () => number): void {
+  existsClock = clock ?? Date.now;
+  existsCache.clear();
+}
+
 /** Test-only: clears in-memory caches and the lazy clients. */
 export function resetStoreCache(): void {
+  existsCache.clear();
+  existsClock = Date.now;
   markupCache = undefined;
   dictionariesCache = undefined;
   fixtureHotels = undefined;

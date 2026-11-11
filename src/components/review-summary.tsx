@@ -15,12 +15,10 @@ export function ReviewSummary({ hotel }: { hotel: Pick<Hotel, "reviewRating" | "
       {model.categories.length > 0 && (
         <dl className="grid gap-x-10 gap-y-3 sm:grid-cols-2">
           {model.categories.map((c) => (
-            <div key={c.key} className="flex flex-col gap-1.5">
-              <div className="flex justify-between gap-4 text-sm">
-                <dt>{c.label}</dt>
-                <dd className="tabular-nums">{c.score}</dd>
-              </div>
-              <div aria-hidden className="h-1.5 overflow-hidden rounded-full bg-muted">
+            <div key={c.key} className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1.5 text-sm">
+              <dt>{c.label}</dt>
+              <dd className="tabular-nums">{c.score}</dd>
+              <div aria-hidden className="col-span-2 h-1.5 overflow-hidden rounded-full bg-muted">
                 <div className="h-full rounded-full bg-foreground/70" style={{ width: `${Math.round(c.fraction * 100)}%` }} />
               </div>
             </div>
