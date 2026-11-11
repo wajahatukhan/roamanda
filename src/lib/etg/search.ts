@@ -2,6 +2,7 @@ import "server-only";
 import { getEnv } from "@/env";
 import { z } from "zod";
 import { etgRequest } from "./client";
+import { countHotelPageFixtureRead } from "./fixture-reads";
 import { EtgError } from "./errors";
 import { MulticompleteData, Rate, type StayQuery } from "./schemas";
 
@@ -90,8 +91,10 @@ export async function searchRegion(regionId: number, q: StayQuery): Promise<Leni
   return data.hotels;
 }
 
-export async function hotelPage(hid: number, q: StayQuery): Promise<Rate[]> {
+/** `fixtureTag` only matters in fixture mode, where it groups the test-only read counter. */
+export async function hotelPage(hid: number, q: StayQuery, opts: { fixtureTag?: string } = {}): Promise<Rate[]> {
   if (isFixtureMode()) {
+    countHotelPageFixtureRead("fixture", opts.fixtureTag);
     const load = hotelPageFixtures[hid] ?? hotelPageFixtures[DEFAULT_HOTEL_PAGE_FIXTURE]!;
     return parseHotelsLenient(await load()).hotels[0]?.rates ?? [];
   }
