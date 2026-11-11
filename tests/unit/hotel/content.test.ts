@@ -4,6 +4,8 @@ import { formatClock, humanize } from "@/lib/hotel/format";
 import { galleryPhotos, MAX_PHOTOS } from "@/lib/hotel/gallery";
 import { htmlToLines, policyData, policyGroups } from "@/lib/hotel/policy";
 import { reviewModel } from "@/lib/hotel/review";
+import nextConfig from "../../../next.config";
+import { canOptimise, OPTIMISED_IMAGE_HOST, OPTIMISED_IMAGE_PATH_PREFIX } from "@/lib/content/image-url";
 import content from "../../fixtures/etg/content-hotels.json";
 
 const RATINGS = { cleanness: 9, location: 8.5, price: 7, services: null, room: 8, meal: null, wifi: 6.5, hygiene: 9.5 };
@@ -40,8 +42,18 @@ describe("galleryPhotos", () => {
   it("sizes the first photo large and the rest smaller, with alt text that names the photo", () => {
     const { photos, total } = galleryPhotos([img(1), img(2, "bedroom_view")]);
     expect(total).toBe(2);
-    expect(photos[0]).toEqual({ n: 1, large: "https://cdn.example.test/t/1024x768/p1.jpg", medium: "https://cdn.example.test/t/640x350/p1.jpg", small: "https://cdn.example.test/t/x220/p1.jpg", alt: "Photo 1 of 2" });
+    expect(photos[0]).toEqual({ n: 1, large: "https://cdn.example.test/t/1024x768/p1.jpg", medium: "https://cdn.example.test/t/640x350/p1.jpg", small: "https://cdn.example.test/t/x220/p1.jpg", alt: "Photo 1 of 2", optimised: false });
     expect(photos[1]!.alt).toBe("Photo 2 of 2: Bedroom view");
+  });
+  it("marks a photo as optimisable only on the allowed supplier host, https and under /t/, and falls back to plain otherwise", () => {
+    const at = (url: string) => galleryPhotos([img(1, "x", url)]).photos[0]?.optimised;
+    expect(at("https://cdn.worldota.net/t/{size}/content/ab/cd/x.jpeg")).toBe(true);
+    expect(at("https://cdn.example.test/t/{size}/x.jpeg")).toBe(false);
+    expect(at("https://cdn.worldota.net.evil.test/t/{size}/x.jpeg")).toBe(false);
+    expect(at("https://cdn.worldota.net/other/{size}/x.jpeg")).toBe(false);
+    expect(at("https://cdn.worldota.net/t/{size}/x.jpeg?token=1")).toBe(false);
+    expect(at("https://cdn.worldota.net:8443/t/{size}/x.jpeg")).toBe(false);
+    expect(galleryPhotos([img(1, "x", "http://cdn.worldota.net/t/{size}/x.jpeg")]).photos).toHaveLength(0);
   });
   it("accepts https only and counts only the accepted photos", () => {
     const { photos, total } = galleryPhotos([img(1, "x", "http://cdn.example.test/{size}/a.jpg"), img(2), img(3, "x", "javascript:alert(1)"), img(4, "x", "//cdn.example.test/{size}/b.jpg"), img(5, "x", "not a url")]);
@@ -57,6 +69,20 @@ describe("galleryPhotos", () => {
   });
   it("never uses the hotel name as alt text, and has no photos for an empty list", () => {
     expect(galleryPhotos([])).toEqual({ photos: [], total: 0 });
+  });
+});
+
+describe("image optimiser allow-list", () => {
+  const patterns = nextConfig.images?.remotePatterns ?? [];
+  it("allows exactly the supplier host and path prefix that the gallery treats as optimisable, over https, with no query", () => {
+    expect(patterns).toEqual([{ protocol: "https", hostname: OPTIMISED_IMAGE_HOST, port: "", pathname: `${OPTIMISED_IMAGE_PATH_PREFIX}**`, search: "" }]);
+    expect(nextConfig.images?.formats).toEqual(["image/avif", "image/webp"]);
+  });
+  it("every recorded hotel photo URL is optimisable once sized", () => {
+    const hotels = (content as unknown as { hotels: { images_ext?: { url: string }[] | null }[] }).hotels;
+    const urls = hotels.flatMap((h) => (h.images_ext ?? []).map((i) => i.url.replace("{size}", "640x350")));
+    expect(urls.length).toBeGreaterThan(0);
+    expect(urls.every(canOptimise)).toBe(true);
   });
 });
 

@@ -107,19 +107,50 @@ test.describe("with a passport country", () => {
     await expect(imgs.first()).toBeAttached();
     expect(await imgs.count()).toBe(12);
     await expect(imgs.first()).toHaveAttribute("loading", "eager");
-    // Phones get the 640 wide size; the 1024 wide one is a <source> for 640 px and up.
-    await expect(imgs.first()).toHaveAttribute("src", /640x350/);
     await expect(imgs.first()).toHaveAttribute("fetchpriority", "high");
-    await expect(page.getByRole("region", { name: "Photos" }).locator("picture source").first()).toHaveAttribute("srcset", /1024x768/);
+    await expect(imgs.first()).toHaveAttribute("width", "640");
+    await expect(imgs.first()).toHaveAttribute("height", "350");
     await expect(imgs.nth(1)).toHaveAttribute("loading", "lazy");
-    await expect(imgs.nth(1)).not.toHaveAttribute("src", /1024x768|640x350/);
+    await expect(imgs.nth(1)).not.toHaveAttribute("src", /1024x768|640x350|_next\/image/);
     await expect(imgs.nth(1)).toHaveAttribute("alt", "Photo 2 of 50");
     const srcs = await imgs.evaluateAll((els) => els.map((e) => (e as HTMLImageElement).getAttribute("src")));
-    expect(srcs.every((s) => s?.startsWith("https://"))).toBe(true);
+    // The lead photo goes through the optimiser; the thumbnails are the supplier's own https files.
+    expect(srcs[0]).toMatch(/^\/_next\/image\?url=/);
+    expect(srcs.slice(1).every((s) => s?.startsWith("https://cdn.worldota.net/t/x220/"))).toBe(true);
     // Aspect boxes are fixed: the box has a height before any photo has loaded.
     const box = await imgs.first().evaluate((e) => e.closest("div")!.getBoundingClientRect().height);
     expect(box).toBeGreaterThan(100);
     await expect(page.getByText("Showing 12 of 50 photos.")).toBeVisible();
+  });
+
+  test("the lead photo is served through the optimiser from the supplier URL, in the first HTML, in a modern format", async ({ request }) => {
+    const html = await (await request.get(HOTEL, { headers: { Cookie: "residency=gb" } })).text();
+    // In the server HTML, before any script runs: the phone <img> from the 640x350 crop, the desktop <source> from the 1024x768 one.
+    const decode = (s: string) => decodeURIComponent(s.replace(/&amp;/g, "&"));
+    const pic = html.match(/<picture>(.*?)<\/picture>/)![1]!;
+    const rawSrcset = (tag: string) => pic.match(new RegExp(`<${tag}[^>]* srcSet="([^"]+)"`))![1]!.replace(/&amp;/g, "&");
+    const srcset = (tag: string) => decode(rawSrcset(tag));
+    expect(srcset("img")).toMatch(/^\/_next\/image\?url=https:\/\/cdn\.worldota\.net\/t\/640x350\/content\/[^&]+&w=640&q=75 640w/);
+    expect(srcset("source")).toMatch(/^\/_next\/image\?url=https:\/\/cdn\.worldota\.net\/t\/1024x768\/content\/[^&]+&w=\d+&q=75 \d+w/);
+    expect(pic).toMatch(/<source media="\(min-width: 640px\)"[^>]* sizes="[^"]*50vw"[^>]* width="1024" height="768"/);
+    expect(pic).toMatch(/<img [^>]*alt="Photo 1 of 50"[^>]*loading="eager"[^>]*fetchPriority="high"/);
+    // A phone-sized request gets AVIF or WebP, smaller than the supplier JPEG.
+    const res = await request.get(rawSrcset("img").split(" 640w")[0]!, { headers: { Accept: "image/avif,image/webp,image/*" } });
+    expect(res.status()).toBe(200);
+    expect(res.headers()["content-type"]).toMatch(/^image\/(avif|webp)$/);
+    expect((await res.body()).length).toBeLessThan(60_000);
+  });
+
+  test("the lead photo box keeps its aspect ratio: 64:35 on a phone, 4:3 from 640 px up", async ({ page }) => {
+    const box = async () => page.getByRole("region", { name: "Photos" }).locator("img").first().evaluate((e) => {
+      const r = e.closest("div")!.getBoundingClientRect();
+      return r.width / r.height;
+    });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(HOTEL);
+    expect(await box()).toBeCloseTo(64 / 35, 1);
+    await page.setViewportSize({ width: 1280, height: 800 });
+    expect(await box()).toBeCloseTo(4 / 3, 1);
   });
 
   test("a hotel without photos or reviews gets a designed no-photo state and no review block or stars", async ({ page }) => {

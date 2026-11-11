@@ -1,8 +1,9 @@
-import { imageUrl } from "@/lib/content/image-url";
+import { canOptimise, imageUrl } from "@/lib/content/image-url";
 import type { HotelImage } from "@/lib/content/types";
 import { humanize } from "./format";
 
-export type Photo = { n: number; large: string; medium: string; small: string; alt: string };
+/** `optimised`: the supplier URL is on the host the image optimiser may fetch from; otherwise the page uses a plain `<img>`. */
+export type Photo = { n: number; large: string; medium: string; small: string; alt: string; optimised: boolean };
 
 /** How many photos the page shows; the rest are counted, not rendered. */
 export const MAX_PHOTOS = 12;
@@ -26,6 +27,7 @@ export function galleryPhotos(images: HotelImage[]): { photos: Photo[]; total: n
       large: imageUrl(image.url, "1024x768"),
       medium: imageUrl(image.url, "640x350"),
       small: imageUrl(image.url, "x220"),
+      optimised: canOptimise(imageUrl(image.url, "1024x768")) && canOptimise(imageUrl(image.url, "640x350")),
       alt: `Photo ${index + 1} of ${total}${category ? `: ${category}` : ""}`,
     };
   });
