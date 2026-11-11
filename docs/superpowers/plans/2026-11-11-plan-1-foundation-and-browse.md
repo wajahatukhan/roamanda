@@ -242,7 +242,16 @@ test("formatMoney never uses floats", () => { expect(formatMoney({ amount: "1234
   - `zoneLabel(timeZone: string): string` (`"Asia/Dubai"` → `"Dubai time"`; underscores become spaces; `"UTC"` → `"UTC"`)
   - `cancellationSentence(input: { penalties: CancellationPenalties; total: Money; markupPercent: number; timeZone: string; now: Date }): string`
 
-Rules, in order:
+> **Superseded during the build (2026-11-11).** Review showed rules 3, 5, 6 and 7 below could understate a penalty or show a deadline later than the data. The rules as built, in `src/lib/policy/cancellation-sentence.ts` and its tests, are:
+> - All timestamps are validated up front; impossible dates and negative amounts throw.
+> - Contradictory or incomplete data returns `CANCELLATION_FALLBACK` ("See the full cancellation policy for this rate."): overlapping, zero-length or reversed windows; a gap between windows from now onward; a final window that ends; penalties that fall over time; a `free_cancellation_before` that is stale or disagrees with a free window.
+> - Current penalty equal to the total → non-refundable, whatever follows.
+> - A fully free, open-ended rate → "Free to cancel."
+> - The deadline is the earlier of a future `free_cancellation_before` and the first later penalty's start.
+> - Equal penalty steps are merged. The first increase is always stated with its own date; longer schedules read "rising in steps to {aN} by {dateN}".
+> - Callers must catch a throw and show `CANCELLATION_FALLBACK`.
+
+Rules, in order (original text, kept for history):
 1. Each policy's penalty in selling terms = `applyMarkup(amount_show, markupPercent)`, capped at `total`. Policies with a zero penalty are free periods.
 2. `current` = the policy whose window contains `now` (null `start_at` = from the beginning, null `end_at` = no end). `later` = policies starting after `now` with a penalty greater than zero, in time order.
 3. No policies at all, or `current` penalty equals `total` and `later` is empty → `Non-refundable. If you cancel you lose {total}.`
