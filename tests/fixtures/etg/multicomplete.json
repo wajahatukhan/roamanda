@@ -1,0 +1,42 @@
+{
+  "hotels": [
+    {
+      "id": "charming_cosy_studette_full_heart_of_paris_close_to_sorbonne_university_luxembou",
+      "hid": 9917892,
+      "name": "Charming Cosy Studette Full Heart of Paris Close to Sorbonne University Luxembou",
+      "region_id": 2734
+    },
+    {
+      "id": "comfortable_apartment_20th_arr_paris",
+      "hid": 9756056,
+      "name": "Comfortable Apartment 20th Arr. Paris",
+      "region_id": 2734
+    },
+    {
+      "id": "paris_services_apartments",
+      "hid": 8745530,
+      "name": "Paris Appartements Services",
+      "region_id": 2734
+    },
+    {
+      "id": "exceptional_appart_champs_elysees_paris",
+      "hid": 6448382,
+      "name": "Exceptional Appart champs Elysées Paris",
+      "region_id": 2734
+    },
+    {
+      "id": "apart_inn_paris_saint_claude_",
+      "hid": 6515833,
+      "name": "Apart Inn Paris - Saint Claude",
+      "region_id": 2734
+    }
+  ],
+  "regions": [
+    {
+      "id": 2734,
+      "name": "Paris",
+      "type": "RT_CITY",
+      "country_code": "FR"
+    }
+  ]
+}

@@ -2,7 +2,31 @@
 
 Collected from docs.emergingtravel.com on 2026-11-11. These are notes, not the
 source of truth. Items marked (verify) were unclear or conflicting in the docs
-and must be checked against the sandbox before code relies on them.
+and must be checked against the sandbox before code relies on them. Items
+marked (settled) were checked against the sandbox recordings in
+`tests/fixtures/etg/` (recorded 2026-11-11 by `scripts/record-fixtures.ts`).
+
+## Sandbox findings (settled, 2026-11-11 recordings)
+
+- Region search worked with region 2011 (first candidate): 30 hotels with `hotels_limit: 30`,
+  `total_hotels: 30`. The fixture is trimmed to the first 22 hotels (66 rates) to stay under 300 KB.
+- `multicomplete` for "Berlin" and "London" returns empty lists in the sandbox (it has a small
+  dataset). "Paris" returns 5 hotels and region 2734 (`RT_CITY`, `FR`). The fixture uses "Paris".
+- Hotel page fixtures: 10004834 has 18 rates, 8819557 has 12 rates. Stay recorded: check-in
+  2026-12-11, 2 nights, 2 adults, residency `gb`, currency USD. Fixture dates are absolute and go
+  stale; tests must not depend on today's date.
+- Every payment type recorded (96 across SERP and hotel pages) has `type: "deposit"`, one
+  payment type per rate. `now` and `hotel` were not seen in the sandbox.
+- SERP rates carry `search_hash` and `match_hash`, but `search_hash` is `null` in all 66 recorded
+  SERP rates. Hotel page rates carry `book_hash` (string) and `match_hash`, and no `search_hash`.
+- `tax_data` is `{}` (no `taxes` key) when a rate has no taxes: all 66 SERP rates and all 12 rates of
+  8819557. Only 10004834 has `taxes`. Parse a missing list as empty.
+- Active on this key (from `overview`): `hotel/info/` (30 per 60 s), `content/v1/hotel_content_by_ids/`
+  (30 per 60 s, not the 1200/min in the docs), `content/v1/hotel_reviews_by_ids/` (30 per 60 s),
+  `content/v1/hotel_ids_by_filter/` and `filter_values/` (10 per 60 s), dumps (100 per day).
+  Search limits: `search/serp/region` and `search/hp` 10 per 60 s, `multicomplete` 30 per 60 s,
+  `serp/hotels` 150 per 60 s, `serp/geo` 10 per 60 s.
+
 
 ## Basics
 
@@ -19,7 +43,7 @@ and must be checked against the sandbox before code relies on them.
   `requests_number`, `seconds_number`.
 - Use numeric `hid` everywhere. String `id` is deprecated.
 - Sandbox fixed values: language `en`, search currency USD, booking currency EUR.
-  Sandbox region IDs: 2011, 2395, 2734, 6053839. Feature hotels: 10004834
+  Sandbox region IDs: 2011, 2395, 2734, 6053839 (2011 and 2734 verified to return hotels; 2734 is Paris). Feature hotels: 10004834
   (taxes, all meals), 8819557 (10% prebook increase), 9744270 (20% increase).
   No 3-D Secure or card flows in sandbox.
 - Test key warning: hotel 8473727 on the test (not sandbox) key makes real bookings.
@@ -45,21 +69,44 @@ and must be checked against the sandbox before code relies on them.
 
 - `room_name`, `room_name_info.original_rate_name`,
   `room_data_trans { main_room_type, main_name, bathroom, bedding_type, misc_room_type }`.
-- `meal_data { value, has_breakfast, no_child_meal }` (`meal` is deprecated).
-- `daily_prices[]`, `allotment`, `amenities_data[]`, `any_residency`, `is_package`.
+- `meal_data { value, has_breakfast, no_child_meal }` (`meal` is deprecated; still sent). Values seen: `nomeal`, `breakfast`, `all-inclusive`. (settled)
+- `daily_prices[]` (strings), `allotment`, `amenities_data[]`, `any_residency`, `is_package`, `match_hash`, `rg_ext`, `serp_filters[]`, `no_show`, `deposit`, `legal_info`, `bar_rate_price_data`. (settled)
+- `room_name_info` is `null` in all recorded rates (not an object with `original_rate_name`). `room_data_trans.bedding_type` is `null` for 51 of 96 rates; `misc_room_type` can be `null`; `beds[]` is also sent. (settled)
 - `payment_options.payment_types[]`:
   - `amount` + `currency_code`: what ETG charges, contract currency.
   - `show_amount` + `show_currency_code`: same figure in the requested currency.
   - `type`: `now` | `hotel` | `deposit`.
-  - `tax_data.taxes[] { name, included_by_supplier, amount, currency_code }`.
-    `included_by_supplier: false` means paid at the hotel.
-  - `vat_data { amount, applied, included, currency_code }`.
-  - `cancellation_penalties.free_cancellation_before` (UTC, null if none).
-  - `cancellation_penalties.policies[] { start_at, end_at, amount_charge, amount_show }`.
-  - `commission_info.{charge|show} { amount_gross, amount_net, amount_commission }`.
-- Which figure is our net cost is not labelled in the docs (verify with ETG and
-  against sandbox responses). Working assumption: `show_amount` is what we owe
-  ETG, expressed in the requested currency.
+  - `tax_data.taxes[] { name, included_by_supplier, amount, currency_code }`. `taxes` is absent when
+    there are none (`tax_data: {}`). Names seen: `city_tax`, `occupancy_tax`, `resort_fee`, `service_fee`.
+    Of 72 recorded tax entries, 36 have `included_by_supplier: false` (city_tax and occupancy_tax, e.g.
+    17.70 and 14.16 USD on a 354.00 USD stay) and 36 have `true` (resort_fee, service_fee). In that
+    example `amount` (354.00) does not change with the taxes. The docs' reading that `false` means
+    paid at the hotel is not contradicted but the sandbox data does not prove it. (settled for shape)
+  - `vat_data { amount, applied, included, currency_code, value }`. (settled)
+  - `cancellation_penalties.free_cancellation_before` (UTC, no offset, e.g. `2026-12-10T00:00:00`; null if none).
+  - `cancellation_penalties.policies[] { start_at, end_at, amount_charge, amount_show, commission_info }`.
+    Windows are contiguous: in all 96 payment types each window's `end_at` equals the next one's
+    `start_at` (no gaps or overlaps). The first window always has `start_at: null` and the last
+    `end_at: null`. (settled)
+    `free_cancellation_before` equals the first window's `end_at` when the first window charges
+    `0.00` and there is a second window (64 of 96). When free cancellation lasts to check-in there is
+    a single window `{ start_at: null, end_at: null, amount_charge: "0.00" }` and
+    `free_cancellation_before` is the check-in day at `00:00:00` (24 of 96, e.g. `2026-12-11T00:00:00`),
+    so it does not match a window start in that case. Non-refundable rates have one window charging the
+    full amount and `free_cancellation_before: null` (8 of 96). (settled)
+  - `commission_info.{charge|show} { amount_gross, amount_net, amount_commission }` is present on every
+    payment type (96 of 96) and also inside every cancellation policy window. (settled)
+- Which figure is our net cost is not labelled in the docs. In the sandbox (USD search, USD
+  contract) `amount`, `show_amount`, `commission_info.show.amount_net` and `.amount_gross` are
+  identical in all 96 payment types and `amount_commission` is `0.00` throughout; `currency_code`
+  equals `show_currency_code` throughout. Example (10004834, first rate, 2 nights): `amount`
+  354.00, `show_amount` 354.00, `commission_info.charge` and `.show` gross 354.00 / net 354.00 /
+  commission 0.00. The same rate's cancellation window has `amount_charge` 354.00 and its own
+  `commission_info` with gross 393.33, net 354.00, commission 39.33 (354.00 / 0.9). So `amount_charge`
+  and window `amount_net` match the payment-level `amount`, while window-level `amount_gross` is a
+  different, higher figure. Working assumption stays: `show_amount` is what we owe ETG in the requested
+  currency. Whether a non-USD contract or a production key changes `amount` vs `show_amount` is
+  not covered by the sandbox. (verify with a non-USD request and with ETG)
 - On request only: `sell_price_limits { min_price, max_price }`.
 
 ## Booking (Plan 2)
