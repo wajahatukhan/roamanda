@@ -243,16 +243,63 @@ describe("cancellationSentence", () => {
       "Free to cancel.",
     );
   });
-  test("past free_cancellation_before falls back to the first later start", () => {
+  test("free_cancellation_before at or before now falls back", () => {
+    for (const fcb of ["2026-05-01T10:00:00", "2026-06-01T00:00:00"]) {
+      expect(
+        s({
+          free_cancellation_before: fcb,
+          policies: [
+            { start_at: null, end_at: "2026-06-27T19:59:00", amount_show: "0.00" },
+            { start_at: "2026-06-27T19:59:00", end_at: null, amount_show: "181.82" },
+          ],
+        }),
+      ).toBe(CANCELLATION_FALLBACK);
+    }
+  });
+  test("open-ended free window with a future free_cancellation_before falls back", () => {
+    expect(
+      s({ free_cancellation_before: "2026-06-10T20:00:00", policies: [{ start_at: null, end_at: null, amount_show: "0.00" }] }),
+    ).toBe(CANCELLATION_FALLBACK);
+  });
+  test("gap between windows falls back", () => {
     expect(
       s({
-        free_cancellation_before: "2026-05-01T10:00:00",
+        free_cancellation_before: null,
         policies: [
-          { start_at: null, end_at: "2026-06-27T19:59:00", amount_show: "0.00" },
-          { start_at: "2026-06-27T19:59:00", end_at: null, amount_show: "181.82" },
+          { start_at: null, end_at: "2026-06-10T20:00:00", amount_show: "0.00" },
+          { start_at: "2026-06-15T20:00:00", end_at: null, amount_show: "181.82" },
         ],
       }),
-    ).toBe("Free to cancel until 27 June, 11:59 pm Dubai time. After that you lose $200.00.");
+    ).toBe(CANCELLATION_FALLBACK);
+  });
+  test("a final window that ends falls back", () => {
+    expect(s({ free_cancellation_before: null, policies: [{ start_at: null, end_at: "2026-07-01T20:00:00", amount_show: "50.00" }] })).toBe(
+      CANCELLATION_FALLBACK,
+    );
+  });
+  test("equal capped steps are merged (partial now)", () => {
+    expect(
+      s({
+        free_cancellation_before: null,
+        policies: [
+          { start_at: null, end_at: "2026-07-01T20:00:00", amount_show: "50.00" },
+          { start_at: "2026-07-01T20:00:00", end_at: "2026-07-05T20:00:00", amount_show: "300.00" },
+          { start_at: "2026-07-05T20:00:00", end_at: null, amount_show: "250.00" },
+        ],
+      }),
+    ).toBe("If you cancel now you lose $55.00. From 2 July, 12:00 am Dubai time you lose $200.00.");
+  });
+  test("equal steps are merged (free, then repeated 50.00)", () => {
+    expect(
+      s({
+        free_cancellation_before: "2026-06-10T20:00:00",
+        policies: [
+          { start_at: null, end_at: "2026-06-10T20:00:00", amount_show: "0.00" },
+          { start_at: "2026-06-10T20:00:00", end_at: "2026-06-15T20:00:00", amount_show: "50.00" },
+          { start_at: "2026-06-15T20:00:00", end_at: null, amount_show: "50.00" },
+        ],
+      }),
+    ).toBe("Free to cancel until 11 June, 12:00 am Dubai time. After that you lose $55.00.");
   });
   test("a gap at now returns the fallback copy", () => {
     expect(

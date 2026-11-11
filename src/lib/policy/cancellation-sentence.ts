@@ -81,26 +81,43 @@ export function cancellationSentence(input: {
     if ((tiers[i] as (typeof tiers)[number]).end > (tiers[i + 1] as (typeof tiers)[number]).start) return CANCELLATION_FALLBACK;
   }
 
+  type T = (typeof tiers)[number];
   const currentIdx = tiers.findIndex((t) => t.start <= nowMs && nowMs < t.end);
   if (currentIdx === -1) return CANCELLATION_FALLBACK;
-  const current = tiers[currentIdx] as (typeof tiers)[number];
+
+  // From now onward the windows must be contiguous and the last one open-ended.
+  const fromNow = tiers.slice(currentIdx);
+  for (let i = 0; i < fromNow.length - 1; i++) {
+    if ((fromNow[i] as T).end !== (fromNow[i + 1] as T).start) return CANCELLATION_FALLBACK;
+  }
+  if ((fromNow[fromNow.length - 1] as T).end !== Infinity) return CANCELLATION_FALLBACK;
+
+  // Merge consecutive steps with equal capped penalties, keeping the earliest start.
+  const merged: T[] = [];
+  for (const t of fromNow) {
+    const prev = merged[merged.length - 1];
+    if (prev && prev.dec.equals(t.dec)) merged[merged.length - 1] = { ...prev, end: t.end };
+    else merged.push(t);
+  }
+  const current = merged[0] as T;
 
   if (current.atTotal) return nonRefundable;
 
-  const ahead = tiers.slice(currentIdx + 1);
+  const ahead = merged.slice(1);
   for (let i = 0; i < ahead.length; i++) {
-    const prev = i === 0 ? current : (ahead[i - 1] as (typeof tiers)[number]);
-    if ((ahead[i] as (typeof tiers)[number]).dec.lessThan(prev.dec)) return CANCELLATION_FALLBACK;
+    const prev = i === 0 ? current : (ahead[i - 1] as T);
+    if ((ahead[i] as T).dec.lessThan(prev.dec)) return CANCELLATION_FALLBACK;
   }
   const later = ahead.filter((t) => !t.isZero);
 
   const when = (ms: number) => `${formatDate(ms, now, timeZone)}, ${formatTime(ms, timeZone)} ${zoneLabel(timeZone)}`;
 
   if (current.isZero) {
-    if (later.length === 0) return current.end === Infinity ? "Free to cancel." : CANCELLATION_FALLBACK;
+    if (declared !== null && declared <= nowMs) return CANCELLATION_FALLBACK;
+    if (later.length === 0) return declared === null ? "Free to cancel." : CANCELLATION_FALLBACK;
     const first = later[0] as Tier;
     const last = later[later.length - 1] as Tier;
-    const deadline = declared !== null && declared > nowMs ? Math.min(declared, first.start) : first.start;
+    const deadline = declared !== null ? Math.min(declared, first.start) : first.start;
     const head = `Free to cancel until ${when(deadline)}.`;
     if (later.length === 1) return `${head} After that you lose ${money(first.amount)}.`;
     if (later.length === 2) {
