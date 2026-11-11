@@ -4,6 +4,9 @@ A hotel booking site built on the RateHawk (ETG) API. Plan 1 covers search, the 
 Hotel content (names, photos, policies) is stored in Supabase and synced from RateHawk; prices and availability
 come from RateHawk on each request.
 
+**New to the project? Start with [docs/HANDOVER.md](docs/HANDOVER.md).** Rules for AI coding assistants are in
+[CLAUDE.md](CLAUDE.md).
+
 ## Requirements
 
 - Node 26 (the version CI uses, see `.github/workflows/ci.yml`)
