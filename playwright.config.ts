@@ -14,6 +14,8 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     timeout: 240_000,
     env: {
+      // The server's own zone is UTC, as on a typical host, so the time-zone tests can put the browser far from it.
+      TZ: "UTC",
       ETG_MODE: "fixture",
       ALLOW_FIXTURE_MODE: "1",
       ETG_BASE_URL: "https://api-sandbox.ratehawk.com",

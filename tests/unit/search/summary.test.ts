@@ -26,12 +26,16 @@ describe("initialFormValues", () => {
     expect(v.range).toBeUndefined();
     expect(v.rooms).toEqual([{ adults: 2, children: [4, 9] }]);
   });
-  it("builds a local-date range", () => {
+  it("passes the stay dates on as YYYY-MM-DD strings, never as Date objects", () => {
     const v = initialFormValues({ in: "2026-12-11", out: "2026-12-13" });
-    expect(v.range?.from?.getFullYear()).toBe(2026);
-    expect(v.range?.from?.getDate()).toBe(11);
-    expect(v.range?.to?.getDate()).toBe(13);
+    expect(v.range).toEqual({ from: "2026-12-11", to: "2026-12-13" });
     expect(v.destination).toBeNull();
+  });
+  it("drops dates that are not real, or a check-out that is not after check-in", () => {
+    expect(initialFormValues({ in: "2026-02-30", out: "2026-03-02" }).range).toBeUndefined();
+    expect(initialFormValues({ in: "2026-12-13", out: "2026-12-13" }).range).toBeUndefined();
+    expect(initialFormValues({ in: "2026-12-13", out: "2026-12-11" }).range).toBeUndefined();
+    expect(initialFormValues({ in: "2026-12-1", out: "2026-12-13" }).range).toBeUndefined();
   });
   it("needs a name to show a destination", () => {
     expect(initialFormValues({ region: "2011" }).destination).toBeNull();

@@ -9,16 +9,18 @@ import { Label } from "@/components/ui/label";
 import type { Guests } from "@/lib/etg/schemas";
 import { DEFAULT_GUESTS, encodeRooms, parseStayParams } from "@/lib/search/params";
 import { getResidency, setResidency } from "@/lib/search/residency";
-import { DateRangeField, toIsoDate } from "./search-form/date-range-field";
+import { isoRangeToLocal, localDateToIso } from "@/lib/search/stay-dates";
+import { DateRangeField } from "./search-form/date-range-field";
 import { GuestsField, UNSET_AGE } from "./search-form/guests-field";
 import { ResidencyDialog } from "./search-form/residency-dialog-lazy";
 
-export type StayPickerInitial = { range?: DateRange; rooms?: Guests };
+/** Dates are "YYYY-MM-DD" strings; the local calendar dates are built here, in the browser's own zone. */
+export type StayPickerInitial = { range?: { from: string; to: string }; rooms?: Guests };
 
 /** Dates and guests for a hotel page (no destination: the hotel is already chosen). Goes to the same hotel with the stay in the URL. */
 export function StayPicker({ hid, initial }: { hid: number; initial?: StayPickerInitial }) {
   const router = useRouter();
-  const [range, setRange] = useState<DateRange | undefined>(initial?.range);
+  const [range, setRange] = useState<DateRange | undefined>(() => isoRangeToLocal(initial?.range));
   const [rooms, setRooms] = useState<Guests>(initial?.rooms ?? DEFAULT_GUESTS);
   const [errors, setErrors] = useState<{ dates?: string; guests?: string }>({});
   const [guestsOpen, setGuestsOpen] = useState(false);
@@ -33,7 +35,7 @@ export function StayPicker({ hid, initial }: { hid: number; initial?: StayPicker
   function validate(): string | null {
     const ageUnset = rooms.some((r) => r.children.includes(UNSET_AGE));
     const parsed = parseStayParams(
-      { in: range?.from ? toIsoDate(range.from) : undefined, out: range?.to ? toIsoDate(range.to) : undefined, rooms: encodeRooms(ageUnset ? DEFAULT_GUESTS : rooms) },
+      { in: range?.from ? localDateToIso(range.from) : undefined, out: range?.to ? localDateToIso(range.to) : undefined, rooms: encodeRooms(ageUnset ? DEFAULT_GUESTS : rooms) },
       new Date(),
     );
     const next: { dates?: string; guests?: string } = {};

@@ -9,20 +9,24 @@ import { Label } from "@/components/ui/label";
 import type { Guests } from "@/lib/etg/schemas";
 import { DEFAULT_GUESTS, encodeRooms, parseSearchParams } from "@/lib/search/params";
 import { getResidency, setResidency } from "@/lib/search/residency";
-import { DateRangeField, toIsoDate } from "./date-range-field";
+import { isoRangeToLocal, localDateToIso } from "@/lib/search/stay-dates";
+import { DateRangeField } from "./date-range-field";
 import { DestinationCombobox, type Destination } from "./destination-combobox";
 import { GuestsField, UNSET_AGE } from "./guests-field";
 import { ResidencyDialog } from "./residency-dialog-lazy";
 
 type Errors = { destination?: string; dates?: string; guests?: string };
 
-/** Values to start the form with, for example from a search URL. Everything is optional. */
-export type SearchFormInitial = { destination?: Destination | null; range?: DateRange; rooms?: Guests };
+/**
+ * Values to start the form with, for example from a search URL. Everything is optional. Dates are "YYYY-MM-DD"
+ * strings: this component builds the local calendar dates itself, so they mean the same day in every time zone.
+ */
+export type SearchFormInitial = { destination?: Destination | null; range?: { from: string; to: string }; rooms?: Guests };
 
 export function SearchForm({ initial }: { initial?: SearchFormInitial } = {}) {
   const router = useRouter();
   const [destination, setDestination] = useState<Destination | null>(initial?.destination ?? null);
-  const [range, setRange] = useState<DateRange | undefined>(initial?.range);
+  const [range, setRange] = useState<DateRange | undefined>(() => isoRangeToLocal(initial?.range));
   const [rooms, setRooms] = useState<Guests>(initial?.rooms ?? DEFAULT_GUESTS);
   const [errors, setErrors] = useState<Errors>({});
   const [guestsOpen, setGuestsOpen] = useState(false);
@@ -41,8 +45,8 @@ export function SearchForm({ initial }: { initial?: SearchFormInitial } = {}) {
     const sp = {
       region: String(destination ? (destination.kind === "region" ? destination.id : destination.hid) : ""),
       name: destination?.name,
-      in: range?.from ? toIsoDate(range.from) : undefined,
-      out: range?.to ? toIsoDate(range.to) : undefined,
+      in: range?.from ? localDateToIso(range.from) : undefined,
+      out: range?.to ? localDateToIso(range.to) : undefined,
       rooms: encodeRooms(rooms),
     };
     const ageUnset = rooms.some((r) => r.children.includes(UNSET_AGE));

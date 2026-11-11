@@ -13,8 +13,6 @@ const DatePicker = dynamic(() => import("./date-picker").then((m) => m.DatePicke
   loading: () => <div aria-hidden className="min-h-[360px] min-w-[280px]" />,
 });
 
-export const toIsoDate = (d: Date) => format(d, "yyyy-MM-dd");
-
 function summary(range: DateRange | undefined) {
   if (!range?.from) return null;
   if (!range.to) return `${format(range.from, "d MMM yyyy")} – check-out?`;
