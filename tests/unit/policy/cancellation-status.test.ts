@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { Rate } from "@/lib/etg/schemas";
 import { Rate as RateSchema } from "@/lib/etg/schemas";
 import type { Hotel } from "@/lib/content/types";
-import type { CancellationPenalties } from "@/lib/etg/types";
+import type { CancellationPenalties } from "@/lib/etg/schemas";
 import { buildRateRows } from "@/lib/hotel/rate-rows";
 import { CANCELLATION_FALLBACK, cancellationSentence } from "@/lib/policy/cancellation-sentence";
 import { cancellationStatus, isFreeCancellation } from "@/lib/policy/cancellation-status";

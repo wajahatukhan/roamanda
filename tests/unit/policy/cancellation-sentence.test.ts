@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { CancellationPenalties } from "@/lib/etg/types";
+import type { CancellationPenalties } from "@/lib/etg/schemas";
 import { CANCELLATION_FALLBACK, cancellationSentence } from "@/lib/policy/cancellation-sentence";
 
 type PolicyIn = { start_at: string | null; end_at: string | null; amount_show: string; amount_charge?: string };

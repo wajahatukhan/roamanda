@@ -1,4 +1,4 @@
-import type { PaymentType } from "@/lib/etg/types";
+import type { PaymentType } from "@/lib/etg/schemas";
 import { applyMarkup, roundMoney, type Money } from "./money";
 
 export type StayPrice = {

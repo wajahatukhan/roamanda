@@ -1,4 +1,4 @@
-import type { CancellationPenalties } from "@/lib/etg/types";
+import type { CancellationPenalties } from "@/lib/etg/schemas";
 import { formatMoney, type Money } from "@/lib/pricing/money";
 import { classifyCancellation, type PenaltyStep } from "./cancellation-status";
 import { formatDate, formatWhen } from "./instant";

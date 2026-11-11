@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { PaymentType, Tax } from "@/lib/etg/types";
+import type { PaymentType, Tax } from "@/lib/etg/schemas";
 import { priceRate } from "@/lib/pricing/price-rate";
 
 function pt({ show_amount, taxes = [] }: { show_amount: string; taxes?: Tax[] }): PaymentType {

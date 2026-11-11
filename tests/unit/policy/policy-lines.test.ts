@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { CancellationPenalties } from "@/lib/etg/types";
+import type { CancellationPenalties } from "@/lib/etg/schemas";
 import { POLICY_LINES_FALLBACK, policyLines } from "@/lib/policy/policy-lines";
 
 const NOW = new Date("2026-06-01T00:00:00Z");

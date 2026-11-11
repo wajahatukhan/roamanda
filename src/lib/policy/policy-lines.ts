@@ -1,5 +1,5 @@
 import Decimal from "decimal.js";
-import type { CancellationPenalties } from "@/lib/etg/types";
+import type { CancellationPenalties } from "@/lib/etg/schemas";
 import { applyMarkup, formatMoney, type Money } from "@/lib/pricing/money";
 import { formatWhen, parseTimestamp } from "./instant";
 
