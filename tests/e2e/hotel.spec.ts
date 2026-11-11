@@ -107,14 +107,17 @@ test.describe("with a passport country", () => {
     await expect(imgs.first()).toBeAttached();
     expect(await imgs.count()).toBe(12);
     await expect(imgs.first()).toHaveAttribute("loading", "eager");
-    await expect(imgs.first()).toHaveAttribute("src", /1024x768/);
+    // Phones get the 640 wide size; the 1024 wide one is a <source> for 640 px and up.
+    await expect(imgs.first()).toHaveAttribute("src", /640x350/);
+    await expect(imgs.first()).toHaveAttribute("fetchpriority", "high");
+    await expect(page.getByRole("region", { name: "Photos" }).locator("picture source").first()).toHaveAttribute("srcset", /1024x768/);
     await expect(imgs.nth(1)).toHaveAttribute("loading", "lazy");
-    await expect(imgs.nth(1)).not.toHaveAttribute("src", /1024x768/);
+    await expect(imgs.nth(1)).not.toHaveAttribute("src", /1024x768|640x350/);
     await expect(imgs.nth(1)).toHaveAttribute("alt", "Photo 2 of 50");
     const srcs = await imgs.evaluateAll((els) => els.map((e) => (e as HTMLImageElement).getAttribute("src")));
     expect(srcs.every((s) => s?.startsWith("https://"))).toBe(true);
     // Aspect boxes are fixed: the box has a height before any photo has loaded.
-    const box = await imgs.first().evaluate((e) => e.parentElement!.getBoundingClientRect().height);
+    const box = await imgs.first().evaluate((e) => e.closest("div")!.getBoundingClientRect().height);
     expect(box).toBeGreaterThan(100);
     await expect(page.getByText("Showing 12 of 50 photos.")).toBeVisible();
   });

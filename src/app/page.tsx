@@ -1,6 +1,9 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { SearchForm } from "@/components/search-form/search-form";
 import { initialFormValues } from "@/lib/search/initial";
+
+export const metadata: Metadata = { title: "Search hotels" };
 
 export default function Home(props: PageProps<"/">) {
   return (

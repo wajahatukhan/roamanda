@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { setResidency } from "@/lib/search/residency";
-import { ResidencyDialog } from "./search-form/residency-dialog";
+import { ResidencyDialog } from "./search-form/residency-dialog-lazy";
 
 /**
  * Asks for the passport country and stores it. The server action sets a cookie, which makes Next re-render this

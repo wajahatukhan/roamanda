@@ -11,7 +11,7 @@ import { DEFAULT_GUESTS, encodeRooms, parseStayParams } from "@/lib/search/param
 import { getResidency, setResidency } from "@/lib/search/residency";
 import { DateRangeField, toIsoDate } from "./search-form/date-range-field";
 import { GuestsField, UNSET_AGE } from "./search-form/guests-field";
-import { ResidencyDialog } from "./search-form/residency-dialog";
+import { ResidencyDialog } from "./search-form/residency-dialog-lazy";
 
 export type StayPickerInitial = { range?: DateRange; rooms?: Guests };
 

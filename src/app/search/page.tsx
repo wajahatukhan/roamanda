@@ -13,7 +13,10 @@ import { describeStay } from "@/lib/search/summary";
 import { Filters } from "./filters";
 import { Results } from "./results";
 
-export const metadata: Metadata = { title: "Search results" };
+export async function generateMetadata({ searchParams }: PageProps<"/search">): Promise<Metadata> {
+  const name = (first((await searchParams).name) ?? "").trim().slice(0, 80);
+  return { title: name ? `Hotels in ${name}` : "Search hotels" };
+}
 
 type RawParams = Record<string, string | string[] | undefined>;
 

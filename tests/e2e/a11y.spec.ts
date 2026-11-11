@@ -115,3 +115,12 @@ test("the hotel page's Show all control is in the tab order and opens from the k
   await page.keyboard.press("Enter");
   await expect(page.locator("details")).toHaveJSProperty("open", true);
 });
+
+test("every page has a descriptive document title", async ({ page }) => {
+  await page.goto("/");
+  await expect(page).toHaveTitle("Search hotels");
+  await page.goto(`/search?region=2011&name=Paris&${STAY}`);
+  await expect(page).toHaveTitle("Hotels in Paris");
+  await page.goto(`/hotel/10004834?${STAY}`);
+  await expect(page).toHaveTitle("Conrad Los Angeles");
+});

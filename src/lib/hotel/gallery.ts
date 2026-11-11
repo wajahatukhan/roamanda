@@ -2,7 +2,7 @@ import { imageUrl } from "@/lib/content/image-url";
 import type { HotelImage } from "@/lib/content/types";
 import { humanize } from "./format";
 
-export type Photo = { n: number; large: string; small: string; alt: string };
+export type Photo = { n: number; large: string; medium: string; small: string; alt: string };
 
 /** How many photos the page shows; the rest are counted, not rendered. */
 export const MAX_PHOTOS = 12;
@@ -24,6 +24,7 @@ export function galleryPhotos(images: HotelImage[]): { photos: Photo[]; total: n
     return {
       n: index + 1,
       large: imageUrl(image.url, "1024x768"),
+      medium: imageUrl(image.url, "640x350"),
       small: imageUrl(image.url, "x220"),
       alt: `Photo ${index + 1} of ${total}${category ? `: ${category}` : ""}`,
     };

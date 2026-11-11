@@ -12,7 +12,7 @@ import { getResidency, setResidency } from "@/lib/search/residency";
 import { DateRangeField, toIsoDate } from "./date-range-field";
 import { DestinationCombobox, type Destination } from "./destination-combobox";
 import { GuestsField, UNSET_AGE } from "./guests-field";
-import { ResidencyDialog } from "./residency-dialog";
+import { ResidencyDialog } from "./residency-dialog-lazy";
 
 type Errors = { destination?: string; dates?: string; guests?: string };
 

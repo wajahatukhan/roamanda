@@ -20,8 +20,12 @@ export function Gallery({ images }: { images: HotelImage[] }) {
   return (
     <section aria-label="Photos" className="flex flex-col gap-3">
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
-        <div className="relative col-span-2 aspect-[4/3] overflow-hidden rounded-2xl bg-muted sm:row-span-2">
-          <Image src={first!.large} alt={first!.alt} fill unoptimized loading="eager" fetchPriority="high" sizes="(min-width: 1024px) 512px, 100vw" className="object-cover" />
+        <div className="relative col-span-2 aspect-[64/35] overflow-hidden rounded-2xl bg-muted sm:row-span-2 sm:aspect-[4/3]">
+          {/* Plain server-rendered markup, so the browser finds the photo in the first HTML. Phones get the 640 wide size; from 640 px up, the 1024 wide one. */}
+          <picture>
+            <source media="(min-width: 640px)" srcSet={first!.large} width={1024} height={768} />
+            <img src={first!.medium} width={640} height={350} alt={first!.alt} loading="eager" fetchPriority="high" decoding="async" className="absolute inset-0 size-full object-cover" />
+          </picture>
         </div>
         {rest.map((p) => (
           <div key={p.n} className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted">
