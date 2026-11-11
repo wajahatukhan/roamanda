@@ -301,6 +301,41 @@ describe("cancellationSentence", () => {
       }),
     ).toBe("Free to cancel until 11 June, 12:00 am Dubai time. After that you lose $55.00.");
   });
+  test("zero-length window falls back", () => {
+    expect(
+      s({
+        free_cancellation_before: null,
+        policies: [
+          { start_at: null, end_at: "2026-06-10T20:00:00", amount_show: "0.00" },
+          { start_at: "2026-06-10T20:00:00", end_at: "2026-06-10T20:00:00", amount_show: "10.00" },
+          { start_at: "2026-06-10T20:00:00", end_at: null, amount_show: "181.82" },
+        ],
+      }),
+    ).toBe(CANCELLATION_FALLBACK);
+  });
+  test("reversed window falls back", () => {
+    expect(
+      s({
+        free_cancellation_before: null,
+        policies: [
+          { start_at: null, end_at: "2026-06-10T20:00:00", amount_show: "0.00" },
+          { start_at: "2026-06-12T20:00:00", end_at: "2026-06-10T20:00:00", amount_show: "10.00" },
+          { start_at: "2026-06-10T20:00:00", end_at: null, amount_show: "181.82" },
+        ],
+      }),
+    ).toBe(CANCELLATION_FALLBACK);
+  });
+  test("negative amount throws", () => {
+    expect(() =>
+      s({
+        free_cancellation_before: null,
+        policies: [
+          { start_at: null, end_at: "2026-06-10T20:00:00", amount_show: "-10.00" },
+          { start_at: "2026-06-10T20:00:00", end_at: null, amount_show: "181.82" },
+        ],
+      }),
+    ).toThrow(/amount/i);
+  });
   test("a gap at now returns the fallback copy", () => {
     expect(
       s({ free_cancellation_before: null, policies: [{ start_at: "2026-06-10T00:00:00", end_at: null, amount_show: "0.00" }] }),

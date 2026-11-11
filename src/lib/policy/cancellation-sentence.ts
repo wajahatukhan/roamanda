@@ -65,6 +65,19 @@ export function cancellationSentence(input: {
     end: p.end_at === null ? Infinity : parseTimestamp(p.end_at),
   }));
 
+  for (const { p } of parsed) {
+    let amount: Decimal;
+    try {
+      amount = new Decimal(p.amount_show);
+    } catch {
+      throw new Error(`Invalid cancellation amount: ${p.amount_show}`);
+    }
+    if (!amount.isFinite() || amount.isNegative()) throw new Error(`Invalid cancellation amount: ${p.amount_show}`);
+  }
+
+  // A window that ends at or before its own start makes the schedule contradictory.
+  if (parsed.some(({ start, end }) => start >= end)) return CANCELLATION_FALLBACK;
+
   if (penalties.policies.length === 0) return nonRefundable;
 
   const tiers = parsed
