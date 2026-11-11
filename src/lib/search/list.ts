@@ -78,9 +78,7 @@ export function sortItems(items: ListItem[], by: SortKey): ListItem[] {
   const compare =
     by === "price"
       ? (a: ListItem, b: ListItem) => byPrice(a, b) || tieBreak(a, b)
-      : by === "rating"
-        ? (a: ListItem, b: ListItem) => byRating(a, b) || byPrice(a, b) || tieBreak(a, b)
-        : (a: ListItem, b: ListItem) => byRating(a, b) || byPrice(a, b) || tieBreak(a, b);
+      : (a: ListItem, b: ListItem) => byRating(a, b) || byPrice(a, b) || tieBreak(a, b);
   return [...items].sort(compare);
 }
 
