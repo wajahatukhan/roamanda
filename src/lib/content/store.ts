@@ -139,8 +139,8 @@ function loadFixtureHotels(): Promise<Map<number, Hotel>> {
 export const CONTENT_READ_TIMEOUT_MS = 3000;
 
 /**
- * Runs a read with an abort signal and a time limit, like `hotelExists` does, but throws a clear error when the time
- * runs out (a page cannot do without the answer). The query is aborted on timeout; a late failure is swallowed.
+ * Runs a read with an abort signal and a time limit, and throws a clear error when the time runs out (a page cannot
+ * do without the answer; `hotelExists` catches it). The query is aborted on timeout; a late failure is swallowed.
  */
 async function bounded<T>(op: string, run: (signal: AbortSignal) => Promise<T>, timeoutMs: number): Promise<T> {
   const controller = new AbortController();
@@ -251,25 +251,21 @@ export async function hotelExists(hid: number, opts: { timeoutMs?: number } = {}
     if (hit.expiresAt > now) return hit.exists;
     existsCache.delete(hid);
   }
-  const controller = new AbortController();
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  const timedOut = new Promise<null>((resolve) => {
-    timer = setTimeout(() => {
-      controller.abort();
-      resolve(null);
-    }, opts.timeoutMs ?? HOTEL_EXISTS_TIMEOUT_MS);
-  });
-  const query = (async (): Promise<boolean | null> => {
-    const { data, error } = await db().from("hotels").select("hid").eq("hid", hid).abortSignal(controller.signal).maybeSingle();
-    return error ? null : data !== null;
-  })().catch(() => null); // Handled here, so a query that fails after the timeout cannot become an unhandled rejection.
+  let exists: boolean | null;
   try {
-    const exists = await Promise.race([query, timedOut]);
-    if (exists !== null) rememberExists(hid, exists);
-    return exists;
-  } finally {
-    clearTimeout(timer);
+    exists = await bounded(
+      "checking hotel",
+      async (signal) => {
+        const { data, error } = await db().from("hotels").select("hid").eq("hid", hid).abortSignal(signal).maybeSingle();
+        return error ? null : data !== null;
+      },
+      opts.timeoutMs ?? HOTEL_EXISTS_TIMEOUT_MS,
+    );
+  } catch {
+    return null; // Timed out or failed: the answer is unknown.
   }
+  if (exists !== null) rememberExists(hid, exists);
+  return exists;
 }
 
 /** Inserts or updates hotels by hid, 200 rows per request. */
