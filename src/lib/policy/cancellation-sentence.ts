@@ -3,6 +3,9 @@ import type { CancellationPenalties } from "@/lib/etg/types";
 import { applyMarkup, formatMoney, type Money } from "@/lib/pricing/money";
 import { zoneLabel } from "./time-zone";
 
+/** Shown when the policy windows leave a gap at `now`; page code may reuse it. */
+export const CANCELLATION_FALLBACK = "See the full cancellation policy for this rate.";
+
 type Tier = { start: number; amount: Money; isZero: boolean; atTotal: boolean };
 
 const ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:?\d{2})?$/;
@@ -69,21 +72,16 @@ export function cancellationSentence(input: {
 
   const current = tiers.find((t) => t.start <= nowMs && nowMs < t.end);
   const later = tiers.filter((t) => t.start > nowMs && !t.isZero);
-  if (!current) {
-    throw new Error("No cancellation policy covers the current time");
-  }
+  if (!current) return CANCELLATION_FALLBACK;
 
   if (current.atTotal && later.length === 0) return nonRefundable;
 
   const when = (ms: number) => `${formatDate(ms, now, timeZone)}, ${formatTime(ms, timeZone)} ${zoneLabel(timeZone)}`;
 
   if (current.isZero) {
-    if (later.length === 0) {
-      throw new Error("Cancellation policies are free with no later penalty; no sentence is defined");
-    }
-    const deadline =
-      penalties.free_cancellation_before !== null ? parseTimestamp(penalties.free_cancellation_before) : (later[0] as Tier).start;
-    if (deadline <= nowMs) throw new Error("Free cancellation deadline is not in the future");
+    if (later.length === 0) return "Free to cancel.";
+    const declared = penalties.free_cancellation_before === null ? null : parseTimestamp(penalties.free_cancellation_before);
+    const deadline = declared !== null && declared > nowMs ? declared : (later[0] as Tier).start;
     const head = `Free to cancel until ${when(deadline)}.`;
     if (later.length === 1) return `${head} After that you lose ${money((later[0] as Tier).amount)}.`;
     const first = later[0] as Tier;

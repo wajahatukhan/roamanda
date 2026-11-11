@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import type { CancellationPenalties } from "@/lib/etg/types";
-import { cancellationSentence } from "@/lib/policy/cancellation-sentence";
+import { CANCELLATION_FALLBACK, cancellationSentence } from "@/lib/policy/cancellation-sentence";
 
 type PolicyIn = { start_at: string | null; end_at: string | null; amount_show: string; amount_charge?: string };
 type PenaltiesIn = { free_cancellation_before: string | null; policies: PolicyIn[] };
@@ -143,9 +143,26 @@ describe("cancellationSentence", () => {
       }),
     ).toThrow(/timestamp/i);
   });
-  test("no policy covering now throws rather than guessing", () => {
-    expect(() =>
+  test("fully free rate", () => {
+    expect(s({ free_cancellation_before: null, policies: [{ start_at: null, end_at: null, amount_show: "0.00" }] })).toBe(
+      "Free to cancel.",
+    );
+  });
+  test("past free_cancellation_before falls back to the first later start", () => {
+    expect(
+      s({
+        free_cancellation_before: "2026-05-01T10:00:00",
+        policies: [
+          { start_at: null, end_at: "2026-06-27T19:59:00", amount_show: "0.00" },
+          { start_at: "2026-06-27T19:59:00", end_at: null, amount_show: "181.82" },
+        ],
+      }),
+    ).toBe("Free to cancel until 27 June, 11:59 pm Dubai time. After that you lose $200.00.");
+  });
+  test("a gap at now returns the fallback copy", () => {
+    expect(
       s({ free_cancellation_before: null, policies: [{ start_at: "2026-06-10T00:00:00", end_at: null, amount_show: "0.00" }] }),
-    ).toThrow();
+    ).toBe(CANCELLATION_FALLBACK);
+    expect(CANCELLATION_FALLBACK).toBe("See the full cancellation policy for this rate.");
   });
 });
