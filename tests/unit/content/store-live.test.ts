@@ -1,6 +1,6 @@
 import { resetEnvCache } from "@/env";
 import { mapEtgHotel } from "@/lib/content/map-hotel";
-import { getHotels, getMarkupPercent, hotelToRow, recordMissing, resetStoreCache, upsertHotels } from "@/lib/content/store";
+import { getDictionaries, getHotels, getMarkupPercent, hotelToRow, recordMissing, resetStoreCache, upsertHotels } from "@/lib/content/store";
 import raw from "../../fixtures/etg/content-10004834.json";
 
 const calls: { table: string; op: string; arg: unknown }[] = [];
@@ -88,7 +88,38 @@ test("getMarkupPercent reads the setting and caches it for 60 s", async () => {
   }
 });
 
-test("getMarkupPercent rejects a bad setting", async () => {
-  settingValue = "abc";
-  await expect(getMarkupPercent()).rejects.toThrow(/markup_percent/);
+test.each([["empty", ""], ["blank", "  "], ["over", "1200"], ["101", 101], ["negative", -1], ["boolean", true], ["null", null], ["object", {}], ["text", "abc"], ["negative string", "-1"]])(
+  "getMarkupPercent rejects %s and does not cache it",
+  async (_n, bad) => {
+    settingValue = bad;
+    await expect(getMarkupPercent()).rejects.toThrow(/markup_percent/);
+    settingValue = 12;
+    expect(await getMarkupPercent()).toBe(12);
+  },
+);
+
+test.each([[12, 12], ["12.5", 12.5], [0, 0], [100, 100], [" 7 ", 7]])("getMarkupPercent accepts %s", async (v, want) => {
+  settingValue = v;
+  expect(await getMarkupPercent()).toBe(want);
+});
+
+describe("getDictionaries", () => {
+  test("a missing row is silent and empty", async () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
+    settingValue = undefined;
+    expect(await getDictionaries()).toEqual({ taxNames: {}, mealNames: {} });
+    expect(spy).not.toHaveBeenCalled();
+    spy.mockRestore();
+  });
+
+  test("a malformed value logs once, returns empty and is not cached", async () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
+    settingValue = { taxNames: "nope" };
+    expect(await getDictionaries()).toEqual({ taxNames: {}, mealNames: {} });
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(String(spy.mock.calls[0]?.[0])).not.toContain("nope");
+    settingValue = { taxNames: { city_tax: "City tax" }, mealNames: {} };
+    expect((await getDictionaries()).taxNames.city_tax).toBe("City tax");
+    spy.mockRestore();
+  });
 });

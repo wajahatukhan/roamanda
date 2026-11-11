@@ -193,6 +193,17 @@ async function readSetting(key: string): Promise<unknown> {
   return (data as { value: unknown } | null)?.value;
 }
 
+const MAX_MARKUP_PERCENT = 100;
+
+/** A finite number 0..100, from a JSON number or a plain decimal string. Anything else is null. */
+function parseMarkup(raw: unknown): number | null {
+  let n: number;
+  if (typeof raw === "number") n = raw;
+  else if (typeof raw === "string" && /^\d+(\.\d+)?$/.test(raw.trim())) n = Number(raw.trim());
+  else return null;
+  return Number.isFinite(n) && n >= 0 && n <= MAX_MARKUP_PERCENT ? n : null;
+}
+
 let markupCache: { value: number; at: number } | undefined;
 
 /** Markup percent applied on top of ETG prices; cached for 60 s. */
@@ -201,9 +212,9 @@ export async function getMarkupPercent(): Promise<number> {
   const now = Date.now();
   if (markupCache && now - markupCache.at < MARKUP_TTL_MS) return markupCache.value;
   const raw = await readSetting("markup_percent");
-  const value = typeof raw === "string" ? Number(raw) : raw;
-  if (typeof value !== "number" || !Number.isFinite(value) || value < 0) {
-    throw new Error("Content store: setting markup_percent is missing or not a non-negative number");
+  const value = parseMarkup(raw);
+  if (value === null) {
+    throw new Error("Content store: setting markup_percent must be a number from 0 to 100");
   }
   markupCache = { value, at: now };
   return value;
@@ -224,10 +235,18 @@ export async function getDictionaries(): Promise<Dictionaries> {
   const now = Date.now();
   if (dictionariesCache && now - dictionariesCache.at < DICTIONARIES_TTL_MS) return dictionariesCache.value;
   const raw = await readSetting("dictionaries");
-  const parsed = DictionariesSchema.safeParse(raw ?? {});
-  const value: Dictionaries = parsed.success ? parsed.data : { taxNames: {}, mealNames: {} };
-  dictionariesCache = { value, at: now };
-  return value;
+  if (raw === undefined || raw === null) {
+    dictionariesCache = { value: { taxNames: {}, mealNames: {} }, at: now };
+    return dictionariesCache.value;
+  }
+  const parsed = DictionariesSchema.safeParse(raw);
+  if (!parsed.success) {
+    // Not cached, so a corrected setting is picked up on the next call. Message only, no payload.
+    console.error("Content store: setting dictionaries is malformed; using empty dictionaries");
+    return { taxNames: {}, mealNames: {} };
+  }
+  dictionariesCache = { value: parsed.data, at: now };
+  return parsed.data;
 }
 
 /** Stores the dictionaries (sync script only). */
