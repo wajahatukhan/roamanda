@@ -256,10 +256,13 @@ describe("cancellationSentence", () => {
       ).toBe(CANCELLATION_FALLBACK);
     }
   });
-  test("open-ended free window with a future free_cancellation_before falls back", () => {
-    expect(
-      s({ free_cancellation_before: "2026-06-10T20:00:00", policies: [{ start_at: null, end_at: null, amount_show: "0.00" }] }),
-    ).toBe(CANCELLATION_FALLBACK);
+  test("open-ended free window with a future free_cancellation_before states only the deadline", () => {
+    const rate: PenaltiesIn = {
+      free_cancellation_before: "2026-12-11T00:00:00",
+      policies: [{ start_at: null, end_at: null, amount_show: "0.00" }],
+    };
+    expect(s(rate, { timeZone: "UTC" })).toBe("Free to cancel until 11 December, 12:00 am UTC.");
+    expect(s(rate)).toBe("Free to cancel until 11 December, 4:00 am Dubai time.");
   });
   test("gap between windows falls back", () => {
     expect(

@@ -127,7 +127,7 @@ export function cancellationSentence(input: {
 
   if (current.isZero) {
     if (declared !== null && declared <= nowMs) return CANCELLATION_FALLBACK;
-    if (later.length === 0) return declared === null ? "Free to cancel." : CANCELLATION_FALLBACK;
+    if (later.length === 0) return declared === null ? "Free to cancel." : `Free to cancel until ${when(declared)}.`;
     const first = later[0] as Tier;
     const last = later[later.length - 1] as Tier;
     const deadline = declared !== null ? Math.min(declared, first.start) : first.start;
