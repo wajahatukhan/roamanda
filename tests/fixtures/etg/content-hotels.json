@@ -1,0 +1,5820 @@
+{
+  "hotels": [
+    {
+      "address": "7015 Lanewood Avenue Hollywood,Lanewood Avenue, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "Internet access"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Internet"
+        }
+      ],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "A very nice place to stay for a reasonable price - hotel «The Place Just To Sleep» is located in Los Angeles. This hotel is located in 8 km from the city center. You can take a walk and explore the neighbourhood area of the hotel. Places nearby: Los Angeles Metropolitan Medical Center, Koreatown Plaza and Wilshire/Western."
+          ],
+          "title": "Location"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 10282085,
+      "id": "the_place_just_to_sleep",
+      "images_ext": [],
+      "kind": "hotel",
+      "latitude": 34.0447,
+      "longitude": -118.324,
+      "name": "The Place Just To Sleep",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": "90028",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 0,
+      "serp_filters": [
+        "has_internet"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "630 1/2 N. Sycamore Avenue Los Angeles,N. Sycamore Avenue, Los Angeles",
+      "amenity_groups": [],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "A great option for a journey on a budget - hotel «N Sycamore Place» is located in Los Angeles. This hotel is located in 8 km from the city center. You can take a walk and explore the neighbourhood area of the hotel — Los Angeles Metropolitan Medical Center, Koreatown Plaza and Wilshire/Western."
+          ],
+          "title": "Location"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 8396895,
+      "id": "melrose_place_2",
+      "images_ext": [],
+      "kind": "hotel",
+      "latitude": 34.0447,
+      "longitude": -118.324,
+      "name": "N Sycamore Place",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": "CA 90036",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 0,
+      "serp_filters": null,
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 3,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "11 Breeze Ave, Los Angeles",
+      "amenity_groups": [],
+      "check_in_time": "16:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "10:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Looking for a home comfort: apartment «VE Boardwalk Apartment A 1 Bedroom 1 Bathroom Apts» is located in Los Angeles. This apartment is located in 23 km from the city center. You can take a walk and explore the neighbourhood area of the apartment. Places nearby: Venice Beach, Venice Skate Park and Chiat-Day Building."
+          ],
+          "title": "Location"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 8978417,
+      "id": "ve_boardwalk_apartment_a_1_bedroom_1_bathroom_apts",
+      "images_ext": [],
+      "kind": "apartment",
+      "latitude": 33.99047,
+      "longitude": -118.47619,
+      "name": "VE Boardwalk Apartment A 1 Bedroom 1 Bathroom Apts",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": "90291",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [
+        {
+          "name": "Apartment",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Apartment"
+          },
+          "room_amenities": [
+            "private-bathroom"
+          ],
+          "room_group_id": 14,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 0,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 6,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "1 Bedroom Apartment",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "1 Bedroom Apartment"
+          },
+          "room_amenities": [
+            "private-bathroom"
+          ],
+          "room_group_id": 18395671,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 1,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 6,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        }
+      ],
+      "star_rating": 3,
+      "serp_filters": [
+        "beach"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "Corner of West 11th Street and South Figueroa Los ,Corner of West 11th Street and South Figueroa, Los Angeles",
+      "amenity_groups": [],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "A great option for a journey on a budget - hotel «Park Hyatt Los Angeles at Oceanwide Plaza» is located in Los Angeles. This hotel is located in 8 km from the city center. You can take a walk and explore the neighbourhood area of the hotel. Places nearby: Los Angeles Metropolitan Medical Center, Koreatown Plaza and Wilshire/Western."
+          ],
+          "title": "Location"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 9743468,
+      "id": "park_hyatt_los_angeles_at_oceanwide_plaza",
+      "images_ext": [],
+      "kind": "hotel",
+      "latitude": 34.0447,
+      "longitude": -118.324,
+      "name": "Park Hyatt Los Angeles at Oceanwide Plaza",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": "90015",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 0,
+      "serp_filters": null,
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "South Los Angeles Street Toyo Miyatake Way,South Los Angeles Street, Los Angeles",
+      "amenity_groups": [],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "A great option for a journey on a budget - hotel «Modern Living by Eleven» is located in Los Angeles. This hotel is located in 8 km from the city center. You can take a walk and explore the neighbourhood area of the hotel — Los Angeles Metropolitan Medical Center, Koreatown Plaza and Wilshire/Western."
+          ],
+          "title": "Location"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 10060723,
+      "id": "modern_living_by_eleven_2",
+      "images_ext": [],
+      "kind": "hotel",
+      "latitude": 34.0447,
+      "longitude": -118.324,
+      "name": "Modern Living by Eleven",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": "90012",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 0,
+      "serp_filters": null,
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "1111 Wilshire Boulevard Los Angeles,Wilshire Boulevard, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "Air conditioning",
+            "24-hour reception",
+            "Elevator/lift",
+            "Smoke-free property",
+            "Heating",
+            "Washing machine",
+            "Garden",
+            "Dryer",
+            "All Spaces Non-Smoking (public and private)",
+            "Upper floors accessible by elevator"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Non-smoking rooms",
+            "Fridge",
+            "Cable TV",
+            "Hairdryer",
+            "Flat-screen TV",
+            "Shower/Bathtub",
+            "Bathtub",
+            "Wardrobe/Closet",
+            "Linens",
+            "Toiletries"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Rooms"
+        },
+        {
+          "amenities": [
+            "Iron and board",
+            "Luggage storage",
+            "Iron"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Services and amenities"
+        },
+        {
+          "amenities": [
+            "Coffee/tea for guests",
+            "Microwave oven",
+            "Kettle"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        },
+        {
+          "amenities": [
+            "Free Wi-Fi"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Internet"
+        },
+        {
+          "amenities": [
+            "Spanish",
+            "Russian",
+            "English",
+            "Arabic"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Languages Spoken"
+        },
+        {
+          "amenities": [
+            "Barbecue grill(s)",
+            "Sun Deck"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Recreation"
+        },
+        {
+          "amenities": [
+            "Parking nearby",
+            "Garage"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Parking"
+        },
+        {
+          "amenities": [
+            "Swimming pool",
+            "Spa tub",
+            "Outdoor pool",
+            "Beach/pool towels"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Pool and beach"
+        },
+        {
+          "amenities": [
+            "Fitness facilities"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Sports"
+        },
+        {
+          "amenities": [
+            "Playroom"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Kids"
+        },
+        {
+          "amenities": [
+            "Pets allowed"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Pets"
+        }
+      ],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "A great option for family vacation: apartment «Wilshire Dream Apartment» is located in Los Angeles. This apartment is located minutes away from the city center. You can take a walk and explore the neighbourhood area of the apartment — FIGat7th, 7th Street and St. Thomas Hospital Group."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "Want to be always on-line? Wi-Fi is available. If you travel by car, you can park in a parking zone. Sports fans will be able to enjoy a fitness center. You will find these entertainment amenities on the premises: a barbeque area.",
+            "Here, you can treat yourself with water procedures as there will be a pool and an outdoor pool. Children will be happy, there is a playroom for them. You won’t have to leave your pet at home as they are allowed. Accessible for guests with disabilities: the elevator helps them to go to the highest floors.",
+            "There are other services available for the guests of the apartment. For example, ironing. The staff of the apartment speaks English, Spanish and Russian."
+          ],
+          "title": "At the apartment"
+        },
+        {
+          "paragraphs": [
+            "In the room, for you, there is a TV. The room equipment depends on its category."
+          ],
+          "title": "Room amenities"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 6803924,
+      "id": "wilshire_dream_apartment",
+      "images_ext": [],
+      "kind": "apartment",
+      "latitude": 34.0528,
+      "longitude": -118.263725,
+      "name": "Wilshire Dream Apartment",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": "CA 90017",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [
+        {
+          "name": "Apartment",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Apartment"
+          },
+          "room_amenities": [
+            "air-conditioning",
+            "bath",
+            "bedsheets",
+            "dining-area",
+            "fridge",
+            "hairdryer",
+            "heating",
+            "iron",
+            "kitchen",
+            "kitchen-stuff",
+            "microwave",
+            "private-bathroom",
+            "private-entrance",
+            "shower",
+            "tea",
+            "tea-or-coffee",
+            "toiletries",
+            "towels",
+            "tv",
+            "wardrobe",
+            "washing-machine"
+          ],
+          "room_group_id": 14,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 0,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 6,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "1 Bedroom Apartment",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "1 Bedroom Apartment"
+          },
+          "room_amenities": [
+            "air-conditioning",
+            "bath",
+            "bedsheets",
+            "dining-area",
+            "fridge",
+            "hairdryer",
+            "heating",
+            "iron",
+            "kitchen",
+            "kitchen-stuff",
+            "microwave",
+            "private-bathroom",
+            "private-entrance",
+            "shower",
+            "tea",
+            "tea-or-coffee",
+            "toiletries",
+            "towels",
+            "tv",
+            "wardrobe",
+            "washing-machine"
+          ],
+          "room_group_id": 18395671,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 1,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 6,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "2 Bedrooms Apartment",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "2 Bedrooms Apartment"
+          },
+          "room_amenities": [
+            "air-conditioning",
+            "bath",
+            "bedsheets",
+            "dining-area",
+            "fridge",
+            "hairdryer",
+            "heating",
+            "iron",
+            "kitchen",
+            "kitchen-stuff",
+            "microwave",
+            "private-bathroom",
+            "private-entrance",
+            "shower",
+            "tea",
+            "tea-or-coffee",
+            "toiletries",
+            "towels",
+            "tv",
+            "wardrobe",
+            "washing-machine"
+          ],
+          "room_group_id": 18395671,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 2,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 6,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Studio",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Studio"
+          },
+          "room_amenities": [
+            "air-conditioning",
+            "bath",
+            "bedsheets",
+            "dining-area",
+            "fridge",
+            "hairdryer",
+            "heating",
+            "iron",
+            "kitchen",
+            "kitchen-stuff",
+            "microwave",
+            "private-bathroom",
+            "private-entrance",
+            "shower",
+            "tea",
+            "tea-or-coffee",
+            "toiletries",
+            "towels",
+            "tv",
+            "wardrobe",
+            "washing-machine"
+          ],
+          "room_group_id": 26,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 0,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 7,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        }
+      ],
+      "star_rating": 0,
+      "serp_filters": [
+        "has_washer",
+        "has_internet",
+        "has_parking",
+        "has_kids",
+        "has_pool",
+        "has_fitness",
+        "has_spa",
+        "air_conditioning",
+        "has_pets",
+        "has_jacuzzi"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 1,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "7947Electra Drive, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "Elevator/lift"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Restaurant"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        },
+        {
+          "amenities": [
+            "Conference Hall"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Business"
+        }
+      ],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Look no further for a healthy and sustainable vacation. Villa «1025 - Villa Sofia - RUD 113280» is located in Los Angeles. This villa is located in 13 km from the city center. You can take a walk and explore the neighbourhood area of the villa — Storer House, Sundance Cinema- West Hollywood and The Garden of Allah."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "It’s time to have a nice meal! Stop by the restaurant. Accessibility: there is an elevator/lift."
+          ],
+          "title": "At the villa"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 9731560,
+      "id": "1025_villa_sofia_rud_113280",
+      "images_ext": [],
+      "kind": "villa_and_bungalows",
+      "latitude": 34.1082,
+      "longitude": -118.365,
+      "name": "1025 - Villa Sofia - RUD 113280",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": "1-800-442-0568",
+      "policy_struct": [],
+      "postal_code": "90046",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 4,
+      "serp_filters": [
+        "has_meal",
+        "has_business"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "1111 Wilshire Boulevard Los Angeles,Wilshire Boulevard, Los Angeles",
+      "amenity_groups": [],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Want to save money while travelling? It’s easy: hotel «1111 Wilshire by ExecuStay» is located in Los Angeles. This hotel is located in 8 km from the city center. You can take a walk and explore the neighbourhood area of the hotel. Places nearby: Los Angeles Metropolitan Medical Center, Koreatown Plaza and Wilshire/Western."
+          ],
+          "title": "Location"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 9743470,
+      "id": "1111_wilshire_by_execustay",
+      "images_ext": [],
+      "kind": "hotel",
+      "latitude": 34.0447,
+      "longitude": -118.324,
+      "name": "1111 Wilshire by ExecuStay",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": null,
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 0,
+      "serp_filters": null,
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "12500 Cloud Lane, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "24-hour reception",
+            "Elevator/lift",
+            "Currency exchange",
+            "Newspapers"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Toiletries"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Rooms"
+        },
+        {
+          "amenities": [
+            "Restaurant"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        },
+        {
+          "amenities": [
+            "Conference Hall"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Business"
+        }
+      ],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Look no further for a healthy and sustainable vacation. Villa «2006 - Cloud View Villa» is located in Los Angeles. This villa is located in 23 km from the city center. You can take a walk and explore the neighbourhood area of the villa — Central Garden, Santa Monica Pier and Getty Villa."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "Taste the local cuisine and have a rest in the restaurant. Accessible for guests with disabilities: the elevator helps them to go to the highest floors. There are other services available for the guests of the villa. For example, press."
+          ],
+          "title": "At the villa"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 9213970,
+      "id": "2006_cloud_view_villa",
+      "images_ext": [],
+      "kind": "villa_and_bungalows",
+      "latitude": 34.07958,
+      "longitude": -118.49167,
+      "name": "2006 - Cloud View Villa",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": null,
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 5,
+      "serp_filters": [
+        "has_meal",
+        "has_business"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "2419 Solar Dr, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "24-hour reception",
+            "Elevator/lift",
+            "Currency exchange",
+            "Newspapers"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Toiletries"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Rooms"
+        },
+        {
+          "amenities": [
+            "Restaurant"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        },
+        {
+          "amenities": [
+            "Conference Hall"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Business"
+        }
+      ],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "It’s so nice when the nature is right outside your door! Villa «1050 - Hollywood Panoramic View Villa» is located in Los Angeles. This villa is located in 12 km from the city center. You can take a walk and explore the neighbourhood area of the villa. Places nearby: Academy of Magical Arts, Freeman House and Storer House."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "Taste the local cuisine and have a rest in the restaurant. Accessible for guests with disabilities: the elevator helps them to go to the highest floors. Additional services that the villa offers to its guests: press."
+          ],
+          "title": "At the villa"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 9214219,
+      "id": "1050_hollywood_panoramic_view_villa",
+      "images_ext": [],
+      "kind": "villa_and_bungalows",
+      "latitude": 34.1149,
+      "longitude": -118.35558,
+      "name": "1050 - Hollywood Panoramic View Villa",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": null,
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 5,
+      "serp_filters": [
+        "has_meal",
+        "has_business"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "1243 South Bonnie Brae Street Los Angeles,South Bonnie Brae Street, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "Common kitchen"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        }
+      ],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "«Simple Hostel» is located in Los Angeles. This hostel is located In 8 km from the city center. You can take a walk and explore the neighbourhood area of the hostel — Los Angeles Metropolitan Medical Center, Koreatown Plaza and Wilshire/Western."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "In the shared kitchen, you can cook anything you want."
+          ],
+          "title": "At the hostel"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 8699834,
+      "id": "simple_hostel_4",
+      "images_ext": [
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/ef/39/ef3955a199ff4da2e30ece1ae5012bdbd968d2ed.JPEG",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/d8/a5/d8a51eaf05226d14d0fad999ec296ef4ffeeb474.JPEG",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/be/69/be69994ba61880493ecbae1f0f171c1015eb14b4.JPEG",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/88/1e/881ee4367f6ee9aee902ed9832c11b94486f4179.JPEG",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/04/f0/04f08c5c6d4c0acb9cd290c6aa7689270b47b7ac.JPEG",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/d6/03/d603aaca02070f74d94672eca05e884fea20d73e.JPEG",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/41/1b/411bacdae3138e135f6be054cf02215f038c1323.JPEG",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/df/83/df8354d4e80230e496f6140dda0015633a8523f5.JPEG",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/c7/b7/c7b72d9c3d4d4e9f694779619eb6680447523ed9.JPEG",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/6c/b3/6cb36beeb0517688c021fe1378ed5c3aaa1d6fd2.JPEG",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/15/8a/158a3445de50e1de0ea1bf3a0ca45b443924f8c2.JPEG",
+          "category_slug": "unspecified"
+        }
+      ],
+      "kind": "hostel",
+      "latitude": 34.0447,
+      "longitude": -118.324,
+      "name": "Simple Hostel",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": null,
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 0,
+      "serp_filters": null,
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "13151 Fountain Park Drive, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "Air conditioning",
+            "Elevator/lift",
+            "Smoke-free property",
+            "Heating",
+            "Washing machine",
+            "Terrace",
+            "Dryer",
+            "Dishwasher",
+            "Patio",
+            "Outdoor furniture",
+            "Adults Only",
+            "Upper floors accessible by elevator"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Bridal suite",
+            "Allergy-free rooms",
+            "Non-smoking rooms",
+            "Soundproof rooms",
+            "Fridge",
+            "Cable TV",
+            "TV",
+            "Hairdryer",
+            "Wardrobe/Closet",
+            "Clothes rack",
+            "Linens",
+            "Laptop safe"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Rooms"
+        },
+        {
+          "amenities": [
+            "Iron"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Services and amenities"
+        },
+        {
+          "amenities": [
+            "Microwave oven",
+            "Coffeemaker"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        },
+        {
+          "amenities": [
+            "Free Wi-Fi"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Internet"
+        },
+        {
+          "amenities": [
+            "Spanish",
+            "English"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Languages Spoken"
+        },
+        {
+          "amenities": [
+            "Offsite parking reservations required",
+            "Parking nearby",
+            "Garage"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Parking"
+        },
+        {
+          "amenities": [
+            "Swimming pool",
+            "Spa tub",
+            "Outdoor pool",
+            "Beach/pool towels"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Pool and beach"
+        },
+        {
+          "amenities": [
+            "Pets allowed"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Pets"
+        }
+      ],
+      "check_in_time": "15:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "11:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "A great option for family vacation: apartment «Marina Exquisite Suite» is located in Los Angeles. This apartment is located in 19 km from the city center. You can take a walk and explore the neighbourhood area of the apartment. Places nearby: Ballona Wetlands, Marina del Rey Visitors Center and Marina Del Rey Hospital."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "Want to be always on-line? Wi-Fi is available. If you travel by car, you can park in a parking zone. Tourists who can’t live without swimming will appreciate a pool and an outdoor pool. You can take your pet with you for the journey. Pets are allowed.",
+            "Accessible for guests with disabilities: the elevator helps them to go to the highest floors. There are other services available for the guests of the apartment. For example, ironing. The staff of the apartment speaks English and Spanish."
+          ],
+          "title": "At the apartment"
+        },
+        {
+          "paragraphs": [
+            "In the room, for you, there is a TV. The room equipment depends on its category."
+          ],
+          "title": "Room amenities"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 8406253,
+      "id": "exquisite_marina_2bdr_suite_with_balcony_relaxing_views",
+      "images_ext": [
+        {
+          "url": "https://cdn.worldota.net/t/{size}/mec/fa/1d/fa1d2f2be00f85ccab2b346f7e3475bf1da4bf9e.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/30/e6/30e6a4039a8351c018479917fd0efd77db90dcb4.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/6d/c7/6dc7c06d1ee04431751f5a3ba12df6079e4b5542.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/e9/db/e9db817e20ca9991524b0bec20dad2b2fbe4e233.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/14/63/1463e6afa95bcc9b2ae57e9da33a347d91f08c02.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/ff/60/ff605af953e89833e51a05edf3b9d49e916fe103.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/fa/3a/fa3a0c649cfecf5d89d5668dbcce7914200ffe04.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/78/cc/78ccb40be5fcf5fb93a432ff56b67c07c1be4c8e.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/d5/40/d540b2f0bb4d0d7c7b2a8955070ae1f32f6890da.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/26/3e/263e63c14c22a2eebfa29eeb8db4fcee4da71701.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/61/24/6124a5dc9636fead76d43e755e2c0342dae0b2f8.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/0b/e8/0be87a18f45b54016d881e94251a37db8f64a776.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/45/29/452928db5d89ca0d89498878c55c16808e06134d.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/38/2b/382b71d867e184b0b138f90ff5b1f8933b887d1d.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/a9/73/a973f0a2beac3fd471afd98a9c1a0ff727dc8dbc.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/87/1b/871bceeee713b9793d34c8cbb67cf1fa42f53298.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/f8/da/f8da90e37a4c68dc3ba1d5eee4ed05f0221f1f66.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/c3/ce/c3ce69a739d4d7af5a903008cf030ae12e2e4ac6.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/3b/55/3b5540eaa2b0e32d0091627fa0dfb85cda4b3481.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/7b/3c/7b3c4a966a07143035cade3c194af2bd53d5dbab.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/60/1a/601a90d00cd8e98b692dac7552c4d1eb77bbd4e4.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/2e/25/2e254179e43c122a7bcac6553eafbb9e781e1c43.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/41/a4/41a43ba3ebf7b07618e2179ea16b40502dcd634d.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/29/05/29053ed27fddf1e9cb72d349ee0246f68e221d28.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/05/88/05884220acba29b4946b414588cda865f26ad837.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/9b/2b/9b2b1474ff56ba6c87af4aa993d8f16d690ed936.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/12/be/12be1d92930988bb05177115a2d07446794d5952.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/47/a4/47a44a0172453a9e82b0aeba183135f410054f6e.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/8c/c3/8cc3523402797b191fcfd399a31ed591af8807d8.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/24/e7/24e707a0fbf3c30605f28214e5eb4926afab9f11.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/d7/7d/d77dcb33b9ea7d86dc80f0d035057a2facce3d18.jpeg",
+          "category_slug": "unspecified"
+        }
+      ],
+      "kind": "apartment",
+      "latitude": 33.97476,
+      "longitude": -118.43013,
+      "name": "Marina Exquisite Suite",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": "<p><b>Know Before You Go</b> <br /><ul>  <li>Guests can arrange to bring pets by contacting the property directly, using the contact information on the booking confirmation (surcharges apply and can be found in the Fees section). </li>  </ul></p><p><b>Fees</b> <br /><p>The following fees and deposits are charged by the property at time of service, check-in, or check-out. </p> <ul>            <li>Pet deposit: USD 100.0 per stay</li> <li>Pet fee: USD 50 per pet, per stay</li>                  </ul> <p>The above list may not be comprehensive. Fees and deposits may not include tax and are subject to change. </p></p><p><b>Mandatory Fees and Taxes</b> <br /><p>You'll be asked to pay the following charges at the property:</p> <ul><li>Deposit: USD 200.0 per stay</li><li>Cleaning fee: USD 125 per accommodation, per stay</li><li>Resort fee: 3.5 percent of room rate</li></ul> <p>We have included all charges provided to us by the property. However, charges can vary, for example, based on length of stay or the room you book. </p></p>",
+      "phone": null,
+      "policy_struct": [
+        {
+          "paragraphs": [
+            "Information about the type of meals included in the price is indicated in the rate details."
+          ],
+          "title": "Meals"
+        },
+        {
+          "paragraphs": [
+            "<p><b>Know Before You Go</b> <br /><ul>  <li>Guests can arrange to bring pets by contacting the property directly, using the contact information on the booking confirmation (surcharges apply and can be found in the Fees section). </li>  </ul></p><p><b>Fees</b> <br /><p>The following fees and deposits are charged by the property at time of service, check-in, or check-out. </p> <ul>            <li>Pet deposit: USD 100.0 per stay</li> <li>Pet fee: USD 50 per pet, per stay</li>                  </ul> <p>The above list may not be comprehensive. Fees and deposits may not include tax and are subject to change. </p></p><p><b>Mandatory Fees and Taxes</b> <br /><p>You'll be asked to pay the following charges at the property:</p> <ul><li>Deposit: USD 200.0 per stay</li><li>Cleaning fee: USD 125 per accommodation, per stay</li><li>Resort fee: 3.5 percent of room rate</li></ul> <p>We have included all charges provided to us by the property. However, charges can vary, for example, based on length of stay or the room you book. </p></p>"
+          ],
+          "title": "Extra info"
+        }
+      ],
+      "postal_code": "CA 90094",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [
+        {
+          "name": "Deluxe room",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Deluxe room"
+          },
+          "room_amenities": [
+            "private-bathroom"
+          ],
+          "room_group_id": 28,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 0,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 6,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "2 Bedrooms Deluxe room with view",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "2 Bedrooms Deluxe room with view"
+          },
+          "room_amenities": [
+            "private-bathroom"
+          ],
+          "room_group_id": 18395764,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 2,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 6,
+            "class": 3,
+            "sex": 0,
+            "view": 37
+          },
+          "size": null
+        }
+      ],
+      "star_rating": 3,
+      "serp_filters": [
+        "has_washer",
+        "has_internet",
+        "has_parking",
+        "has_pool",
+        "has_spa",
+        "air_conditioning",
+        "has_pets",
+        "has_jacuzzi"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 1,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "US Los Angeles - CA Harbor City LAX, Los Angeles",
+      "amenity_groups": [],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "You can take a walk and explore the neighbourhood area of the hotel — Lomita Medical Center, Kaiser Permanente South Bay Medical Center and Kaiser Permanente Vermont Pavillion."
+          ],
+          "title": "Location"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 9721825,
+      "id": "rodeway_inn_suites_pacific_coast_highway_2",
+      "images_ext": [],
+      "kind": "hotel",
+      "latitude": 33.7899,
+      "longitude": -118.307,
+      "name": "Rodeway Inn & Suites Pacific Coast Highway",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": null,
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 3,
+      "serp_filters": null,
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "1742Courtney Avenue, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "Elevator/lift"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Restaurant"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        },
+        {
+          "amenities": [
+            "Conference Hall"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Business"
+        }
+      ],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Looking for a place without the neighbors to worry about? Villa «1064 - Sunset Modern Villa - RUD 113238» is located in Los Angeles. This villa is located in 12 km from the city center. You can take a walk and explore the neighbourhood area of the villa — Sundance Cinema- West Hollywood, Storer House and The Garden of Allah."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "It’s time to have a nice meal! Stop by the restaurant. For business meetings, there is a conference hall. Accessibility: there is an elevator/lift."
+          ],
+          "title": "At the villa"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 9731536,
+      "id": "1064_sunset_modern_villa_rud_113238",
+      "images_ext": [],
+      "kind": "villa_and_bungalows",
+      "latitude": 34.1029,
+      "longitude": -118.357,
+      "name": "1064 - Sunset Modern Villa - RUD 113238",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": "1-800-442-0568",
+      "policy_struct": [],
+      "postal_code": "90046",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 4,
+      "serp_filters": [
+        "has_meal",
+        "has_business"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "90036 , 335North Orange Grove Avenue, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "Elevator/lift"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Restaurant"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        },
+        {
+          "amenities": [
+            "Conference Hall"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Business"
+        }
+      ],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Good choice if you’re looking forward to taking some rest at the hotel as much as to walking around the city. Hotel «Vintage Two Bedroom La Vacation Rentals, Unit 4 - Rud 82197» is located in Los Angeles. This hotel is located in 11 km from the city center. You can take a walk and explore the neighbourhood area of the hotel. Places nearby: Farmers Market, Pan Pacific Park and Artspace Warehouse."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "It’s time to have a nice meal! Stop by the restaurant. Accessibility: there is an elevator/lift."
+          ],
+          "title": "At the hotel"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 9731618,
+      "id": "vintage_two_bedroom_la_vacation_rentals_unit_4_rud_82197",
+      "images_ext": [],
+      "kind": "hotel",
+      "latitude": 34.077194,
+      "longitude": -118.36068,
+      "name": "Vintage Two Bedroom La Vacation Rentals, Unit 4 - Rud 82197",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": "1-866-688-1228",
+      "policy_struct": [],
+      "postal_code": "90036",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 4,
+      "serp_filters": [
+        "has_meal",
+        "has_business"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "1714 North McCadden Place, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "Elevator/lift"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Restaurant"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        },
+        {
+          "amenities": [
+            "Conference Hall"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Business"
+        }
+      ],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "If you want to feel like you’re at home no matter where you are, choose this — apartment «The Hollywood Hendrix Apartment» is located in Los Angeles. This apartment is located in 10 km from the city center. You can take a walk and explore the neighbourhood area of the apartment. Places nearby: Grauman's Egyptian Theatre, Hollywood/Highland and Hollywood Walk of Fame."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "It’s time to have a nice meal! Stop by the restaurant. For participants of business meetings, there is a conference hall. Accessibility: there is an elevator/lift."
+          ],
+          "title": "At the apartment"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 8031837,
+      "id": "the_hollywood_hendrix_apartment",
+      "images_ext": [],
+      "kind": "apartment",
+      "latitude": 34.10234,
+      "longitude": -118.33723,
+      "name": "The Hollywood Hendrix Apartment",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": "CA 90028",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [
+        {
+          "name": "Apartment",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Apartment"
+          },
+          "room_amenities": [
+            "private-bathroom"
+          ],
+          "room_group_id": 14,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 0,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 6,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "2 Bedrooms Apartment",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "2 Bedrooms Apartment"
+          },
+          "room_amenities": [
+            "private-bathroom"
+          ],
+          "room_group_id": 18395671,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 2,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 6,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        }
+      ],
+      "star_rating": 4,
+      "serp_filters": [
+        "has_meal",
+        "has_business"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 1,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "14529 Archwood Street Van Nuys California 91405, Los Angeles",
+      "amenity_groups": [],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Here, you won’t puzzle over the place to go as everything you need is close by. Resort «Magnolia Resort Apartments» is located in Los Angeles. This resort is located in 26 km from the city center. You can take a walk and explore the neighbourhood area of the resort — Fresenius Medical Care at Valley Presbyterian Hospital, Universal City and Hollywood Sign."
+          ],
+          "title": "Location"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 10060721,
+      "id": "magnolia_resort_apartments",
+      "images_ext": [],
+      "kind": "resort",
+      "latitude": 34.2007,
+      "longitude": -118.468,
+      "name": "Magnolia Resort Apartments",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": "91405",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 3,
+      "serp_filters": null,
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "5522 Senford Ave, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "Smoke-free property",
+            "Garden",
+            "Outdoor furniture"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Internet access"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Internet"
+        },
+        {
+          "amenities": [
+            "Barbecue grill(s)",
+            "Picnic area",
+            "Barbeque"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Recreation"
+        },
+        {
+          "amenities": [
+            "Free parking"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Parking"
+        },
+        {
+          "amenities": [
+            "Swimming pool"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Pool and beach"
+        },
+        {
+          "amenities": [
+            "Pets allowed"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Pets"
+        }
+      ],
+      "check_in_time": "16:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "11:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Active or laid-back vacation, it’s up to you to decide. Cottage «Searose» is located in Los Angeles. This cottage is located in 14 km from the city center. You can take a walk and explore the neighbourhood area of the cottage — Kindred Hospital - Los Angeles, Los Angeles County Museum of Art and Farmers Market."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "Specially for tourists who travel by car, there’s a free parking zone. You won’t be bored as at the cottage you will find a picnic area and a barbeque area. Tourists who can’t live without swimming will appreciate a pool. You can take your pet with you for the journey. Pets are allowed."
+          ],
+          "title": "At the cottage"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 6892874,
+      "id": "searose",
+      "images_ext": [
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/f9/ae/f9ae830792799415b97176d058330354fd6f24c0.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/de/c3/dec3c0d0f516d64501e38b63cf1f420edfde0808.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/fb/3d/fb3dc54408905afefb15a221c41edfc5d3531b59.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/11/26/112637ed988f9be2b64e972794ba3e14c55c9333.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/96/82/96827fd3a75514b39f3c8a7e412f419349714d4b.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/bb/f7/bbf78f5a7f0dde9972df9367d9b0221e15677c84.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/b9/44/b9448d4620da4f798309095f4abf3b4d6e897d3b.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/92/47/92476baa108e366ac27553f6144d8e38a5113b12.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/2d/7e/2d7ed2b87645a450204c94a3e0b14e46b39709df.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/2d/b6/2db61db5df5c190ff4310cc4e059ac6672744c7a.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/e9/cf/e9cfaa37fe5a9ece4ce274285edeb4d83ac656b4.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/0a/72/0a72c6a193babe79fa55be08a6407919be3b8eef.jpeg",
+          "category_slug": "unspecified"
+        }
+      ],
+      "kind": "cottage",
+      "latitude": 33.99149,
+      "longitude": -118.37608,
+      "name": "Searose",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": "<ul>  <li>Guests can arrange to bring pets by contacting the property directly, using the contact information on the booking confirmation. </li>  </ul>",
+      "phone": "1-6263448858",
+      "policy_struct": [
+        {
+          "paragraphs": [
+            "Information about the type of meals included in the price is indicated in the rate details."
+          ],
+          "title": "Meals"
+        },
+        {
+          "paragraphs": [
+            "<ul>  <li>Guests can arrange to bring pets by contacting the property directly, using the contact information on the booking confirmation. </li>  </ul>"
+          ],
+          "title": "Extra info"
+        }
+      ],
+      "postal_code": "CA 90056",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [
+        {
+          "name": "Cottage",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/2c/21/2c215cbe57ad5fe9624c30cedbfda395f2596017.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/e1/59/e15978c292266f2c914dc7563692f6b3367c404a.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/ca/5c/ca5c72ee9309fb4122921aa112e5dd91e59651b9.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/f9/ae/f9ae830792799415b97176d058330354fd6f24c0.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/de/c3/dec3c0d0f516d64501e38b63cf1f420edfde0808.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/c5/62/c562a34719792d05304daa14d8640bb2208440ba.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/32/62/3262461adc46ea45e636225c6ac6260cc88af534.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/b9/44/b9448d4620da4f798309095f4abf3b4d6e897d3b.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/b0/6c/b06cfbafbb0adf450ff886ff044f5ffd54ff35c8.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/5e/57/5e571f4fb409586032f4747ef112376366c8b3a4.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/2d/b6/2db61db5df5c190ff4310cc4e059ac6672744c7a.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/3d/c3/3dc371065caf11ab6f421b57c18ad8404ee2bb15.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/56/70/5670551b3747f96bc0a3b4b100e213e366cc8da7.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/91/ce/91ce5f3daa981ff6919acb81266a0ddba28184ee.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/fd/92/fd92a6f89577d30bb4ed46a748600bd67430dbb4.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/0a/72/0a72c6a193babe79fa55be08a6407919be3b8eef.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/e9/cf/e9cfaa37fe5a9ece4ce274285edeb4d83ac656b4.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/75/b3/75b32c56163ba2e77ad87550d646e4cfc956ea3d.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/d8/67/d867b85b64742b2c044c74ec2dbc2e9bf323972f.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/36/d3/36d30ed19e9035e453a79ac426fde228484392c3.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/bb/f7/bbf78f5a7f0dde9972df9367d9b0221e15677c84.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/2c/21/2c215cbe57ad5fe9624c30cedbfda395f2596017.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/e1/59/e15978c292266f2c914dc7563692f6b3367c404a.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/ca/5c/ca5c72ee9309fb4122921aa112e5dd91e59651b9.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/f9/ae/f9ae830792799415b97176d058330354fd6f24c0.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/de/c3/dec3c0d0f516d64501e38b63cf1f420edfde0808.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/c5/62/c562a34719792d05304daa14d8640bb2208440ba.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/32/62/3262461adc46ea45e636225c6ac6260cc88af534.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/b9/44/b9448d4620da4f798309095f4abf3b4d6e897d3b.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/b0/6c/b06cfbafbb0adf450ff886ff044f5ffd54ff35c8.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/5e/57/5e571f4fb409586032f4747ef112376366c8b3a4.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/2d/b6/2db61db5df5c190ff4310cc4e059ac6672744c7a.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/3d/c3/3dc371065caf11ab6f421b57c18ad8404ee2bb15.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/56/70/5670551b3747f96bc0a3b4b100e213e366cc8da7.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/91/ce/91ce5f3daa981ff6919acb81266a0ddba28184ee.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/fd/92/fd92a6f89577d30bb4ed46a748600bd67430dbb4.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/0a/72/0a72c6a193babe79fa55be08a6407919be3b8eef.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/e9/cf/e9cfaa37fe5a9ece4ce274285edeb4d83ac656b4.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/75/b3/75b32c56163ba2e77ad87550d646e4cfc956ea3d.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/d8/67/d867b85b64742b2c044c74ec2dbc2e9bf323972f.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/36/d3/36d30ed19e9035e453a79ac426fde228484392c3.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/bb/f7/bbf78f5a7f0dde9972df9367d9b0221e15677c84.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Cottage"
+          },
+          "room_amenities": [
+            "air-conditioning",
+            "desk",
+            "dining-area",
+            "dishwasher",
+            "fan",
+            "fireplace",
+            "fridge",
+            "hairdryer",
+            "heating",
+            "iron",
+            "kitchen",
+            "microwave",
+            "private-bathroom",
+            "safe",
+            "tea",
+            "tea-or-coffee",
+            "tv",
+            "wi-fi"
+          ],
+          "room_group_id": 17,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 0,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 9,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        }
+      ],
+      "star_rating": 3,
+      "serp_filters": [
+        "has_internet",
+        "has_parking",
+        "has_pool",
+        "has_pets"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 1,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": [
+        "visa",
+        "mastercard",
+        "american_express",
+        "diners_club"
+      ],
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "1341 South Masselin Ave, Los Angeles",
+      "amenity_groups": [],
+      "check_in_time": "15:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "10:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Active or laid-back vacation, it’s up to you to decide. Cottage «Mid-city LA Townhouse #140456 2 Bedrooms 1 Bathroom Townhouse» is located in Los Angeles. This cottage is located in 11 km from the city center. You can take a walk and explore the neighbourhood area of the cottage. Places nearby: Olympia Medical Center, Miracle Mile Medical Center and Wall Project."
+          ],
+          "title": "Location"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 9004584,
+      "id": "midcity_la_townhouse_140456_2_bedrooms_1_bathroom_townhouse",
+      "images_ext": [],
+      "kind": "cottage",
+      "latitude": 34.05058,
+      "longitude": -118.35783,
+      "name": "Mid-city LA Townhouse #140456 2 Bedrooms 1 Bathroom Townhouse",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": "90019",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [
+        {
+          "name": "Cottage",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Cottage"
+          },
+          "room_amenities": [
+            "private-bathroom"
+          ],
+          "room_group_id": 17,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 0,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 9,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "2 Bedrooms Cottage",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "2 Bedrooms Cottage"
+          },
+          "room_amenities": [
+            "private-bathroom"
+          ],
+          "room_group_id": 18395674,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 2,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 9,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        }
+      ],
+      "star_rating": 3,
+      "serp_filters": null,
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "6200 Franklin Ave, Los Angeles, CA 90028, USA, Los Angeles",
+      "amenity_groups": [],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "A great option for family vacation: apartment «Hollywood Tower Apartments» is located in Los Angeles. This apartment is located in 9 km from the city center. You can take a walk and explore the neighbourhood area of the apartment — Hollywood/Vine, Museum of Death and Hollywood Boulevard."
+          ],
+          "title": "Location"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 10050577,
+      "id": "hollywood_tower_apartments",
+      "images_ext": [],
+      "kind": "apartment",
+      "latitude": 34.104866,
+      "longitude": -118.32419,
+      "name": "Hollywood Tower Apartments",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": "not available",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 0,
+      "serp_filters": null,
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "1307 Lucile Avenue, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "24-hour reception",
+            "Elevator/lift",
+            "Currency exchange",
+            "Newspapers"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Toiletries"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Rooms"
+        },
+        {
+          "amenities": [
+            "Restaurant"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        },
+        {
+          "amenities": [
+            "Conference Hall"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Business"
+        }
+      ],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Look no further for a healthy and sustainable vacation. Villa «1034 - Silver Lake Vibrant Villa» is located in Los Angeles. This villa is located in 5 km from the city center. You can take a walk and explore the neighbourhood area of the villa — Naya's Garden, Vermont/Santa Monica and Hollywood Presbyterian Medical Center."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "It’s time to have a nice meal! Stop by the restaurant. Accessible for guests with disabilities: the elevator helps them to go to the highest floors. At the guests’ disposal, there’s also press."
+          ],
+          "title": "At the villa"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 9213897,
+      "id": "1034_silver_lake_vibrant_villa",
+      "images_ext": [],
+      "kind": "villa_and_bungalows",
+      "latitude": 34.087524,
+      "longitude": -118.28132,
+      "name": "1034 - Silver Lake Vibrant Villa",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": null,
+      "policy_struct": [],
+      "postal_code": null,
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 5,
+      "serp_filters": [
+        "has_meal",
+        "has_business"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "8011Hemet Place, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "Elevator/lift"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Restaurant"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        },
+        {
+          "amenities": [
+            "Conference Hall"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Business"
+        }
+      ],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Good choice if you’re looking forward to taking some rest at the hotel as much as to walking around the city. Hotel «1039 - Sensational Sunset View - RUD 113307» is located in Los Angeles. This hotel is located in 12 km from the city center. You can take a walk and explore the neighbourhood area of the hotel — Storer House, Sundance Cinema- West Hollywood and The Garden of Allah."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "Taste the local cuisine and have a rest in the restaurant. Accessibility: there is an elevator/lift."
+          ],
+          "title": "At the hotel"
+        }
+      ],
+      "email": null,
+      "hotel_chain": "No chain",
+      "hid": 9731570,
+      "id": "1039_sensational_sunset_view_rud_113307",
+      "images_ext": [],
+      "kind": "hotel",
+      "latitude": 34.102,
+      "longitude": -118.364,
+      "name": "1039 - Sensational Sunset View - RUD 113307",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": null,
+      "phone": "1-800-442-0568",
+      "policy_struct": [],
+      "postal_code": "90046",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [],
+      "star_rating": 4,
+      "serp_filters": [
+        "has_meal",
+        "has_business"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 0,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": null,
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "100 South Grand Avenue, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "Air conditioning",
+            "24-hour reception",
+            "Currency exchange",
+            "Smoke-free property",
+            "Express check-in/check-out",
+            "Garden",
+            "Computer",
+            "Ticket assistance",
+            "Security guard"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Fridge",
+            "Cable TV",
+            "TV",
+            "Toiletries",
+            "Minibar",
+            "Hairdryer",
+            "Shower",
+            "Linens"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Rooms"
+        },
+        {
+          "amenities": [
+            "Accessibility features",
+            "Wheelchair Accessible"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Accessibility"
+        },
+        {
+          "amenities": [
+            "Laundry",
+            "Concierge services",
+            "Safe-deposit box",
+            "Wake-up service",
+            "Telephone",
+            "Dry-cleaning",
+            "Luggage storage"
+          ],
+          "non_free_amenities": [
+            "Laundry",
+            "Dry-cleaning",
+            "Luggage storage"
+          ],
+          "group_name": "Services and amenities"
+        },
+        {
+          "amenities": [
+            "Bar",
+            "Breakfast",
+            "Restaurant",
+            "Coffee/tea for guests",
+            "Cafe",
+            "Snack bar",
+            "Vending machine",
+            "Bottled water",
+            "Kettle"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        },
+        {
+          "amenities": [
+            "Free Wi-Fi",
+            "Internet"
+          ],
+          "non_free_amenities": [
+            "Internet"
+          ],
+          "group_name": "Internet"
+        },
+        {
+          "amenities": [
+            "English",
+            "French"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Languages Spoken"
+        },
+        {
+          "amenities": [
+            "Airport transportation",
+            "Transfer services"
+          ],
+          "non_free_amenities": [
+            "Airport transportation"
+          ],
+          "group_name": "Transfer"
+        },
+        {
+          "amenities": [
+            "Tour assistance"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Tourist services"
+        },
+        {
+          "amenities": [
+            "Parking",
+            "Parking nearby"
+          ],
+          "non_free_amenities": [
+            "Parking"
+          ],
+          "group_name": "Parking"
+        },
+        {
+          "amenities": [
+            "Outdoor pool",
+            "Swimming pool",
+            "Beach/pool towels"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Pool and beach"
+        },
+        {
+          "amenities": [
+            "Meeting and presentation facilities",
+            "Conference Hall",
+            "Business center",
+            "Event facilities"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Business"
+        },
+        {
+          "amenities": [
+            "Fitness facilities",
+            "Gym"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Sports"
+        },
+        {
+          "amenities": [
+            "Babysitting and childcare"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Kids"
+        },
+        {
+          "amenities": [
+            "First Aid Kit",
+            "Sauna"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Beauty and wellness"
+        },
+        {
+          "amenities": [
+            "Pets allowed (under 5 kg) (surcharge)"
+          ],
+          "non_free_amenities": [
+            "Pets allowed (under 5 kg) (surcharge)"
+          ],
+          "group_name": "Pets"
+        },
+        {
+          "amenities": [
+            "Extra decontamination measures",
+            "Personal protection equipment for staff",
+            "Temperature control for staff",
+            "Personal protection equipment for guests",
+            "Temperature control for guests",
+            "Additional measures against COVID-19"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Health and Safety Measures"
+        }
+      ],
+      "check_in_time": "15:00:00",
+      "check_in_time_end": "18:00:00",
+      "check_out_time": "12:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Dreaming about a first-class hotel? Welcome to hotel «Conrad Los Angeles» is located in Los Angeles. This hotel is located nearby from the city center. You can take a walk and explore the neighbourhood area of the hotel. Places nearby: The Broad, Civic Center/Grand Park and Ahmanson Theatre."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "You can stop by the bar. It’s time to have a nice meal! Stop by the restaurant. Free Wi-Fi on the territory will help you to stay on-line. Specially for tourists who travel by car, there’s a parking zone.",
+            "The beauty and wellness services: a massage room, a sauna and a spa center. Guests who love doing sports will be able to enjoy a fitness center. Swimming fans are going to enjoy an outdoor pool. At the guests’ disposal, there’s also a laundry, dry cleaning, press and a concierge.",
+            "The staff of the hotel speaks English."
+          ],
+          "title": "At the hotel"
+        },
+        {
+          "paragraphs": [
+            "Guests will find the following in the room: a bathrobe and slippers. The room equipment depends on its category."
+          ],
+          "title": "Room amenities"
+        }
+      ],
+      "email": "laxav.ds@conradhotels.com",
+      "hotel_chain": "No chain",
+      "hid": 10004834,
+      "id": "conrad_los_angeles",
+      "images_ext": [
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/cb/2b/cb2b1cc25be9e3f8892f9d572e3e0e71492a3b38.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/1c/83/1c83047c4dd3d2a90d0c3eade5041dcb93f0e0b3.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/6c/d8/6cd8f2712bb2ec878a47024d7e660c387291d497.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/73/65/73651255ad449806f062ab35232e1e3a0d8ca6be.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/9b/03/9b031ed8b5f949b1cfdef17904e560cabbd6df6f.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/48/49/4849a76cccb850d4b49ee6456ab9bbe4dd4e57ac.JPEG",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/a8/77/a8779ebef66c46e943d0e6b14b8c50b45f31521e.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/84/77/8477828ec9e3475fa1f653a0d7fdb8de7e87efc0.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/5d/00/5d00649384a5e23aa5c85bf73d9d74433d9c86bb.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/bf/8a/bf8ab6903abac0d24e250742b93488809febc497.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/88/fb/88fb605105f44ab68cc4841d615acf19b0d62378.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/0e/38/0e388fa4f10cffd9acece2b27e21aeda883e4b61.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/d1/c0/d1c00d2b1a307faf82dce80ad5266aaf135316d9.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/9f/17/9f175533b4d334da7fb7be17d15d43d6e5778036.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/d9/7f/d97f5c513210703f5cb4d2074b331c58b0437f72.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/da/d6/dad69f12305ca192aa91846bdddc55250a87e532.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/47/72/4772a458774a34595ade06731d381e9f69cfa084.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/f0/3b/f03b1ba464f8ef3487b98d95bea823a5b8642924.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/b1/95/b195c61c5fe3066de88eeb2cedb53bae944df977.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/73/eb/73eb9054f53b1369c4ddcf5b23f85e11995e742b.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/e9/44/e944a4ac62a8553bc0f7134db7ac8aafd034c0c7.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/8d/91/8d9111f7ace85a3a36c4d2a6b1467ea3d5a4752b.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/7a/b5/7ab543950ff4f0b795722116e378782c4d98d0e3.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/73/d6/73d641822bd68d1e2a1e502dad84ec3db51dd230.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/54/0b/540b828c801b7bb4b3dda0ef4bd1907fb78a43ba.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/23/c9/23c941caa3233a489320cd822e8923acec685f3d.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/b2/98/b298188201385c0182b52c8440c5dc55d151b21f.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/7e/60/7e60a80c020a9e3de9a0a60bea83a32fa8b155ed.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/53/9b/539b4bd431394dcf0638ba30c5e00e2b1ae15bcf.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/63/c3/63c358f440f561381a522e9714585ed719287160.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/a8/6d/a86d26d85ab4bf9c4a8c0dfa27ef22f87b269717.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/1f/15/1f159db845ddd300da9632ec4794151e9ca53254.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/38/a3/38a3574546d243a138440030ffde948cc6571ab8.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/c1/4c/c14c7a3928bf7e459f3de024c422da7215b302c0.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/e9/92/e9923104e2b0410585f439a6ff8e514d13a2978a.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/1f/2e/1f2ed60bffdf7beee5b1a26bfbb1713582c6a521.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/ff/0c/ff0c87b254342bda37a9118a9e51a3948737436f.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/ae/45/ae456a0d5b0f752b605e0cee4fa8ce5afad25c7b.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/24/23/242349911c308c8b7d2b32d05bf4b7e3e5717226.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/ba/2c/ba2c3d232b43e4e935114f75cfe662144b0c9585.JPEG",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/71/f4/71f469978a4911a6555464fe490101ed11e6f7fd.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/42/3a/423a6cb0ba9a0283a66c6e13fd6245b235d574a9.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/57/1b/571be8ee79f0886798db34161e9b08db89039f1c.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/85/69/8569d7401a772d6677c730d2d55b03b4988ca482.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/ae/75/ae756c22d85b7c5f3a8508d55a3c2274bb3dda0e.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/30/2e/302ea36686936c4f18b1f0a855ebaab7e28124ad.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/f4/5d/f45dbc0539881f5a752c9269ea7e0536f50147ee.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/43/33/4333b04af9bd851634b2cc20b79d6547af0cd5d9.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/b3/15/b31594d764388450b627747635f389dfc504d311.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/6c/1e/6c1eb5a4fd3ce7ee3149b18da718f13e9098cb62.jpeg",
+          "category_slug": "unspecified"
+        }
+      ],
+      "kind": "hotel",
+      "latitude": 34.05554,
+      "longitude": -118.24875,
+      "name": "Conrad Los Angeles",
+      "metapolicy_struct": {
+        "add_fee": [
+          {
+            "currency": "EUR",
+            "fee_type": "luggage_storage",
+            "price": "2",
+            "price_unit": "per_hour"
+          }
+        ],
+        "check_in_check_out": [
+          {
+            "currency": "EUR",
+            "inclusion": "not_included",
+            "price": "10",
+            "check_in_check_out_type": "late_checkin"
+          }
+        ],
+        "children": [
+          {
+            "age_end": 3,
+            "age_start": 0,
+            "currency": "USD",
+            "extra_bed": "available",
+            "price": "20"
+          },
+          {
+            "age_end": 9,
+            "age_start": 4,
+            "currency": "EUR",
+            "extra_bed": "available",
+            "price": "40"
+          },
+          {
+            "age_end": 12,
+            "age_start": 10,
+            "currency": "",
+            "extra_bed": "available",
+            "price": "0"
+          }
+        ],
+        "children_meal": [
+          {
+            "age_end": 5,
+            "age_start": 0,
+            "currency": "USD",
+            "inclusion": "not_included",
+            "meal_type": "breakfast",
+            "price": "10"
+          },
+          {
+            "age_end": 12,
+            "age_start": 6,
+            "currency": "USD",
+            "inclusion": "not_included",
+            "meal_type": "breakfast",
+            "price": "14"
+          }
+        ],
+        "cot": [
+          {
+            "amount": 1,
+            "currency": "USD",
+            "inclusion": "not_included",
+            "price": "0",
+            "price_unit": "per_room_per_night"
+          }
+        ],
+        "deposit": [
+          {
+            "availability": "available",
+            "currency": "EUR",
+            "deposit_type": "unspecified",
+            "payment_type": "cash",
+            "price": "123",
+            "price_unit": "per_room_per_stay",
+            "pricing_method": "fixed"
+          },
+          {
+            "availability": "available",
+            "currency": "",
+            "deposit_type": "breakage",
+            "payment_type": "unspecified",
+            "price": "20",
+            "price_unit": "per_guest_per_stay",
+            "pricing_method": "percent"
+          },
+          {
+            "availability": "available",
+            "currency": "USD",
+            "deposit_type": "keys",
+            "payment_type": "unspecified",
+            "price": "10",
+            "price_unit": "per_room_per_stay",
+            "pricing_method": "fixed"
+          },
+          {
+            "availability": "available",
+            "currency": "EUR",
+            "deposit_type": "pet",
+            "payment_type": "unspecified",
+            "price": "5",
+            "price_unit": "per_room_per_night",
+            "pricing_method": "fixed"
+          }
+        ],
+        "extra_bed": [
+          {
+            "amount": 1,
+            "currency": "EUR",
+            "inclusion": "not_included",
+            "price": "10",
+            "price_unit": "per_guest_per_night"
+          }
+        ],
+        "internet": [
+          {
+            "currency": "",
+            "inclusion": "included",
+            "internet_type": "unspecified",
+            "price": "0",
+            "price_unit": "unspecified",
+            "work_area": "hotel"
+          },
+          {
+            "currency": "USD",
+            "inclusion": "not_included",
+            "internet_type": "unspecified",
+            "price": "1",
+            "price_unit": "per_hour",
+            "work_area": "room"
+          }
+        ],
+        "meal": [
+          {
+            "currency": "USD",
+            "inclusion": "not_included",
+            "meal_type": "breakfast",
+            "price": "3"
+          },
+          {
+            "currency": "USD",
+            "inclusion": "not_included",
+            "meal_type": "lunch",
+            "price": "5"
+          }
+        ],
+        "no_show": {
+          "availability": "available",
+          "day_period": "after_midday",
+          "time": "09:00:00"
+        },
+        "parking": [
+          {
+            "currency": "USD",
+            "inclusion": "not_included",
+            "territory_type": "unspecified",
+            "price": "10",
+            "price_unit": "per_car_per_night"
+          }
+        ],
+        "pets": [
+          {
+            "currency": "USD",
+            "inclusion": "not_included",
+            "pets_type": "unspecified",
+            "price": "55",
+            "price_unit": "per_room_per_stay"
+          }
+        ],
+        "shuttle": [
+          {
+            "currency": "EUR",
+            "inclusion": "not_included",
+            "shuttle_type": "one_way",
+            "price": "10",
+            "destination_type": "train"
+          },
+          {
+            "currency": "EUR",
+            "inclusion": "not_included",
+            "shuttle_type": "one_way",
+            "price": "20",
+            "destination_type": "airport"
+          },
+          {
+            "currency": "",
+            "inclusion": "included",
+            "shuttle_type": "unspecified",
+            "price": "0",
+            "destination_type": "airport_train"
+          }
+        ],
+        "visa": {
+          "visa_support": "support_enable"
+        }
+      },
+      "metapolicy_extra_info": "SANDBOX DEMO PROPERTY (no real bookings).\nThere may be maintenance work around the property; some noise is possible from 08:30 AM to 09:00 PM. The property makes every effort to minimize delays and noise, and apologizes in advance for any inconvenience",
+      "phone": "+12133498585",
+      "policy_struct": [],
+      "postal_code": "90012",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [
+        {
+          "name": "Standard Double room (full double bed)",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/c0/de/c0dea9e5760f33c2b101ed14577e168b3f36c74f.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/b4/53/b4535084864c6ae5a55afa9bd7318b4b00bf6872.jpeg",
+            "https://cdn.worldota.net/t/{size}/ostrovok/b2/12/b2127fc5d2977ce9904c34c44abd0422fef9fd5a.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/c0/de/c0dea9e5760f33c2b101ed14577e168b3f36c74f.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/b4/53/b4535084864c6ae5a55afa9bd7318b4b00bf6872.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/ostrovok/b2/12/b2127fc5d2977ce9904c34c44abd0422fef9fd5a.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "full double bed",
+            "main_name": "Standard Double room"
+          },
+          "room_amenities": [
+            "non-smoking",
+            "desk",
+            "tv",
+            "wi-fi",
+            "towels"
+          ],
+          "room_group_id": 201,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 3,
+            "bedrooms": 0,
+            "capacity": 2,
+            "club": 0,
+            "family": 0,
+            "floor": 1,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Standard Double room (full double bed)",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/ostrovok/31/d7/31d7938759ec867b8ee1d16bfeda9a433e5287d5.jpeg",
+            "https://cdn.worldota.net/t/{size}/ostrovok/fe/12/fe12daebe3e5296f838bbf1e8063bae338486ae9.jpeg",
+            "https://cdn.worldota.net/t/{size}/ostrovok/7e/9f/7e9f08aa66278a435262f4cd37655f7a2697c99f.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/ostrovok/31/d7/31d7938759ec867b8ee1d16bfeda9a433e5287d5.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/ostrovok/fe/12/fe12daebe3e5296f838bbf1e8063bae338486ae9.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/ostrovok/7e/9f/7e9f08aa66278a435262f4cd37655f7a2697c99f.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "full double bed",
+            "main_name": "Standard Double room"
+          },
+          "room_amenities": [
+            "non-smoking",
+            "desk",
+            "tv",
+            "wi-fi",
+            "towels"
+          ],
+          "room_group_id": 201,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 3,
+            "bedrooms": 0,
+            "capacity": 2,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Standard Double room with balcony and with river view (full double bed)",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/a7/d4/a7d49c32d906921ad659eea305d76729e5d29b21.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/a6/9b/a69b844ff356124d18839f51215056243b48433f.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/0c/d1/0cd17d7ca30f19fa626bc567dfcb09a4fecd6c7c.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/a7/d4/a7d49c32d906921ad659eea305d76729e5d29b21.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/a6/9b/a69b844ff356124d18839f51215056243b48433f.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/0c/d1/0cd17d7ca30f19fa626bc567dfcb09a4fecd6c7c.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "full double bed",
+            "main_name": "Standard Double room with balcony and with river view"
+          },
+          "room_amenities": [
+            "non-smoking",
+            "balcony",
+            "river-view",
+            "mini-bar",
+            "towels"
+          ],
+          "room_group_id": 202,
+          "rg_ext": {
+            "balcony": 1,
+            "bathroom": 2,
+            "bedding": 3,
+            "bedrooms": 0,
+            "capacity": 2,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 30
+          },
+          "size": null
+        },
+        {
+          "name": "Junior Suite with balcony and with city view (full double bed)",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/ostrovok/fe/12/fe12daebe3e5296f838bbf1e8063bae338486ae9.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/2f/e5/2fe541945c0e41e278e6c272f0cfa259473da699.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/d0/95/d095cb51758cd1a47e019a35d61c8d10c90354bf.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/ostrovok/fe/12/fe12daebe3e5296f838bbf1e8063bae338486ae9.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/2f/e5/2fe541945c0e41e278e6c272f0cfa259473da699.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/d0/95/d095cb51758cd1a47e019a35d61c8d10c90354bf.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "full double bed",
+            "main_name": "Junior Suite with balcony and with city view"
+          },
+          "room_amenities": [
+            "lounge",
+            "non-smoking",
+            "balcony",
+            "city-view",
+            "toiletries"
+          ],
+          "room_group_id": 203,
+          "rg_ext": {
+            "balcony": 1,
+            "bathroom": 2,
+            "bedding": 3,
+            "bedrooms": 1,
+            "capacity": 2,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 6,
+            "class": 4,
+            "sex": 0,
+            "view": 5
+          },
+          "size": null
+        },
+        {
+          "name": "Deluxe Villa Pool Access (3 full double beds)",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/a7/d4/a7d49c32d906921ad659eea305d76729e5d29b21.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/a6/9b/a69b844ff356124d18839f51215056243b48433f.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/0c/d1/0cd17d7ca30f19fa626bc567dfcb09a4fecd6c7c.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/a7/d4/a7d49c32d906921ad659eea305d76729e5d29b21.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/a6/9b/a69b844ff356124d18839f51215056243b48433f.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/0c/d1/0cd17d7ca30f19fa626bc567dfcb09a4fecd6c7c.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "3 full double beds",
+            "main_name": "Deluxe Villa Pool Access"
+          },
+          "room_amenities": [
+            "pool-view",
+            "terrace",
+            "welcome-drink",
+            "non-smoking"
+          ],
+          "room_group_id": 204,
+          "rg_ext": {
+            "balcony": 1,
+            "bathroom": 2,
+            "bedding": 3,
+            "bedrooms": 3,
+            "capacity": 6,
+            "club": 0,
+            "family": 1,
+            "floor": 0,
+            "quality": 6,
+            "class": 8,
+            "sex": 0,
+            "view": 29
+          },
+          "size": null
+        },
+        {
+          "name": "Studio Room (shared bathroom) (sofa bed and single bed)",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/81/f6/81f6baa6739f0e5ac357ac169fc7b10da0fb3200.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/8f/40/8f40821ad61c624d9f6b8cc391aa24ef812dfb7e.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/12/57/1257d5e4173aa8627dc8516138bc1690f473e1c3.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/81/f6/81f6baa6739f0e5ac357ac169fc7b10da0fb3200.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/8f/40/8f40821ad61c624d9f6b8cc391aa24ef812dfb7e.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/12/57/1257d5e4173aa8627dc8516138bc1690f473e1c3.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "shared bathroom",
+            "bedding_type": "sofa bed and single bed",
+            "main_name": "Studio Room"
+          },
+          "room_amenities": [
+            "accessible",
+            "shared-bathroom"
+          ],
+          "room_group_id": 205,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 1,
+            "bedding": 7,
+            "bedrooms": 0,
+            "capacity": 2,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 3,
+            "class": 7,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        }
+      ],
+      "star_rating": 5,
+      "serp_filters": [
+        "has_internet",
+        "has_kids",
+        "has_pool",
+        "air_conditioning",
+        "balcony",
+        "has_smoking"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 25,
+        "rooms_number": 305,
+        "year_built": 2022,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": [
+        "visa",
+        "mastercard",
+        "american_express"
+      ],
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    },
+    {
+      "address": "5606 S Western Ave, Los Angeles",
+      "amenity_groups": [
+        {
+          "amenities": [
+            "Air conditioning",
+            "24-hour reception",
+            "Elevator/lift",
+            "Smoke-free property"
+          ],
+          "non_free_amenities": null,
+          "group_name": "General"
+        },
+        {
+          "amenities": [
+            "Room service",
+            "Fridge",
+            "Cable TV",
+            "Hairdryer",
+            "Toiletries"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Rooms"
+        },
+        {
+          "amenities": [
+            "Accessibility features",
+            "Wheelchair Accessible"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Accessibility"
+        },
+        {
+          "amenities": [
+            "Microwave oven"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Meals"
+        },
+        {
+          "amenities": [
+            "Free Wi-Fi"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Internet"
+        },
+        {
+          "amenities": [
+            "English"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Languages Spoken"
+        },
+        {
+          "amenities": [
+            "Parking nearby"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Parking"
+        },
+        {
+          "amenities": [
+            "Pets Not Allowed"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Pets"
+        },
+        {
+          "amenities": [
+            "Personal protection equipment for staff",
+            "Extra decontamination measures",
+            "Personal protection equipment for guests",
+            "Contactless check-in and/or check-out",
+            "Additional measures against COVID-19"
+          ],
+          "non_free_amenities": null,
+          "group_name": "Health and Safety Measures"
+        }
+      ],
+      "check_in_time": "14:00:00",
+      "check_in_time_end": null,
+      "check_out_time": "11:00:00",
+      "description_struct": [
+        {
+          "paragraphs": [
+            "Here’s all you need to spend a night! Mini-hotel «Rosa Bell Motel - Los Angeles» is located in Los Angeles. This mini-hotel is located in 9 km from the city center. You can take a walk and explore the neighbourhood area of the mini-hotel. Places nearby: Los Angeles Convention Center, Staples Center and Grammy Museum."
+          ],
+          "title": "Location"
+        },
+        {
+          "paragraphs": [
+            "Free Wi-Fi is available on the territory. Ask for more information when checking in. Specially for tourists who travel by car, there’s a parking zone. Accessibility: there is an elevator/lift. The staff of the mini-hotel speaks English."
+          ],
+          "title": "At the mini-hotel"
+        }
+      ],
+      "email": "rosabellmotel@gmail.com",
+      "hotel_chain": "No chain",
+      "hid": 8819557,
+      "id": "rosa_bell_motel_los_angeles",
+      "images_ext": [
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/9d/f8/9df8f286596b05fea5000ddc4158b2ab60155977.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/81/9b/819bb6f67990cbb30e9cc9b86a3f0e94f55ae80b.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/b5/61/b561823d44a3343786ba7a72b8e06bbd3c1f1d61.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/92/f5/92f59a645a4b271682188fabd8a320bbdca63375.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/27/9f/279f518fe2a6849edaab2a09d5a740c360833d17.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/9b/9b/9b9b4c8db5b82d01281623da8855c1aeecd69ce7.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/35/f2/35f263fa74e89b2c2908e91ba4d3b7334e202c87.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/03/a5/03a53f19735647a1b6aa56e16eb5afb798c21647.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/26/84/268452a6e26da943a5624699c68f0b7d3b271f7e.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/ce/bd/cebdf43234317897dc30e307eaf0493125f8f9a5.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/1e/ea/1eeaa6c31458f938d42a312cea263c7b70032854.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/94/5b/945bceaa2de47cc00ddfb91df40d41238c31f9a6.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/43/df/43df923c6906f81857ec843b09c14ec36d73a883.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/d5/a7/d5a799245c6a8befe43e963fae01037d2331c3f6.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/0f/4f/0f4f9b4f3eb0737522554c181bf96ed985a57fac.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/53/ca/53ca3d9345ca89d5c34a46495d47479b46ad936b.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/e0/25/e0253bcb9d6cd3164c72dacb2160971884e2b64c.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/08/f6/08f61b6e5cb86eb37527f5e40c863b5ffab4b4b2.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/f8/c7/f8c739cc2067f79e1ea565632b87f9889a55638d.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/4f/1c/4f1c2d9ff1e097bcb7ac23f7f1ef2a638bceef4b.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/26/b8/26b801f2bfb15bbb0a6d9262e01b18f11bfff0ac.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/c9/63/c9632278dd1ee142c5a5c17582c696e6c0f2aa26.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/40/05/4005f5586102184728f8a67c5aa87d7ac94585c5.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/d3/06/d306b9ec3a04dea130e34d54ffc7df66e8caa951.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/43/aa/43aa0d3de8c843e114c8612c3a3aad2cfe20f0bd.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/cf/e9/cfe965b5c976de9b69d57eb12154959f641ce98c.jpeg",
+          "category_slug": "unspecified"
+        },
+        {
+          "url": "https://cdn.worldota.net/t/{size}/content/e0/f6/e0f6db14711586640aa80a8e957854076c9abb6b.jpeg",
+          "category_slug": "unspecified"
+        }
+      ],
+      "kind": "mini_hotel",
+      "latitude": 33.9913,
+      "longitude": -118.3086,
+      "name": "Rosa Bell Motel - Los Angeles",
+      "metapolicy_struct": {
+        "add_fee": [],
+        "check_in_check_out": [],
+        "children": [],
+        "children_meal": [],
+        "cot": [],
+        "deposit": [],
+        "extra_bed": [],
+        "internet": [],
+        "meal": [],
+        "no_show": {
+          "availability": "unspecified",
+          "day_period": "unspecified",
+          "time": ""
+        },
+        "parking": [],
+        "pets": [],
+        "shuttle": [],
+        "visa": {
+          "visa_support": "unspecified"
+        }
+      },
+      "metapolicy_extra_info": "<p><b>Mandatory Fees and Taxes</b> <br /><p>You'll be asked to pay the following charges at the property:</p> <ul><li>Deposit: USD 100.0 per stay</li></ul> <p>We have included all charges provided to us by the property. However, charges can vary, for example, based on length of stay or the room you book. </p></p>",
+      "phone": "+13238452302",
+      "policy_struct": [
+        {
+          "paragraphs": [
+            "Information about the type of meals included in the price is indicated in the rate details."
+          ],
+          "title": "Meals"
+        },
+        {
+          "paragraphs": [
+            "<p><b>Mandatory Fees and Taxes</b> <br /><p>You'll be asked to pay the following charges at the property:</p> <ul><li>Deposit: USD 100.0 per stay</li></ul> <p>We have included all charges provided to us by the property. However, charges can vary, for example, based on length of stay or the room you book. </p></p>"
+          ],
+          "title": "Extra info"
+        }
+      ],
+      "postal_code": "90062",
+      "region": {
+        "country_code": "US",
+        "iata": "LAX",
+        "id": 2011,
+        "name": "Los Angeles",
+        "type": "city"
+      },
+      "room_groups": [
+        {
+          "name": "Other",
+          "images": null,
+          "images_ext": [],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Other"
+          },
+          "room_amenities": null,
+          "room_group_id": 1,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 0,
+            "bedding": 0,
+            "bedrooms": 0,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 0,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Bed in Dorm (shared bathroom)",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "shared bathroom",
+            "bedding_type": "",
+            "main_name": "Bed in Dorm"
+          },
+          "room_amenities": [
+            "shared-bathroom"
+          ],
+          "room_group_id": 6,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 1,
+            "bedding": 0,
+            "bedrooms": 0,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 0,
+            "class": 1,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Standard room",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Standard room"
+          },
+          "room_amenities": [
+            "air-conditioning",
+            "fridge",
+            "heating",
+            "microwave",
+            "private-bathroom",
+            "shower",
+            "toiletries",
+            "towels",
+            "tv",
+            "wi-fi"
+          ],
+          "room_group_id": 11,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 0,
+            "capacity": 0,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Standard Double room",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Standard Double room"
+          },
+          "room_amenities": [
+            "air-conditioning",
+            "fridge",
+            "heating",
+            "microwave",
+            "private-bathroom",
+            "shower",
+            "toiletries",
+            "towels",
+            "tv",
+            "wi-fi"
+          ],
+          "room_group_id": 20492852,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 0,
+            "capacity": 2,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Standard Triple room",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Standard Triple room"
+          },
+          "room_amenities": [
+            "air-conditioning",
+            "fridge",
+            "heating",
+            "microwave",
+            "private-bathroom",
+            "shower",
+            "toiletries",
+            "towels",
+            "tv",
+            "wi-fi"
+          ],
+          "room_group_id": 21541428,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 0,
+            "bedrooms": 0,
+            "capacity": 3,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Standard Single room (single bed)",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "single bed",
+            "main_name": "Standard Single room"
+          },
+          "room_amenities": [
+            "air-conditioning",
+            "fridge",
+            "heating",
+            "microwave",
+            "private-bathroom",
+            "shower",
+            "toiletries",
+            "towels",
+            "tv",
+            "wi-fi"
+          ],
+          "room_group_id": 19509812,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 2,
+            "bedrooms": 0,
+            "capacity": 1,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Standard Double room (full double bed)",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/mec/eb/5c/eb5c5afdd169674b3f5b23b118af022537f05f65.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/94/67/94676756e20723e9bf5fb84e271f9e0ef21030cb.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/af/fa/affae1df835af076f6f100f36abf8041a7683c3b.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/f6/25/f62569e8be5d7215bba97a320bff32f0599547b3.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/89/3d/893db29211b5b58b7e7394dbacf19ed67c594838.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/2a/7f/2a7f9da6e7047d46bfc5b76ab5dbaded9aec778b.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/6b/7f/6b7f48fc205f19c51a344a4c1324694cf678f2fd.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/f9/de/f9de271482f013824bc9d8e083aac34fc23ed933.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/9d/64/9d64ef0a6ba8163ea631252f28bc4b34c3dca14d.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/a6/10/a610cc5254cffe684b0dc018a3d232247dacf407.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/98/c6/98c6faa15909dd1ce0d327b02c92dfa89263cfdc.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/44/cc/44ccb359775d33b73573e1ca3d147fa3db8cdfa0.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/mec/eb/5c/eb5c5afdd169674b3f5b23b118af022537f05f65.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/94/67/94676756e20723e9bf5fb84e271f9e0ef21030cb.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/af/fa/affae1df835af076f6f100f36abf8041a7683c3b.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/f6/25/f62569e8be5d7215bba97a320bff32f0599547b3.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/89/3d/893db29211b5b58b7e7394dbacf19ed67c594838.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/2a/7f/2a7f9da6e7047d46bfc5b76ab5dbaded9aec778b.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/6b/7f/6b7f48fc205f19c51a344a4c1324694cf678f2fd.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/f9/de/f9de271482f013824bc9d8e083aac34fc23ed933.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/9d/64/9d64ef0a6ba8163ea631252f28bc4b34c3dca14d.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/a6/10/a610cc5254cffe684b0dc018a3d232247dacf407.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/98/c6/98c6faa15909dd1ce0d327b02c92dfa89263cfdc.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/44/cc/44ccb359775d33b73573e1ca3d147fa3db8cdfa0.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "full double bed",
+            "main_name": "Standard Double room"
+          },
+          "room_amenities": [
+            "air-conditioning",
+            "fridge",
+            "heating",
+            "microwave",
+            "private-bathroom",
+            "shower",
+            "toiletries",
+            "towels",
+            "tv",
+            "wi-fi"
+          ],
+          "room_group_id": 90,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 3,
+            "bedrooms": 0,
+            "capacity": 2,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Standard Double room (2 single beds)",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "2 single beds",
+            "main_name": "Standard Double room"
+          },
+          "room_amenities": [
+            "private-bathroom"
+          ],
+          "room_group_id": 91,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 4,
+            "bedrooms": 0,
+            "capacity": 2,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Standard Triple room",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Standard Triple room"
+          },
+          "room_amenities": [
+            "private-bathroom"
+          ],
+          "room_group_id": 21770804,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 7,
+            "bedrooms": 0,
+            "capacity": 3,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Standard Quadruple room",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/cf/5f/cf5f56ec7a52195d0bb66aec1148b2658171c6e5.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/cb/05/cb054218d0a9b855fa1c44fde005e63d6fd02624.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/6b/7f/6b7f48fc205f19c51a344a4c1324694cf678f2fd.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/c4/91/c4913b07d0dc26ebf761c84f703399de095d1f57.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/24/4e/244e0798c75288cd8093c62294c61c8852100a15.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/9d/64/9d64ef0a6ba8163ea631252f28bc4b34c3dca14d.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/a6/10/a610cc5254cffe684b0dc018a3d232247dacf407.jpeg",
+            "https://cdn.worldota.net/t/{size}/content/98/c6/98c6faa15909dd1ce0d327b02c92dfa89263cfdc.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/cf/5f/cf5f56ec7a52195d0bb66aec1148b2658171c6e5.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/cb/05/cb054218d0a9b855fa1c44fde005e63d6fd02624.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/6b/7f/6b7f48fc205f19c51a344a4c1324694cf678f2fd.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/c4/91/c4913b07d0dc26ebf761c84f703399de095d1f57.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/24/4e/244e0798c75288cd8093c62294c61c8852100a15.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/9d/64/9d64ef0a6ba8163ea631252f28bc4b34c3dca14d.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/a6/10/a610cc5254cffe684b0dc018a3d232247dacf407.jpeg",
+              "category_slug": "unspecified"
+            },
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/98/c6/98c6faa15909dd1ce0d327b02c92dfa89263cfdc.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Standard Quadruple room"
+          },
+          "room_amenities": [
+            "air-conditioning",
+            "fridge",
+            "heating",
+            "microwave",
+            "private-bathroom",
+            "shower",
+            "toiletries",
+            "towels",
+            "tv",
+            "wi-fi"
+          ],
+          "room_group_id": 22819380,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 7,
+            "bedrooms": 0,
+            "capacity": 4,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Standard Quintuple room",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Standard Quintuple room"
+          },
+          "room_amenities": [
+            "private-bathroom"
+          ],
+          "room_group_id": 23867956,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 7,
+            "bedrooms": 0,
+            "capacity": 5,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        },
+        {
+          "name": "Standard Sextuple room",
+          "images": [
+            "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg"
+          ],
+          "images_ext": [
+            {
+              "url": "https://cdn.worldota.net/t/{size}/content/ed/05/ed05aa2ad187817f26b29684fe8b00317de743cf.jpeg",
+              "category_slug": "unspecified"
+            }
+          ],
+          "name_struct": {
+            "bathroom": "",
+            "bedding_type": "",
+            "main_name": "Standard Sextuple room"
+          },
+          "room_amenities": [
+            "private-bathroom"
+          ],
+          "room_group_id": 24916532,
+          "rg_ext": {
+            "balcony": 0,
+            "bathroom": 2,
+            "bedding": 7,
+            "bedrooms": 0,
+            "capacity": 6,
+            "club": 0,
+            "family": 0,
+            "floor": 0,
+            "quality": 2,
+            "class": 3,
+            "sex": 0,
+            "view": 0
+          },
+          "size": null
+        }
+      ],
+      "star_rating": 2,
+      "serp_filters": [
+        "has_internet",
+        "has_parking",
+        "has_disabled_support",
+        "air_conditioning"
+      ],
+      "star_certificate": {
+        "valid_to": "",
+        "certificate_id": ""
+      },
+      "is_closed": false,
+      "facts": {
+        "electricity": {
+          "frequency": [
+            60
+          ],
+          "voltage": [
+            120
+          ],
+          "sockets": [
+            "a",
+            "b"
+          ]
+        },
+        "floors_number": 0,
+        "rooms_number": 26,
+        "year_built": 0,
+        "year_renovated": 0,
+        "register": null
+      },
+      "payment_methods": [
+        "visa",
+        "jcb",
+        "mastercard",
+        "american_express",
+        "diners_club"
+      ],
+      "front_desk_time_start": null,
+      "front_desk_time_end": null,
+      "is_gender_specification_required": false,
+      "deleted": false,
+      "keys_pickup": {
+        "type": "unspecified",
+        "phone": "",
+        "is_contactless": false,
+        "email": "",
+        "apartment_office_address": "",
+        "apartment_extra_information": ""
+      },
+      "distance_center": null
+    }
+  ],
+  "reviews": [
+    {
+      "hid": 6803924,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 6892874,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 8031837,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 8396895,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 8406253,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 8699834,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 8819557,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 8978417,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 9004584,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 9213897,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 9213970,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 9214219,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 9721825,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 9731536,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 9731560,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 9731570,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 9731618,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 9743468,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 9743470,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 10004834,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 10050577,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 10060721,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 10060723,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    },
+    {
+      "hid": 10282085,
+      "rating": null,
+      "detailed_ratings": {
+        "cleanness": null,
+        "location": null,
+        "price": null,
+        "services": null,
+        "room": null,
+        "meal": null,
+        "wifi": null,
+        "hygiene": null
+      }
+    }
+  ]
+}

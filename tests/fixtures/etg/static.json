@@ -1,0 +1,43 @@
+{
+  "taxNames": {
+    "service_fee": "Service fee",
+    "electricity_fee": "Electricity fee",
+    "cleaning_fee": "Cleaning fee",
+    "transfer_fee": "Transfer to hotel",
+    "environmental_fee": "Environmental fee",
+    "vat": "VAT",
+    "city_tax": "City tax",
+    "resort_fee": "Resort fee",
+    "luxury_tax": "Luxury tax",
+    "occupancy_tax": "Occupancy tax",
+    "hotel_fee": "Hotel fee"
+  },
+  "mealNames": {
+    "half-board-lunch": "Breakfast and lunch",
+    "israeli-breakfast": "Israeli breakfast",
+    "nomeal": "No meals included",
+    "all-inclusive": "All-inclusive",
+    "american-breakfast": "American breakfast",
+    "dinner": "Dinner",
+    "half-board": "Breakfast + dinner or lunch included",
+    "half-board-dinner": "Breakfast and dinner",
+    "japanese-breakfast": "Japanese breakfast",
+    "some-meal": "Meals included",
+    "continental-breakfast": "Continental Breakfast",
+    "english-breakfast": "English breakfast",
+    "irish-breakfast": "Irish breakfast",
+    "lunch": "Lunch",
+    "soft-all-inclusive": "Soft all-inclusive",
+    "super-all-inclusive": "Super all-inclusive",
+    "asian-breakfast": "Asian breakfast",
+    "breakfast": "Breakfast included",
+    "breakfast-buffet": "Breakfast Buffet",
+    "breakfast-for-2": "Breakfast for 2 guests",
+    "chinese-breakfast": "Chinese breakfast",
+    "scandinavian-breakfast": "Scandinavian breakfast",
+    "scottish-breakfast": "Scottish breakfast",
+    "ultra-all-inclusive": "Ultra all-inclusive",
+    "breakfast-for-1": "Breakfast for 1 guest",
+    "full-board": "Breakfast, lunch and dinner included"
+  }
+}

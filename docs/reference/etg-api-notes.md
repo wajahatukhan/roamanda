@@ -134,21 +134,48 @@ marked (settled) were checked against the sandbox recordings in
 
 - Content API is "available upon request"; check `overview` to see if it is active on our key.
 - Never call content endpoints during search, hotel page or booking.
-- By IDs: `POST /api/content/v1/hotel_content_by_ids/` body `{ hids[] (max 100), language }`,
-  1200 requests/min. Fields: `hid`, `name`, `address`, `latitude`, `longitude`,
-  `kind`, `star_rating` (0 = none) (verify), `region { id, name, type, country_code }`,
-  `check_in_time`, `check_out_time`, `amenity_groups[] { group_name, amenities[], non_free_amenities[] }`,
-  `description_struct[] { title, paragraphs[] }`, `images_ext[] { category_slug, url }`
-  (URL contains `{size}`; sizes include `1024x768`, `640x350`, `x220`, `1080x`, `1920x1080`),
-  `room_groups[]`, `metapolicy_struct`, `metapolicy_extra_info`, `is_closed`, `deleted` (verify).
+- By IDs: `POST /api/content/v1/hotel_content_by_ids/` body `{ hids[] (max 100), language }`.
+  Docs say 1200 requests/min; this sandbox key allows 30 per 60 s. `data` is an array of hotels (not
+  keyed by hid); unknown hids are simply absent. Fields: `hid`, `name`, `address`, `latitude`,
+  `longitude`, `kind`, `star_rating`, `region { id, name, type, country_code, iata }`,
+  `check_in_time`, `check_out_time`, `amenity_groups[] { group_name, amenities[], non_free_amenities[] | null }`,
+  `description_struct[] { title, paragraphs[] }`, `images_ext[] { category_slug, url }`,
+  `room_groups[]`, `metapolicy_struct`, `metapolicy_extra_info`, `is_closed`, `deleted`. (settled)
+  Also sent and not stored: `email`, `phone`, `postal_code`, `hotel_chain`, `facts`, `serp_filters`,
+  `payment_methods`, `check_in_time_end`, `front_desk_time_start/end`, `keys_pickup`, `distance_center`,
+  `star_certificate`, `policy_struct`, `is_gender_specification_required`, `id` (deprecated string id).
+  Recorded 2026-11-11 in `tests/fixtures/etg/content-10004834.json` (one hotel) and
+  `content-hotels.json` (the 22 hotels of the region 2011 search plus 10004834 and 8819557; not trimmed).
+- Star rating: `star_rating` is an integer. Values seen across 24 hotels: 0, 2, 3, 4, 5 (8 of 24 are
+  0). 0 means "no star rating" and maps to null; the mapper also nulls anything outside 1 to 5. (settled)
+- Coordinates: `latitude` and `longitude` are JSON numbers (decimal degrees) on all 24 hotels. The mapper
+  still treats them as optional (null gives no time zone). (settled)
+- `is_closed` and `deleted` are both booleans, present on every hotel, `false` on all 24 recorded.
+  The sync skips a hotel when either is `true` (not upserted, counted). (settled)
+- Images: `images_ext[].url` is `https://cdn.worldota.net/t/{size}/content/<aa>/<bb>/<hash>.jpeg`,
+  single host `cdn.worldota.net`, literal `{size}` in every URL (replace it, e.g. `640x350`, `1024x768`,
+  `x220`). `category_slug` is `unspecified` on every image in the sandbox. Only 5 of 24 hotels have any
+  images (11, 12, 28, 31, 50); the others have an empty list, so the UI needs a no-photo state. (settled)
+- `metapolicy_struct` is an object of 14 keys on all 24 hotels: `add_fee`, `check_in_check_out`,
+  `children`, `children_meal`, `cot`, `deposit`, `extra_bed`, `internet`, `meal`, `parking`, `pets`,
+  `shuttle` (each an array of objects with `inclusion`, `price`, `currency` and a type or unit field, prices as
+  strings) and `no_show` and `visa` (single objects, e.g. `no_show { availability, day_period, time }`,
+  `visa { visa_support }`). The sandbox values look synthetic, so a production hotel may omit keys:
+  stored as jsonb as received, read defensively. `metapolicy_extra_info` is free text, present on 4 of 24. (settled for shape)
+- Reviews: `POST /api/content/v1/hotel_reviews_by_ids/` returns one row per hid with `rating` and
+  `detailed_ratings` { cleanness, location, price, services, room, meal, wifi, hygiene }; in the sandbox
+  every value is `null` and `reviews` is `[]` for all 24 hotels. `no_hotel_reviews` is treated as "no reviews".
+- Static dictionaries: `GET /api/b2b/v3/hotel/static/` returns `data { beddings, meals, room_amenities, taxes,
+  serp_filters, socket_types, amenity_translations }`; `taxes[]` and `meals[]` are `{ name, locale { en, de, ... } }`.
+  11 tax names and 26 meal names, English under `locale.en`. 100 calls per day on this key. Recorded trimmed
+  to English tax and meal names in `tests/fixtures/etg/static.json`.
 - B2B single-hotel content endpoint also exists (page not read; path to confirm, verify).
 - Hotel dump: `POST /api/b2b/v3/hotel/info/dump/` body `{ language, inventory? }`
   → `data.url` (valid about 1 h). Zstd, one JSON object per line. Weekly.
   Incremental: `/api/b2b/v3/hotel/info/incremental_dump/`, daily.
 - Regions dump: `/api/b2b/v3/hotel/region/dump/` (GET or POST, verify). Fields: `id`,
   `name{lang}`, `type`, `country_code`, `center { latitude, longitude }`, `hids[]`, `iata`.
-- Reviews by IDs: `POST /api/content/v1/hotel_reviews_by_ids/` body `{ hids[], language }`
-  → `rating` (0-10), `detailed_ratings { cleanness, location, price, services, room, meal, wifi, hygiene }`,
+- Reviews by IDs (body `{ hids[], language }`): `rating` (0-10), `detailed_ratings { cleanness, location, price, services, room, meal, wifi, hygiene }`,
   `reviews[] { review_plus, review_minus, created, traveller_type, trip_type, rating, ... }`.
 - Reviews dump: `POST /api/b2b/v3/hotel/reviews/dump/`. POI dump: `POST /api/b2b/v3/hotel/poi/dump`.
 - Dictionaries: `GET /api/b2b/v3/hotel/static/`.

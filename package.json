@@ -10,7 +10,8 @@
     "lint": "eslint",
     "test": "vitest run",
     "e2e": "playwright test",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sync:content": "tsx --conditions=react-server scripts/sync-content.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
