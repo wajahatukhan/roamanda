@@ -75,13 +75,3 @@ export const MulticompleteData = z.object({
   regions: z.array(z.object({ id: z.number(), name: z.string(), type: z.string(), country_code: z.string() })),
 });
 export type MulticompleteData = z.infer<typeof MulticompleteData>;
-
-export const SearchRegionData = z.object({
-  hotels: z.array(z.object({ hid: z.number(), rates: z.array(Rate) })),
-});
-export type SearchRegionData = z.infer<typeof SearchRegionData>;
-
-export const HotelPageData = z.object({
-  hotels: z.array(z.object({ hid: z.number(), rates: z.array(Rate) })),
-});
-export type HotelPageData = z.infer<typeof HotelPageData>;

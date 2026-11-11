@@ -1,5 +1,5 @@
 import { resetEnvCache } from "@/env";
-import { HotelPageData, MulticompleteData, SearchRegionData } from "@/lib/etg/schemas";
+import { MulticompleteData, Rate } from "@/lib/etg/schemas";
 import { hotelPage, multicomplete, parseHotelsLenient, searchRegion } from "@/lib/etg/search";
 import hp10004834 from "../../fixtures/etg/hp-10004834.json";
 import hp8819557 from "../../fixtures/etg/hp-8819557.json";
@@ -30,32 +30,34 @@ afterEach(() => {
 });
 
 test("hotel page fixture parses and every rate has a payment type", () => {
-  const rates = HotelPageData.parse(hp10004834).hotels[0]!.rates;
+  const out = parseHotelsLenient(hp10004834);
+  expect(out.droppedRates).toBe(0);
+  const rates = out.hotels[0]!.rates;
   expect(rates.length).toBeGreaterThan(0);
   for (const r of rates) expect(r.payment_options.payment_types.length).toBeGreaterThan(0);
 });
 
 test("the second hotel page fixture, the region fixture and multicomplete also parse", () => {
-  expect(HotelPageData.parse(hp8819557).hotels[0]!.rates.length).toBeGreaterThan(0);
-  expect(SearchRegionData.parse(serpRegion).hotels.length).toBeGreaterThan(0);
+  expect(parseHotelsLenient(hp8819557).hotels[0]!.rates.length).toBeGreaterThan(0);
+  expect(parseHotelsLenient(serpRegion).hotels.length).toBeGreaterThan(0);
   expect(MulticompleteData.parse(multicompleteFixture).regions.length).toBeGreaterThan(0);
 });
 
 test("unknown extra fields are tolerated", () => {
   const data = structuredClone(hp10004834) as { hotels: { rates: Record<string, unknown>[] }[] };
   data.hotels[0]!.rates[0]!.foo = 1;
-  expect(() => HotelPageData.parse(data)).not.toThrow();
+  expect(parseHotelsLenient(data).droppedRates).toBe(0);
 });
 
 test("empty tax_data ({} as the sandbox sends it) parses to an empty tax list", () => {
-  const rates = HotelPageData.parse(hp8819557).hotels[0]!.rates;
+  const rates = parseHotelsLenient(hp8819557).hotels[0]!.rates;
   expect(rates[0]!.payment_options.payment_types[0]!.tax_data.taxes).toEqual([]);
 });
 
 test("a rate missing room_name is rejected", () => {
-  const data = structuredClone(hp10004834) as { hotels: { rates: Record<string, unknown>[] }[] };
-  delete data.hotels[0]!.rates[0]!.room_name;
-  expect(() => HotelPageData.parse(data)).toThrow();
+  const rate = structuredClone(hp10004834.hotels[0]!.rates[0]) as Record<string, unknown>;
+  delete rate.room_name;
+  expect(Rate.safeParse(rate).success).toBe(false);
 });
 
 test("fixture mode returns fixture data without fetch", async () => {
@@ -118,12 +120,10 @@ describe("lenient hotel parsing", () => {
   afterEach(() => { warn.mockRestore(); });
 
   test("a malformed amount is rejected", () => {
-    const data = copy();
-    data.hotels[0]!.rates[0]!.payment_options.payment_types[0].amount = "abc";
-    expect(() => HotelPageData.parse(data)).toThrow();
-    for (const bad of ["", "-5", "NaN"]) {
-      data.hotels[0]!.rates[0]!.payment_options.payment_types[0].amount = bad;
-      expect(() => HotelPageData.parse(data)).toThrow();
+    const rate = copy().hotels[0]!.rates[0]!;
+    for (const bad of ["abc", "", "-5", "NaN"]) {
+      rate.payment_options.payment_types[0].amount = bad;
+      expect(Rate.safeParse(rate).success).toBe(false);
     }
   });
 
