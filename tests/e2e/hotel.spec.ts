@@ -255,6 +255,9 @@ test.describe("with a passport country", () => {
     const skeleton = page.getByTestId("rates-skeleton");
     await expect(skeleton).toBeVisible();
     await expect(page.getByRole("status").filter({ hasText: "Loading prices for your stay" })).toBeAttached();
+    // With "commit" the markup can be measured before the stylesheet applies (a browser never paints that state),
+    // so wait for the styles before taking the "before" positions.
+    await expect(page.locator("main")).toHaveCSS("display", "flex");
     const heading = page.getByRole("heading", { level: 2, name: "Rooms and prices" });
     const gallery = page.getByRole("region", { name: "Photos" });
     const before = { h: (await heading.boundingBox())!.y, g: (await gallery.boundingBox())!.y };
