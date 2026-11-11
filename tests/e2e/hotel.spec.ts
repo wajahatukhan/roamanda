@@ -27,7 +27,10 @@ async function reads(context: BrowserContext): Promise<number> {
   return ((await res.json()) as { hotelPage: number }).hotelPage;
 }
 
+// The first six rows; the rest sit in a closed <details> (see moreRows) until "Show all N options" is opened.
 const rows = (page: Page) => page.getByRole("list", { name: /Rooms and prices/ }).locator(":scope > li");
+const moreRows = (page: Page) => page.locator("details").getByRole("list", { name: /More rooms and prices/, includeHidden: true }).locator(":scope > li");
+const showAll = (page: Page) => page.getByText(/^Show all \d+ options$/);
 
 test.describe("with a passport country", () => {
   test.beforeEach(async ({ context }) => {
@@ -42,7 +45,14 @@ test.describe("with a passport country", () => {
     await expect(page.getByText("5-star hotel")).toBeAttached();
 
     await expect(rows(page).first()).toBeVisible();
-    expect(await rows(page).count()).toBe(18);
+    expect(await rows(page).count()).toBe(6);
+    expect(await moreRows(page).count()).toBe(12);
+    await expect(showAll(page)).toHaveText("Show all 18 options");
+    await expect(page.getByRole("status").filter({ hasText: "18 options found" })).toBeAttached();
+    // The rest are folded away until the control is opened.
+    await expect(moreRows(page).first()).toBeHidden();
+    await showAll(page).click();
+    await expect(moreRows(page).first()).toBeVisible();
     const first = rows(page).first();
     await expect(first.getByRole("heading", { level: 3 })).toHaveText(/Standard Double room/);
     await expect(first.getByText(/^\$\d[\d,]*\.\d\d$/)).toBeVisible();
@@ -54,16 +64,18 @@ test.describe("with a passport country", () => {
     await expect(first.getByText(/Bedding: full double bed/)).toBeVisible();
 
     // Every row has a cancellation sentence, and the control is present but disabled.
-    const count = await rows(page).count();
+    const count = 18;
+    const all = page.locator("section[aria-labelledby=rates-heading] li").filter({ has: page.getByRole("heading", { level: 3 }) });
+    expect(await all.count()).toBe(count);
     for (let i = 0; i < count; i++) {
-      const text = (await rows(page).nth(i).locator("p", { hasText: /^Cancellation:/ }).textContent()) ?? "";
+      const text = (await all.nth(i).locator("p", { hasText: /^Cancellation:/ }).textContent()) ?? "";
       expect(text.replace("Cancellation:", "").trim()).toMatch(/.+\.$/);
     }
     await expect(page.getByRole("button", { name: "Booking opens soon" })).toHaveCount(count);
     await expect(page.getByRole("button", { name: "Booking opens soon" }).first()).toBeDisabled();
 
     // Ascending by total.
-    const totals = (await rows(page).locator("p.text-2xl").allTextContents()).map((t) => Number(t.replace(/[^0-9.]/g, "")));
+    const totals = (await page.locator("section[aria-labelledby=rates-heading] p.text-2xl").allTextContents()).map((t) => Number(t.replace(/[^0-9.]/g, "")));
     expect(totals).toEqual([...totals].sort((a, b) => a - b));
 
     // Policies: each populated group, and the supplier's extra text.
@@ -137,6 +149,19 @@ test.describe("with a passport country", () => {
     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   });
 
+  test("the rest of the options open from a keyboard-reachable control and stay in lowest-price order", async ({ page }) => {
+    await page.goto(HOTEL);
+    await expect(rows(page).first()).toBeVisible();
+    const control = showAll(page);
+    await control.focus();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("details")).toHaveJSProperty("open", true);
+    await expect(moreRows(page)).toHaveCount(12);
+    await expect(moreRows(page).last()).toBeVisible();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("details")).toHaveJSProperty("open", false);
+  });
+
   test("the loading state reserves space and is announced, then the rates replace it without moving what is above", async ({ page, context }) => {
     await cookie(context, "etg_fixture_delay", "2500");
     // "commit": do not wait for the stream to finish, or the loading state would already be gone.
@@ -149,6 +174,7 @@ test.describe("with a passport country", () => {
     const before = { h: (await heading.boundingBox())!.y, g: (await gallery.boundingBox())!.y };
     const skeletonRow = skeleton.locator("li").first();
     expect((await skeletonRow.boundingBox())!.height).toBeGreaterThanOrEqual(176);
+    await expect(skeleton.locator("li")).toHaveCount(6);
     await expect(rows(page).first()).toBeVisible();
     await expect(skeleton).toHaveCount(0);
     const after = { h: (await heading.boundingBox())!.y, g: (await gallery.boundingBox())!.y };

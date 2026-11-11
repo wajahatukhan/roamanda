@@ -22,6 +22,9 @@ import { nightsBetween, describeStay } from "@/lib/search/summary";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+/** Rows shown before the rest are folded into a "Show all" control. Also the number of rows the skeleton reserves. */
+const RATES_SHOWN_FIRST = 6;
+
 type RawParams = Record<string, string | string[] | undefined>;
 const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 
@@ -29,7 +32,7 @@ const panel = "flex flex-col items-start gap-5 rounded-2xl bg-card p-6 ring-1 ri
 const h3 = "text-lg font-semibold tracking-[0.01em] [word-spacing:0.1em]";
 
 /** Placeholder rows with the same shell and minimum height as real ones, so rates arrive without moving the page. */
-export function RatesSkeleton({ count = 3 }: { count?: number }) {
+export function RatesSkeleton({ count = RATES_SHOWN_FIRST }: { count?: number }) {
   const bar = "rounded-md bg-muted";
   return (
     <div data-testid="rates-skeleton" aria-busy="true">
@@ -171,10 +174,22 @@ export async function Rates({ hid, hotel, sp }: { hid: number; hotel: Hotel; sp:
       </p>
       <p role="status" className="sr-only">{rows.length} {rows.length === 1 ? "option" : "options"} found, lowest price first</p>
       <ul aria-label="Rooms and prices, lowest price first" className="flex flex-col gap-4">
-        {rows.map((row, i) => (
+        {rows.slice(0, RATES_SHOWN_FIRST).map((row, i) => (
           <RateRowView key={row.key} row={row} index={i} nights={nights} />
         ))}
       </ul>
+      {rows.length > RATES_SHOWN_FIRST && (
+        <details className="group flex flex-col gap-4">
+          <summary className="flex min-h-11 w-full cursor-pointer list-none items-center justify-center rounded-lg px-5 text-base font-medium text-foreground ring-1 ring-foreground/20 outline-none select-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
+            Show all {rows.length} options
+          </summary>
+          <ul aria-label="More rooms and prices, lowest price first" className="mt-4 flex flex-col gap-4">
+            {rows.slice(RATES_SHOWN_FIRST).map((row, i) => (
+              <RateRowView key={row.key} row={row} index={i} nights={nights} />
+            ))}
+          </ul>
+        </details>
+      )}
     </div>
   );
 }
