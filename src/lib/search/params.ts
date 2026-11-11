@@ -57,7 +57,8 @@ export function parseSearchParams(sp: RawParams, today: Date): ParsedSearch {
   if (inDay === null || outDay === null) {
     add("Choose your check-in and check-out dates.");
   } else {
-    const todayDay = Math.floor(today.getTime() / 86_400_000);
+    // One day of grace behind the UTC date, so travellers west of UTC can still book their own "today".
+    const todayDay = Math.floor(today.getTime() / 86_400_000) - 1;
     if (inDay < todayDay) add("Check-in is in the past.");
     if (outDay <= inDay) add("Check-out must be after check-in.");
     else if (outDay - inDay > LIMITS.maxNights) add("Stays can be up to 30 nights.");
@@ -65,7 +66,9 @@ export function parseSearchParams(sp: RawParams, today: Date): ParsedSearch {
 
   const roomsRaw = first(sp.rooms);
   let guests: Guests = DEFAULT_GUESTS;
-  if (roomsRaw !== undefined) {
+  if (!roomsRaw) {
+    add("Choose guests and rooms.");
+  } else {
     const decoded = decodeRooms(roomsRaw);
     if (!decoded) add("Check the guest details.");
     else {

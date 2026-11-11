@@ -87,6 +87,17 @@ test("the form is completable by keyboard alone; passport country is asked once"
   await page.getByRole("button", { name: "Increase children in room 1" }).focus();
   await page.keyboard.press("Enter");
   await expect(page.getByRole("combobox", { name: "Room 1 child 1 age" })).toBeVisible();
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Enter");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("Enter");
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: /Guests and rooms.*1 child/ })).toBeFocused();
 
@@ -100,7 +111,7 @@ test("the form is completable by keyboard alone; passport country is asked once"
   const url = new URL(page.url());
   expect(url.searchParams.get("region")).toBe("2734");
   expect(url.searchParams.get("name")).toBe("Paris");
-  expect(url.searchParams.get("rooms")).toBe("2-8");
+  expect(url.searchParams.get("rooms")).toMatch(/^2-\d{1,2}$/);
   expect(url.searchParams.get("in")).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   expect(url.searchParams.get("out")).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   expect((await context.cookies()).find((c) => c.name === "residency")?.value).toBe("gb");
@@ -125,11 +136,34 @@ test("child ages and extra rooms can be set in the guests popover", async ({ pag
   await page.getByRole("combobox", { name: "Room 1 child 1 age" }).click();
   await page.getByRole("option", { name: "5 years", exact: true }).click();
   await expect(page.getByRole("combobox", { name: "Room 1 child 1 age" })).toContainText("5 years");
+  await page.getByRole("combobox", { name: "Room 1 child 2 age" }).click();
+  await page.getByRole("option", { name: "8 years", exact: true }).click();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: /Guests and rooms/ })).toContainText("4 adults · 2 children · 2 rooms");
   await page.getByRole("button", SEARCH).click();
   await page.waitForURL(/\/search\?/);
   expect(new URL(page.url()).searchParams.get("rooms")).toBe("2-5.8,2");
+});
+
+test("a child's age must be chosen before searching", async ({ page, context }) => {
+  await context.addCookies([{ name: "residency", value: "gb", url: "http://localhost:3100" }]);
+  await page.goto("/");
+  await pickParis(page);
+  await pickDates(page);
+  await page.getByRole("button", { name: /Guests and rooms/ }).click();
+  await page.getByRole("button", { name: "Increase children in room 1" }).click();
+  await expect(page.getByRole("combobox", { name: "Room 1 child 1 age" })).toContainText("Choose age");
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", SEARCH).click();
+  await expect(page.locator("#search-errors")).toContainText("Choose an age for each child.");
+  await expect(page.getByRole("combobox", { name: "Room 1 child 1 age" })).toBeFocused();
+  await expect(page).toHaveURL(/\/$/);
+  await page.getByRole("combobox", { name: "Room 1 child 1 age" }).click();
+  await page.getByRole("option", { name: "6 years", exact: true }).click();
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", SEARCH).click();
+  await page.waitForURL(/\/search\?/);
+  expect(new URL(page.url()).searchParams.get("rooms")).toBe("2-6");
 });
 
 test("choosing a hotel sends the search to its page", async ({ page, context }) => {

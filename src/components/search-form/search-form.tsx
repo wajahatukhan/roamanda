@@ -11,7 +11,7 @@ import { DEFAULT_GUESTS, encodeRooms, parseSearchParams } from "@/lib/search/par
 import { getResidency, setResidency } from "@/lib/search/residency";
 import { DateRangeField, toIsoDate } from "./date-range-field";
 import { DestinationCombobox, type Destination } from "./destination-combobox";
-import { GuestsField } from "./guests-field";
+import { GuestsField, UNSET_AGE } from "./guests-field";
 import { ResidencyDialog } from "./residency-dialog";
 
 type Errors = { destination?: string; dates?: string; guests?: string };
@@ -22,6 +22,8 @@ export function SearchForm() {
   const [range, setRange] = useState<DateRange | undefined>();
   const [rooms, setRooms] = useState<Guests>(DEFAULT_GUESTS);
   const [errors, setErrors] = useState<Errors>({});
+  const [guestsOpen, setGuestsOpen] = useState(false);
+  const [ageFocusTick, setAgeFocusTick] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogError, setDialogError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -40,16 +42,22 @@ export function SearchForm() {
       out: range?.to ? toIsoDate(range.to) : undefined,
       rooms: encodeRooms(rooms),
     };
-    const parsed = parseSearchParams(sp, new Date());
+    const ageUnset = rooms.some((r) => r.children.includes(UNSET_AGE));
+    const parsed = parseSearchParams(ageUnset ? { ...sp, rooms: encodeRooms(DEFAULT_GUESTS) } : sp, new Date());
     if (!parsed.ok) {
       const dateProblems = parsed.problems.filter((p) => /check-in|check-out|dates|nights/i.test(p));
       const guestProblems = parsed.problems.filter((p) => !dateProblems.includes(p) && p !== "Choose a destination.");
       if (dateProblems.length) next.dates = dateProblems.join(" ");
       if (guestProblems.length) next.guests = guestProblems.join(" ");
     }
+    if (ageUnset) next.guests = [next.guests, "Choose an age for each child."].filter(Boolean).join(" ");
     setErrors(next);
     if (next.destination) destinationRef.current?.focus();
     else if (next.dates) datesRef.current?.focus();
+    else if (ageUnset) {
+      setGuestsOpen(true);
+      setAgeFocusTick((t) => t + 1);
+    }
     if (Object.keys(next).length > 0 || !destination || !parsed.ok) return { ok: false };
 
     const qs = new URLSearchParams();
@@ -143,6 +151,9 @@ export function SearchForm() {
                 setRooms(g);
                 setErrors((x) => ({ ...x, guests: undefined }));
               }}
+              open={guestsOpen}
+              onOpenChange={setGuestsOpen}
+              focusUnsetAge={ageFocusTick}
               invalid={!!errors.guests}
               describedBy={errors.guests ? errorId : undefined}
             />

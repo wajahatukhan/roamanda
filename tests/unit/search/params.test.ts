@@ -32,7 +32,7 @@ describe("parseSearchParams", () => {
   });
 
   it("rejects a check-in in the past", () => {
-    expect(problemsFor({ in: "2026-11-10", out: "2026-11-12" })).toContain("Check-in is in the past.");
+    expect(problemsFor({ in: "2026-11-09", out: "2026-11-12" })).toContain("Check-in is in the past.");
   });
 
   it("rejects a check-out that is not after check-in", () => {
@@ -75,9 +75,17 @@ describe("parseSearchParams", () => {
     expect(problemsFor({ rooms: "0" })).toContain("Each room needs at least 1 adult.");
   });
 
-  it("defaults to two adults in one room when rooms is missing", () => {
-    const r = parseSearchParams({ ...valid, rooms: undefined }, today);
-    expect(r.ok && r.query.guests).toEqual([{ adults: 2, children: [] }]);
+  it("requires rooms", () => {
+    expect(problemsFor({ rooms: undefined })).toContain("Choose guests and rooms.");
+    expect(problemsFor({ rooms: "" })).toContain("Choose guests and rooms.");
+  });
+
+  it("allows a one-day grace behind the UTC date for travellers west of UTC", () => {
+    const lateEvening = new Date("2026-11-12T04:00:00Z"); // 20:00 on 11 Nov in UTC-8
+    const at = (checkin: string, checkout: string) => parseSearchParams({ ...valid, in: checkin, out: checkout }, lateEvening);
+    expect(at("2026-11-11", "2026-11-13").ok).toBe(true);
+    const r = at("2026-11-10", "2026-11-13");
+    expect(!r.ok && r.problems).toContain("Check-in is in the past.");
   });
 
   it("uses the first value of a repeated parameter", () => {

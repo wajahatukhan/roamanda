@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Minus, Plus, Users } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -9,7 +10,8 @@ import type { Guests } from "@/lib/etg/schemas";
 import { LIMITS } from "@/lib/search/params";
 import { cn } from "@/lib/utils";
 
-const DEFAULT_CHILD_AGE = 8;
+/** Age of a child the traveller has not chosen yet; never encoded into a URL. */
+export const UNSET_AGE = -1;
 const AGE_ITEMS = Array.from({ length: LIMITS.maxChildAge + 1 }, (_, age) => ({
   value: String(age),
   label: age === 0 ? "Under 1" : `${age} year${age === 1 ? "" : "s"}`,
@@ -42,11 +44,33 @@ function Stepper({ name, room, value, min, max, onChange }: { name: string; room
   );
 }
 
-export function GuestsField({ value, onChange, invalid, describedBy }: { value: Guests; onChange: (g: Guests) => void; invalid?: boolean; describedBy?: string }) {
+export function GuestsField({
+  value,
+  onChange,
+  invalid,
+  describedBy,
+  open,
+  onOpenChange,
+  focusUnsetAge,
+}: {
+  value: Guests;
+  onChange: (g: Guests) => void;
+  invalid?: boolean;
+  describedBy?: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  /** Incremented to ask for focus on the first child age that has not been chosen. */
+  focusUnsetAge: number;
+}) {
+  useEffect(() => {
+    if (focusUnsetAge === 0) return;
+    const t = setTimeout(() => document.querySelector<HTMLElement>("[data-age-unset]")?.focus(), 80);
+    return () => clearTimeout(t);
+  }, [focusUnsetAge]);
   const setRoom = (i: number, patch: Partial<Guests[number]>) => onChange(value.map((r, j) => (j === i ? { ...r, ...patch } : r)));
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={onOpenChange}>
       <PopoverTrigger
         id="guests-trigger"
         aria-labelledby="guests-label guests-value"
@@ -76,7 +100,7 @@ export function GuestsField({ value, onChange, invalid, describedBy }: { value: 
               min={0}
               max={LIMITS.maxChildren}
               onChange={(n) =>
-                setRoom(i, { children: n > room.children.length ? [...room.children, DEFAULT_CHILD_AGE] : room.children.slice(0, n) })
+                setRoom(i, { children: n > room.children.length ? [...room.children, UNSET_AGE] : room.children.slice(0, n) })
               }
             />
             <AnimatePresence initial={false}>
@@ -94,11 +118,11 @@ export function GuestsField({ value, onChange, invalid, describedBy }: { value: 
                   </span>
                   <Select
                     items={AGE_ITEMS}
-                    value={String(age)}
+                    value={age === UNSET_AGE ? null : String(age)}
                     onValueChange={(v) => setRoom(i, { children: room.children.map((a, k) => (k === c ? Number(v) : a)) })}
                   >
-                    <SelectTrigger aria-label={`Room ${i + 1} child ${c + 1} age`} className="h-9 min-w-32">
-                      <SelectValue />
+                    <SelectTrigger data-age-unset={age === UNSET_AGE || undefined} aria-label={`Room ${i + 1} child ${c + 1} age`} className="h-9 min-w-32">
+                      <SelectValue placeholder="Choose age" />
                     </SelectTrigger>
                     <SelectContent>
                       {AGE_ITEMS.map((item) => (
