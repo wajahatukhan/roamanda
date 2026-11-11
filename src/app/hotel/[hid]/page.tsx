@@ -9,8 +9,8 @@ import { ReviewSummary } from "@/components/review-summary";
 import type { AmenityGroup } from "@/lib/content/types";
 import { getHotelContent } from "@/lib/hotel/content";
 import { formatClock, humanize } from "@/lib/hotel/format";
+import { HID } from "@/lib/hotel/hotel-id";
 import { FIXTURE_FAIL_COOKIE, FIXTURE_RATED_COOKIE, fixtureRated, hotelContentFailure } from "@/lib/search/fixture-failure";
-import { HID } from "./layout";
 import { RatesSection } from "./rates";
 
 // Reads the route parameter and the stored content before streaming, so an unknown hotel gets a real 404 status.

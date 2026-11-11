@@ -1,8 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { hotelExists } from "@/lib/content/store";
+import { HID } from "@/lib/hotel/hotel-id";
 import { MISSING_HOTEL_HEADER } from "@/lib/hotel/missing";
-
-const HID = /^[1-9]\d{0,11}$/;
 
 /**
  * Hotel pages stream, and a streamed response starts with status 200, so the page itself cannot answer 404.
