@@ -39,7 +39,7 @@ vi.mock("@supabase/supabase-js", () => ({
                   signals.push(s);
                   return single;
                 },
-                maybeSingle: () => (table === "hotels" ? answer(result(hotelRow(Number(value)))) : Promise.resolve(result({ value: settingValue }))),
+                maybeSingle: () => (table === "hotels" ? answer(result(hotelRow(Number(value)))) : answer(result({ value: settingValue }))),
               };
               return single;
             },
@@ -168,6 +168,30 @@ test.each([["empty", ""], ["blank", "  "], ["over", "1200"], ["101", 101], ["neg
 test.each([[12, 12], ["12.5", 12.5], [0, 0], [100, 100], [" 7 ", 7]])("getMarkupPercent accepts %s", async (v, want) => {
   settingValue = v;
   expect(await getMarkupPercent()).toBe(want);
+});
+
+describe("time limit on settings reads", () => {
+  test("getMarkupPercent throws a clear error and aborts the query when the database does not answer in time", async () => {
+    hang = true;
+    await expect(getMarkupPercent({ timeoutMs: 20 })).rejects.toThrow("Content store: reading setting markup_percent timed out after 20 ms");
+    expect(signals.length).toBeGreaterThan(0);
+    expect(signals.every((s) => s.aborted)).toBe(true);
+  });
+
+  test("getDictionaries throws a clear error and aborts the query when the database does not answer in time", async () => {
+    hang = true;
+    await expect(getDictionaries({ timeoutMs: 20 })).rejects.toThrow("Content store: reading setting dictionaries timed out after 20 ms");
+    expect(signals.length).toBeGreaterThan(0);
+    expect(signals.every((s) => s.aborted)).toBe(true);
+  });
+
+  test("defaults to the same 3-second limit as the other store reads", async () => {
+    settingValue = 15;
+    expect(await getMarkupPercent()).toBe(15);
+    // The read passed a real AbortSignal (the bound), and it was not aborted within the limit.
+    expect(signals.length).toBeGreaterThan(0);
+    expect(signals.every((s) => !s.aborted)).toBe(true);
+  });
 });
 
 describe("getDictionaries", () => {

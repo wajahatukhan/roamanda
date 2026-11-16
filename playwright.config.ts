@@ -11,7 +11,9 @@ export default defineConfig({
   webServer: {
     command: `npm run build && npm run start -- --port ${PORT}`,
     url: `http://localhost:${PORT}`,
-    reuseExistingServer: !process.env.CI,
+    // Always start our own server so TZ=UTC (and fixture mode) is guaranteed; never reuse a server
+    // that may have been started in another zone, which would break the time-zone tests.
+    reuseExistingServer: false,
     timeout: 240_000,
     env: {
       // The server's own zone is UTC, as on a typical host, so the time-zone tests can put the browser far from it.

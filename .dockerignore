@@ -1,0 +1,26 @@
+# Rebuilt inside the image
+node_modules
+.next
+out
+build
+
+# Version control and CI
+.git
+.github
+
+# Local tooling and reports
+coverage
+test-results
+playwright-report
+.lighthouseci
+.superpowers
+*.log
+
+# Secrets never enter the image (.env.example is the only committed one)
+.env
+.env.*
+!.env.example
+
+# Not needed at runtime
+docs
+.DS_Store

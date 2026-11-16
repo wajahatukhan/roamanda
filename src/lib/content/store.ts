@@ -289,10 +289,18 @@ export async function recordMissing(hids: number[]): Promise<void> {
 // Settings
 // ---------------------------------------------------------------------------------------------
 
-async function readSetting(key: string): Promise<unknown> {
-  const { data, error } = await db().from("settings").select("value").eq("key", key).maybeSingle();
-  check(`reading setting ${key}`, error);
-  return (data as { value: unknown } | null)?.value;
+/** A single setting's value, read within the same time limit as the other store reads (a slow database must
+ *  not hang a price). Throws on a database error or when the time runs out; the query is aborted on timeout. */
+async function readSetting(key: string, timeoutMs: number): Promise<unknown> {
+  return bounded(
+    `reading setting ${key}`,
+    async (signal) => {
+      const { data, error } = await db().from("settings").select("value").eq("key", key).abortSignal(signal).maybeSingle();
+      check(`reading setting ${key}`, error);
+      return (data as { value: unknown } | null)?.value;
+    },
+    timeoutMs,
+  );
 }
 
 const MAX_MARKUP_PERCENT = 100;
@@ -308,12 +316,12 @@ function parseMarkup(raw: unknown): number | null {
 
 let markupCache: { value: number; at: number } | undefined;
 
-/** Markup percent applied on top of ETG prices; cached for 60 s. */
-export async function getMarkupPercent(): Promise<number> {
+/** Markup percent applied on top of ETG prices; cached for 60 s. The database read is bounded (3 s default). */
+export async function getMarkupPercent(opts: { timeoutMs?: number } = {}): Promise<number> {
   if (isFixtureMode()) return FIXTURE_MARKUP_PERCENT;
   const now = Date.now();
   if (markupCache && now - markupCache.at < MARKUP_TTL_MS) return markupCache.value;
-  const raw = await readSetting("markup_percent");
+  const raw = await readSetting("markup_percent", opts.timeoutMs ?? CONTENT_READ_TIMEOUT_MS);
   const value = parseMarkup(raw);
   if (value === null) {
     throw new Error("Content store: setting markup_percent must be a number from 0 to 100");
@@ -329,14 +337,15 @@ const DictionariesSchema = z.object({
 
 let dictionariesCache: { value: Dictionaries; at: number } | undefined;
 
-/** English tax and meal names (empty objects until the sync script has run); cached for 10 minutes. */
-export async function getDictionaries(): Promise<Dictionaries> {
+/** English tax and meal names (empty objects until the sync script has run); cached for 10 minutes.
+ *  The database read is bounded (3 s default). */
+export async function getDictionaries(opts: { timeoutMs?: number } = {}): Promise<Dictionaries> {
   if (isFixtureMode()) {
     return DictionariesSchema.parse((await import("../../../tests/fixtures/etg/static.json")).default);
   }
   const now = Date.now();
   if (dictionariesCache && now - dictionariesCache.at < DICTIONARIES_TTL_MS) return dictionariesCache.value;
-  const raw = await readSetting("dictionaries");
+  const raw = await readSetting("dictionaries", opts.timeoutMs ?? CONTENT_READ_TIMEOUT_MS);
   if (raw === undefined || raw === null) {
     dictionariesCache = { value: { taxNames: {}, mealNames: {} }, at: now };
     return dictionariesCache.value;
