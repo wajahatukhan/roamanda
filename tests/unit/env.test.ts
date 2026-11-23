@@ -14,15 +14,24 @@ test("fixture mode does not require ETG credentials", () => {
   expect(e.ETG_MODE).toBe("fixture");
 });
 
-test("fixture mode does not require Supabase credentials (an untouched .env.example runs)", () => {
-  const e = parseEnv({ ETG_BASE_URL: "https://x", ETG_MODE: "fixture" });
+test("fixture mode runs with the empty credentials of an untouched .env.example", () => {
+  // Mirrors `cp .env.example .env.local`: the keys are present but empty strings, not absent.
+  const e = parseEnv({
+    ETG_BASE_URL: "https://x",
+    ETG_MODE: "fixture",
+    ETG_KEY_ID: "",
+    ETG_API_KEY: "",
+    SUPABASE_URL: "",
+    SUPABASE_SERVICE_ROLE_KEY: "",
+  });
   expect(e.ETG_MODE).toBe("fixture");
   expect(e.SUPABASE_URL).toBe("");
   expect(e.SUPABASE_SERVICE_ROLE_KEY).toBe("");
 });
 
-test("live mode requires Supabase credentials, naming both variables", () => {
-  const run = () => parseEnv({ ETG_BASE_URL: "https://x", ETG_MODE: "live", ETG_KEY_ID: "a", ETG_API_KEY: "b" });
+test("live mode rejects empty Supabase credentials, naming both variables", () => {
+  const run = () =>
+    parseEnv({ ETG_BASE_URL: "https://x", ETG_MODE: "live", ETG_KEY_ID: "a", ETG_API_KEY: "b", SUPABASE_URL: "", SUPABASE_SERVICE_ROLE_KEY: "" });
   expect(run).toThrow(/SUPABASE_URL/);
   expect(run).toThrow(/SUPABASE_SERVICE_ROLE_KEY/);
 });

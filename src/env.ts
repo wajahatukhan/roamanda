@@ -3,13 +3,15 @@ import { z } from "zod";
 
 const schema = z.object({
   ETG_BASE_URL: z.string().min(1),
-  ETG_KEY_ID: z.string().min(1).optional(),
-  ETG_API_KEY: z.string().min(1).optional(),
+  // These four may be absent OR empty: an untouched .env.local (copied from .env.example) sets them to "".
+  // They are required only in live mode, checked below against the raw values where "" counts as missing;
+  // fixture mode ignores them. So the schema must accept an empty string, not merely an absent key — hence
+  // no .min(1) here (that is what the live-mode check enforces instead).
+  ETG_KEY_ID: z.string().optional(),
+  ETG_API_KEY: z.string().optional(),
   ETG_MODE: z.enum(["live", "fixture"]),
-  // Required only in live mode (checked below), so an untouched fixture-mode .env.local runs
-  // with no database. The content store never calls Supabase in fixture mode (see store.ts).
-  SUPABASE_URL: z.string().min(1).optional(),
-  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
+  SUPABASE_URL: z.string().optional(),
+  SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
 });
 
 export type Env = {
