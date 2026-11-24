@@ -1,0 +1,41 @@
+# Local development stack.
+#
+# The `app` service runs the production image in FIXTURE mode: it replays the
+# recorded RateHawk responses and needs no RateHawk or Supabase credentials.
+# The image runs with NODE_ENV=production, so ALLOW_FIXTURE_MODE=1 is required
+# to permit fixture mode (see src/env.ts) — this is a dev/test stand-up only.
+#
+# `redis` and `postgres` are scaffolding for the later migration phases
+# (see docs/architecture/). They are not needed to browse in fixture mode.
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      ETG_MODE: fixture
+      ALLOW_FIXTURE_MODE: "1"
+      ETG_BASE_URL: https://api-sandbox.ratehawk.com
+      # Only used in live mode; blank is fine for fixture mode.
+      SUPABASE_URL: ""
+      SUPABASE_SERVICE_ROLE_KEY: ""
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: travel_portal
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

@@ -3,11 +3,15 @@ import { z } from "zod";
 
 const schema = z.object({
   ETG_BASE_URL: z.string().min(1),
-  ETG_KEY_ID: z.string().min(1).optional(),
-  ETG_API_KEY: z.string().min(1).optional(),
+  // These four may be absent OR empty: an untouched .env.local (copied from .env.example) sets them to "".
+  // They are required only in live mode, checked below against the raw values where "" counts as missing;
+  // fixture mode ignores them. So the schema must accept an empty string, not merely an absent key — hence
+  // no .min(1) here (that is what the live-mode check enforces instead).
+  ETG_KEY_ID: z.string().optional(),
+  ETG_API_KEY: z.string().optional(),
   ETG_MODE: z.enum(["live", "fixture"]),
-  SUPABASE_URL: z.string().min(1),
-  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
+  SUPABASE_URL: z.string().optional(),
+  SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
 });
 
 export type Env = {
@@ -23,8 +27,9 @@ export function parseEnv(raw: Record<string, string | undefined>): Env {
   const result = schema.safeParse(raw);
   const problems = result.success ? [] : result.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`);
   // Checked separately from the schema so a live-mode credential gap is reported alongside any other problem.
+  // Supabase is only reached in live mode, so its variables are required only then; fixture mode needs neither.
   if (raw.ETG_MODE === "live") {
-    for (const key of ["ETG_KEY_ID", "ETG_API_KEY"] as const) {
+    for (const key of ["ETG_KEY_ID", "ETG_API_KEY", "SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"] as const) {
       if (!raw[key]) problems.push(`${key}: required when ETG_MODE is "live"`);
     }
   }
@@ -35,8 +40,14 @@ export function parseEnv(raw: Record<string, string | undefined>): Env {
   if (!result.success || problems.length > 0) {
     throw new Error(`Invalid environment: ${problems.join("; ")}`);
   }
-  // In fixture mode ETG credentials are not required and default to empty strings.
-  return { ...result.data, ETG_KEY_ID: result.data.ETG_KEY_ID ?? "", ETG_API_KEY: result.data.ETG_API_KEY ?? "" };
+  // In fixture mode ETG and Supabase values are not required and default to empty strings.
+  return {
+    ...result.data,
+    ETG_KEY_ID: result.data.ETG_KEY_ID ?? "",
+    ETG_API_KEY: result.data.ETG_API_KEY ?? "",
+    SUPABASE_URL: result.data.SUPABASE_URL ?? "",
+    SUPABASE_SERVICE_ROLE_KEY: result.data.SUPABASE_SERVICE_ROLE_KEY ?? "",
+  };
 }
 
 let cached: Env | undefined;
