@@ -11,8 +11,10 @@
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
   /* Roamanda brand palette (supplements the neutral shadcn tokens for the new UI). */
-  --color-roam-blue: var(--roam-blue);
-  --color-roam-blue-dark: var(--roam-blue-dark);
+  --color-roam-accent: var(--roam-accent);
+  --color-roam-accent-dark: var(--roam-accent-dark);
+  --color-roam-accent-bright: var(--roam-accent-bright);
+  --color-roam-accent-light: var(--roam-accent-light);
   --color-roam-ink: var(--roam-ink);
   --color-roam-muted: var(--roam-muted);
   --color-roam-surface: var(--roam-surface);
@@ -62,7 +64,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #1976d2;
+  --primary: #c2410c;
   --primary-foreground: #ffffff;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -80,9 +82,13 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  /* Roamanda brand palette */
-  --roam-blue: #1976d2;
-  --roam-blue-dark: #1565c0;
+  /* Roamanda brand palette. --roam-accent (#c2410c) is the accessible orange used wherever text sits
+     on it or it is used as text (WCAG AA with white/on-white). --roam-accent-bright is the vivid brand
+     orange for large decorative fills (hero gradient, category tiles) that carry no small text. */
+  --roam-accent: #c2410c;
+  --roam-accent-dark: #9a3412;
+  --roam-accent-bright: #ff6b35;
+  --roam-accent-light: #ff8e72;
   --roam-ink: #1a1d2e;
   --roam-muted: #6b6f7e;
   --roam-surface: #f9fafb;

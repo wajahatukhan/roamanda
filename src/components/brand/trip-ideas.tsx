@@ -17,7 +17,7 @@ export function TripIdeas() {
               <img src={t.image} alt="" className="absolute inset-0 size-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/25 to-black/75" />
               <div className="absolute inset-0 flex flex-col items-start justify-end gap-1 p-[22px]">
-                <span className="rounded-full bg-roam-blue px-2 py-[3px] text-[10px] font-bold tracking-[0.8px] text-white">{t.label}</span>
+                <span className="rounded-full bg-roam-accent px-2 py-[3px] text-[10px] font-bold tracking-[0.8px] text-white">{t.label}</span>
                 <h3 className="text-[22px] font-bold text-white">{t.title}</h3>
                 <p className="text-[13px] text-white">{t.places}</p>
               </div>

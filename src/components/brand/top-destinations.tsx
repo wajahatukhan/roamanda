@@ -15,7 +15,7 @@ export function TopDestinations() {
       <div className="mx-auto w-full max-w-[1440px] flex flex-col gap-6">
         <div className="flex flex-wrap items-end gap-4">
           <div className="flex flex-col gap-1.5">
-            <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[#e8eef9] py-[5px] pr-3 pl-2.5 text-[11px] font-bold tracking-[0.5px] text-[#0d47a1]">
+            <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[#fff1ea] py-[5px] pr-3 pl-2.5 text-[11px] font-bold tracking-[0.5px] text-[#c2410c]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/brand/trophy.svg" alt="" width={12} height={12} className="size-3" />
               TRAVELERS&rsquo; CHOICE 2026
@@ -40,7 +40,7 @@ export function TopDestinations() {
               </div>
               <div className="flex flex-col gap-2 px-4 pt-4 pb-[18px]">
                 <div className="flex items-center">
-                  <span className="rounded-full bg-roam-blue px-2.5 py-[3px] text-[11px] font-bold text-white">#{d.rank}</span>
+                  <span className="rounded-full bg-roam-accent px-2.5 py-[3px] text-[11px] font-bold text-white">#{d.rank}</span>
                   <span className="ml-auto text-[11px] font-semibold text-roam-muted">{d.category}</span>
                 </div>
                 <h3 className="text-[17px] font-bold text-roam-ink">{d.name}</h3>

@@ -7,7 +7,7 @@ export function Newsletter() {
           <h2 id="newsletter-heading" className="text-2xl font-bold text-roam-ink">Get trip ideas in your inbox</h2>
           <p className="text-sm text-roam-muted">Monthly picks from Roamanda editors — no spam, unsubscribe anytime.</p>
         </div>
-        <form className="flex h-14 w-full items-center gap-3 rounded-full border border-roam-border bg-roam-surface py-1.5 pr-1.5 pl-5 focus-within:ring-2 focus-within:ring-roam-blue md:ml-auto md:w-[440px]">
+        <form className="flex h-14 w-full items-center gap-3 rounded-full border border-roam-border bg-roam-surface py-1.5 pr-1.5 pl-5 focus-within:ring-2 focus-within:ring-roam-accent md:ml-auto md:w-[440px]">
           <label htmlFor="newsletter-email" className="sr-only">
             Email address
           </label>
@@ -19,7 +19,7 @@ export function Newsletter() {
           />
           <button
             type="submit"
-            className="shrink-0 rounded-full bg-roam-blue px-[22px] py-3 text-[13px] font-bold text-white transition-colors hover:bg-roam-blue-dark"
+            className="shrink-0 rounded-full bg-roam-accent px-[22px] py-3 text-[13px] font-bold text-white transition-colors hover:bg-roam-accent-dark"
           >
             Subscribe
           </button>

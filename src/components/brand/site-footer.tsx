@@ -17,7 +17,7 @@ export function SiteFooter() {
             <nav key={col.title} aria-label={col.title} className="flex flex-col gap-3.5">
               <h2 className="text-sm font-semibold text-roam-ink">{col.title}</h2>
               {col.links.map((l) => (
-                <Link key={l} href="/" className="text-[13px] text-roam-muted transition-colors hover:text-roam-blue">
+                <Link key={l} href="/" className="text-[13px] text-roam-muted transition-colors hover:text-roam-accent">
                   {l}
                 </Link>
               ))}
@@ -28,9 +28,9 @@ export function SiteFooter() {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <p className="text-[13px] text-roam-muted">© 2026 Roamanda, Inc.</p>
           <div className="flex items-center gap-7 sm:ml-auto">
-            <Link href="/" className="text-[13px] text-roam-muted transition-colors hover:text-roam-blue">Privacy</Link>
-            <Link href="/" className="text-[13px] text-roam-muted transition-colors hover:text-roam-blue">Terms</Link>
-            <Link href="/" className="text-[13px] text-roam-muted transition-colors hover:text-roam-blue">Sitemap</Link>
+            <Link href="/" className="text-[13px] text-roam-muted transition-colors hover:text-roam-accent">Privacy</Link>
+            <Link href="/" className="text-[13px] text-roam-muted transition-colors hover:text-roam-accent">Terms</Link>
+            <Link href="/" className="text-[13px] text-roam-muted transition-colors hover:text-roam-accent">Sitemap</Link>
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@ export function SiteHeader() {
         <Link
           href="/"
           aria-label="Roamanda home"
-          className="shrink-0 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-roam-blue focus-visible:ring-offset-2"
+          className="shrink-0 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-roam-accent focus-visible:ring-offset-2"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/logo.svg" alt="Roamanda" width={153} height={29} className="h-[29px] w-auto" />
@@ -30,19 +30,19 @@ export function SiteHeader() {
 
         <Link
           href="/#search"
-          className="hidden min-w-0 flex-1 items-center gap-2.5 rounded-full bg-roam-surface py-1.5 pr-1.5 pl-[18px] text-roam-muted transition-colors hover:bg-[#f1f3f5] focus-visible:ring-2 focus-visible:ring-roam-blue focus-visible:outline-none md:flex"
+          className="hidden min-w-0 flex-1 items-center gap-2.5 rounded-full bg-roam-surface py-1.5 pr-1.5 pl-[18px] text-roam-muted transition-colors hover:bg-[#f1f3f5] focus-visible:ring-2 focus-visible:ring-roam-accent focus-visible:outline-none md:flex"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/search.svg" alt="" width={18} height={18} className="size-[18px] shrink-0" />
           <span className="truncate text-sm">Hotels, places, experiences</span>
-          <span className="ml-auto shrink-0 rounded-full bg-roam-blue px-[22px] py-2.5 text-[13px] font-bold text-white">Search</span>
+          <span className="ml-auto shrink-0 rounded-full bg-roam-accent px-[22px] py-2.5 text-[13px] font-bold text-white">Search</span>
         </Link>
 
         <nav aria-label="Account" className="ml-auto flex shrink-0 items-center gap-5 md:ml-0">
-          <Link href="/#trips" className="hidden text-[13px] font-semibold text-roam-ink hover:text-roam-blue sm:block">
+          <Link href="/#trips" className="hidden text-[13px] font-semibold text-roam-ink hover:text-roam-accent sm:block">
             Trips
           </Link>
-          <Link href="/#reviews" className="hidden text-[13px] font-semibold text-roam-ink hover:text-roam-blue sm:block">
+          <Link href="/#reviews" className="hidden text-[13px] font-semibold text-roam-ink hover:text-roam-accent sm:block">
             Reviews
           </Link>
           <Link
@@ -67,8 +67,8 @@ export function SiteHeader() {
               className={[
                 "flex shrink-0 items-center gap-2 border-b-[3px] px-[18px] py-3.5 text-[13px] whitespace-nowrap transition-colors",
                 c.active
-                  ? "border-roam-blue font-bold text-roam-blue"
-                  : "border-transparent font-medium text-roam-ink hover:text-roam-blue",
+                  ? "border-roam-accent font-bold text-roam-accent"
+                  : "border-transparent font-medium text-roam-ink hover:text-roam-accent",
               ].join(" ")}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -3,11 +3,12 @@ import { Suspense } from "react";
 import { SearchForm } from "@/components/search-form/search-form";
 import { SiteHeader } from "@/components/brand/site-header";
 import { Hero } from "@/components/brand/hero";
+import { Categories } from "@/components/brand/categories";
 import { TopDestinations } from "@/components/brand/top-destinations";
 import { TripIdeas } from "@/components/brand/trip-ideas";
 import { StaysInLisbon } from "@/components/brand/stays-in-lisbon";
 import { ThingsToDo } from "@/components/brand/things-to-do";
-import { Testimonials } from "@/components/brand/testimonials";
+import { VideoStories } from "@/components/brand/video-stories";
 import { Newsletter } from "@/components/brand/newsletter";
 import { SiteFooter } from "@/components/brand/site-footer";
 import { initialFormValues } from "@/lib/search/initial";
@@ -26,11 +27,12 @@ export default function Home(props: PageProps<"/">) {
             <PrefilledSearchForm searchParams={props.searchParams} />
           </Suspense>
         </Hero>
+        <Categories />
         <TopDestinations />
         <TripIdeas />
         <StaysInLisbon />
         <ThingsToDo />
-        <Testimonials />
+        <VideoStories />
         <Newsletter />
       </main>
       <SiteFooter />

@@ -32,7 +32,7 @@ export function StaysInLisbon() {
               </div>
               <div className="flex flex-1 flex-col gap-1.5 p-3.5">
                 {s.travelersChoice && (
-                  <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#0d47a1] bg-[#e8eef9] py-1.5 pr-3 pl-2.5 text-[11px] font-bold tracking-[0.3px] text-[#0d47a1]">
+                  <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#c2410c] bg-[#fff1ea] py-1.5 pr-3 pl-2.5 text-[11px] font-bold tracking-[0.3px] text-[#c2410c]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src="/brand/award.svg" alt="" width={14} height={14} className="size-3.5" />
                     Travelers&rsquo; Choice
@@ -48,7 +48,7 @@ export function StaysInLisbon() {
                   </div>
                   <Link
                     href="/"
-                    className="ml-auto rounded-full bg-roam-blue px-3.5 py-[9px] text-xs font-bold text-white transition-colors hover:bg-roam-blue-dark"
+                    className="ml-auto rounded-full bg-roam-accent px-3.5 py-[9px] text-xs font-bold text-white transition-colors hover:bg-roam-accent-dark"
                   >
                     View deal
                   </Link>

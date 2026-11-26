@@ -1,7 +1,7 @@
 <svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="icon-trophy">
-<path id="Vector" d="M3.5 2H8.5V4.5C8.5 5.16304 8.23661 5.79893 7.76777 6.26777C7.29893 6.73661 6.66304 7 6 7C5.33696 7 4.70107 6.73661 4.23223 6.26777C3.76339 5.79893 3.5 5.16304 3.5 4.5V2Z" stroke-width="1.8" stroke="#0D47A1"/>
-<path id="Vector_2" d="M3.5 3H2V4C2 4.39782 2.15804 4.77936 2.43934 5.06066C2.72064 5.34196 3.10218 5.5 3.5 5.5M8.5 3H10V4C10 4.39782 9.84196 4.77936 9.56066 5.06066C9.27936 5.34196 8.89782 5.5 8.5 5.5" stroke-width="1.8" stroke="#0D47A1"/>
-<path id="Vector_3" d="M5 7H7L6.5 9H7.5V10H4.5V9H5.5L5 7Z" stroke-width="1.8" stroke-linejoin="round" stroke="#0D47A1"/>
+<path id="Vector" d="M3.5 2H8.5V4.5C8.5 5.16304 8.23661 5.79893 7.76777 6.26777C7.29893 6.73661 6.66304 7 6 7C5.33696 7 4.70107 6.73661 4.23223 6.26777C3.76339 5.79893 3.5 5.16304 3.5 4.5V2Z" stroke-width="1.8" stroke="#c2410c"/>
+<path id="Vector_2" d="M3.5 3H2V4C2 4.39782 2.15804 4.77936 2.43934 5.06066C2.72064 5.34196 3.10218 5.5 3.5 5.5M8.5 3H10V4C10 4.39782 9.84196 4.77936 9.56066 5.06066C9.27936 5.34196 8.89782 5.5 8.5 5.5" stroke-width="1.8" stroke="#c2410c"/>
+<path id="Vector_3" d="M5 7H7L6.5 9H7.5V10H4.5V9H5.5L5 7Z" stroke-width="1.8" stroke-linejoin="round" stroke="#c2410c"/>
 </g>
 </svg>
