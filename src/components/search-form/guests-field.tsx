@@ -2,13 +2,12 @@
 
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Minus, Plus, Users } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Minus, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { Guests } from "@/lib/etg/schemas";
 import { LIMITS } from "@/lib/search/params";
-import { cn } from "@/lib/utils";
 
 /** Age of a child the traveller has not chosen yet; never encoded into a URL. */
 export const UNSET_AGE = -1;
@@ -76,9 +75,8 @@ export function GuestsField({
         aria-labelledby="guests-label guests-value"
         aria-invalid={invalid || undefined}
         aria-describedby={describedBy}
-        className={cn(buttonVariants({ variant: "outline" }), "h-12 w-full justify-start gap-3 px-3.5 text-base font-normal")}
+        className="flex h-6 w-full items-center justify-start rounded-md text-[15px] font-semibold text-roam-ink outline-none focus-visible:ring-2 focus-visible:ring-roam-accent focus-visible:ring-offset-2 aria-invalid:text-destructive"
       >
-        <Users aria-hidden className="size-4 text-muted-foreground" />
         <span id="guests-value" className="truncate">{guestsSummary(value)}</span>
       </PopoverTrigger>
       <PopoverContent align="start" aria-label="Guests and rooms" className="max-h-[min(34rem,var(--available-height))] w-[min(22rem,calc(100vw-2rem))] gap-5 overflow-y-auto p-4">
