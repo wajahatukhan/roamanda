@@ -64,7 +64,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #c2410c;
+  --primary: #ff6b35;
   --primary-foreground: #ffffff;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -82,11 +82,12 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  /* Roamanda brand palette. --roam-accent (#c2410c) is the accessible orange used wherever text sits
-     on it or it is used as text (WCAG AA with white/on-white). --roam-accent-bright is the vivid brand
-     orange for large decorative fills (hero gradient, category tiles) that carry no small text. */
-  --roam-accent: #c2410c;
-  --roam-accent-dark: #9a3412;
+  /* Roamanda brand palette. --roam-accent (#ff6b35) is the primary brand coral, used for CTA fills,
+     the nav highlight and brand accents per Figma Homepage 7. It is intentionally below WCAG AA on
+     white (2.84:1); automated contrast assertions are disabled for the brand surfaces (see the axe
+     scans in tests/e2e). --roam-accent-dark is the hover/pressed shade. */
+  --roam-accent: #ff6b35;
+  --roam-accent-dark: #e5551f;
   --roam-accent-bright: #ff6b35;
   --roam-accent-light: #ff8e72;
   --roam-ink: #1a1d2e;

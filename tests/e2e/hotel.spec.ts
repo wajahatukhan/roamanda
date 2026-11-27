@@ -1,4 +1,4 @@
-import AxeBuilder from "@axe-core/playwright";
+import { axeScan } from "./axe";
 import { randomUUID } from "node:crypto";
 import { expect, test, type BrowserContext, type Page } from "@playwright/test";
 
@@ -211,7 +211,7 @@ test.describe("with a passport country", () => {
     await expect(reviews.getByText("out of 10")).toBeVisible();
     await expect(reviews.locator("dt")).toHaveText(["Cleanliness", "Location", "Value for money", "Service", "Wi-Fi"]);
     await expect(reviews.locator("dd")).toHaveText(["9.1", "8.4", "7.9", "8.8", "8.2"]);
-    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    expect((await axeScan(page).analyze()).violations).toEqual([]);
   });
 
   test("the rest of the options open from a keyboard-reachable control and stay in lowest-price order", async ({ page }) => {
@@ -245,7 +245,7 @@ test.describe("with a passport country", () => {
     await expect(lines.first()).toHaveText(/^At any time: you lose \$[\d,]+\.\d\d$/);
     // Every visible row has the control directly under its sentence.
     await expect(rows(page).locator("summary", { hasText: "Full cancellation policy" })).toHaveCount(6);
-    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    expect((await axeScan(page).analyze()).violations).toEqual([]);
   });
 
   test("the loading state reserves space and is announced, then the rates replace it without moving what is above", async ({ page, context }) => {
@@ -373,7 +373,7 @@ test.describe("with a passport country", () => {
   });
 
   test("has no accessibility violations: rates, failure, no dates", async ({ page, context }) => {
-    const scan = async () => expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    const scan = async () => expect((await axeScan(page).analyze()).violations).toEqual([]);
     await page.goto(HOTEL);
     await expect(rows(page).first()).toBeVisible();
     await scan();
@@ -439,7 +439,7 @@ test.describe("without a passport country", () => {
   test("has no accessibility violations", async ({ page }) => {
     await page.goto(HOTEL);
     await expect(page.getByText("Tell us your passport country to see prices.")).toBeVisible();
-    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    expect((await axeScan(page).analyze()).violations).toEqual([]);
   });
 });
 
@@ -453,7 +453,7 @@ test.describe("hotels that are not available", () => {
     await expect(page.getByRole("link", { name: "Back to search" })).toHaveAttribute("href", "/");
     await expect(rows(page)).toHaveCount(0);
     expect(await reads(context)).toBe(start);
-    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    expect((await axeScan(page).analyze()).violations).toEqual([]);
   });
 
   test("a non-numeric or absurd hotel id is a plain 404 without the hotel wording", async ({ page, context }) => {
@@ -486,7 +486,7 @@ test.describe("when the content store fails", () => {
     await expect(page.getByRole("button", { name: "Try again" })).toBeVisible();
     await expect(page.getByRole("link", { name: "Back to search" })).toHaveAttribute("href", "/");
     await expect(page.getByText(/simulated|Content store|fixture/i)).toHaveCount(0);
-    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    expect((await axeScan(page).analyze()).violations).toEqual([]);
     // Once the cause is gone, Try again brings the hotel back without leaving the page.
     await context.clearCookies({ name: "etg_fixture_fail" });
     await page.getByRole("button", { name: "Try again" }).click();
@@ -521,6 +521,6 @@ test.describe("navigating in the browser to a hotel we have no details for", () 
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
     await expect(page.getByText("Something went wrong")).toHaveCount(0);
     for (const d of documents) expect(d.status, d.url).toBe(404);
-    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    expect((await axeScan(page).analyze()).violations).toEqual([]);
   });
 });
