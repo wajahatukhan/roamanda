@@ -12,13 +12,17 @@ const CATEGORIES: Category[] = [
   { label: "Rental Cars", icon: "/brand/cat-car.svg", href: "/" },
 ];
 
-const container = "mx-auto w-full max-w-[1440px] px-4 sm:px-8 lg:px-20";
+// The gutter lives on a full-width wrapper and the max-width on the inner row, exactly like the Hero and the
+// page sections — so the header, banner and every section share one left/right edge at any viewport width.
+const gutter = "w-full px-4 sm:px-8 lg:px-20";
+const row = "mx-auto w-full max-w-[1440px]";
 
 /** Global Roamanda header: brand, a search affordance that jumps to the hero search, account links, and category tabs. */
 export function SiteHeader() {
   return (
     <header className="w-full border-b border-roam-border bg-white">
-      <div className={`${container} flex items-center gap-4 pt-[18px] pb-3.5 sm:gap-8`}>
+      <div className={gutter}>
+      <div className={`${row} flex items-center gap-4 pt-[18px] pb-3.5 sm:gap-8`}>
         <Link
           href="/"
           aria-label="Roamanda home"
@@ -53,8 +57,10 @@ export function SiteHeader() {
           </Link>
         </nav>
       </div>
+      </div>
 
-      <div className={container}>
+      <div className={gutter}>
+      <div className={row}>
         <nav
           aria-label="Browse categories"
           className="-mx-4 flex gap-0.5 overflow-x-auto px-4 pb-3.5 [scrollbar-width:none] sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden"
@@ -80,6 +86,7 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
+      </div>
       </div>
     </header>
   );

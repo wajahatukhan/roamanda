@@ -12,7 +12,7 @@ export function Hero({ children }: { children: ReactNode }) {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="w-full px-4 py-8 sm:px-8 lg:px-20"
+      className="w-full px-4 py-12 sm:px-8 lg:px-20 lg:py-[72px]"
       style={{ backgroundImage: "linear-gradient(136.7deg, #ff8e72 0%, #ff6b35 76.923%)" }}
     >
       <div className="mx-auto flex w-full max-w-[1440px] flex-col justify-center gap-5">
