@@ -67,7 +67,10 @@ export function SiteHeader() {
               className={[
                 "flex shrink-0 items-center gap-2 border-b-[3px] px-[18px] py-3.5 text-[13px] whitespace-nowrap transition-colors",
                 c.active
-                  ? "border-[#ff6b35] font-bold text-roam-accent"
+                  ? // Brand coral per Figma Homepage 7. #ff6b35 on white is below WCAG AA (2.84:1);
+                    // this is a deliberate design choice and is exempted from the contrast scan in
+                    // tests/e2e/search-form.spec.ts via its aria-current="page".
+                    "border-[#ff6b35] font-bold text-[#ff6b35]"
                   : "border-transparent font-medium text-roam-ink hover:text-roam-accent",
               ].join(" ")}
             >
