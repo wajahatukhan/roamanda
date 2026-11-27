@@ -1,4 +1,4 @@
-import AxeBuilder from "@axe-core/playwright";
+import { axeScan } from "./axe";
 import { expect, test, type BrowserContext } from "@playwright/test";
 
 const BASE = "http://localhost:3100";
@@ -128,7 +128,7 @@ test.describe("with a passport country", () => {
     await expect(page.getByRole("heading", { name: "We're still adding details for hotels in this destination." })).toBeVisible();
     await expect(page.getByText("No hotels are available for these dates.")).toHaveCount(0);
     await expect(page.getByRole("article")).toHaveCount(0);
-    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    expect((await axeScan(page).analyze()).violations).toEqual([]);
   });
 
   test("the count says Showing when the supplier has more hotels than it returned", async ({ page }) => {
@@ -153,7 +153,7 @@ test.describe("with a passport country", () => {
   });
 
   test("has no accessibility violations: results, failure and invalid URL", async ({ page, context }) => {
-    const scan = async () => expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    const scan = async () => expect((await axeScan(page).analyze()).violations).toEqual([]);
     await page.goto(SEARCH);
     await expect(page.getByRole("article").first()).toBeVisible();
     await scan();

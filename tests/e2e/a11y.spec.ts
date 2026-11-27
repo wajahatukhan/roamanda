@@ -118,7 +118,7 @@ test("the hotel page's Show all control is in the tab order and opens from the k
 
 test("every page has a descriptive document title", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveTitle("Search hotels");
+  await expect(page).toHaveTitle("Roamanda — Find your stay");
   await page.goto(`/search?region=2011&name=Paris&${STAY}`);
   await expect(page).toHaveTitle("Hotels in Paris");
   await page.goto(`/hotel/10004834?${STAY}`);

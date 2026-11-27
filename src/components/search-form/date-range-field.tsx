@@ -2,11 +2,13 @@
 
 import { format } from "date-fns";
 import dynamic from "next/dynamic";
-import { CalendarDays } from "lucide-react";
 import type { DateRange } from "react-day-picker";
-import { buttonVariants } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+
+// Borderless segment trigger shared by the search-pill fields: no box, brand focus ring for visibility.
+const SEGMENT_TRIGGER =
+  "flex h-6 w-full items-center justify-start rounded-md text-[15px] font-semibold text-roam-ink outline-none focus-visible:ring-2 focus-visible:ring-roam-accent focus-visible:ring-offset-2 aria-invalid:text-destructive";
 
 // The calendar loads when the popover first opens. The placeholder holds its height so the popover does not jump.
 const DatePicker = dynamic(() => import("./date-picker").then((m) => m.DatePicker), {
@@ -42,10 +44,9 @@ export function DateRangeField({
         aria-labelledby="dates-label dates-value"
         aria-invalid={invalid || undefined}
         aria-describedby={describedBy}
-        className={cn(buttonVariants({ variant: "outline" }), "h-12 w-full justify-start gap-3 px-3.5 text-base font-normal")}
+        className={SEGMENT_TRIGGER}
       >
-        <CalendarDays aria-hidden className="size-4 text-muted-foreground" />
-        <span id="dates-value" className={cn("truncate", !text && "text-muted-foreground")}>
+        <span id="dates-value" className={cn("truncate", !text && "font-normal text-roam-muted")}>
           {text ?? "Add dates"}
         </span>
       </PopoverTrigger>

@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon-ship">
+<path id="Vector" d="M2.66667 9.33333L4 5.33333H12L13.3333 9.33333" stroke-width="1.8" stroke-linejoin="round" stroke="#1A1D2E"/>
+<path id="Vector_2" d="M2 10.6667C3.33333 12 6 12 8 10.6667C10 9.33333 12.6667 12 14 10.6667" stroke-width="1.8" stroke-linecap="round" stroke="#1A1D2E"/>
+<path id="Vector_3" d="M2 13.3333C3.33333 14.6667 6 14.6667 8 13.3333C10 12 12.6667 14.6667 14 13.3333" stroke-width="1.8" stroke-linecap="round" stroke="#1A1D2E"/>
+<path id="Vector_4" d="M8 5.33333V2H10.6667V5.33333" stroke-width="1.8" stroke="#1A1D2E"/>
+</g>
+</svg>

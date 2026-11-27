@@ -184,7 +184,6 @@ export function DestinationCombobox({
 
   return (
     <div className="relative">
-      <MapPin aria-hidden className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted-foreground" />
       <input
         ref={inputRef}
         id={inputId}
@@ -211,7 +210,7 @@ export function DestinationCombobox({
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}
         onKeyDown={onKeyDown}
-        className="h-12 w-full rounded-lg border border-input bg-background pr-3 pl-10 text-base outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20"
+        className="h-6 w-full rounded-md border-0 bg-transparent p-0 text-[15px] font-semibold text-roam-ink outline-none placeholder:font-normal placeholder:text-roam-muted focus-visible:ring-2 focus-visible:ring-roam-accent focus-visible:ring-offset-2 aria-invalid:text-destructive"
       />
       <AnimatePresence>
         {(listVisible || message) && (

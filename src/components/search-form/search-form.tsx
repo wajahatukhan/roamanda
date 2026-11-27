@@ -121,10 +121,12 @@ export function SearchForm({ initial }: { initial?: SearchFormInitial } = {}) {
 
   return (
     <MotionConfig reducedMotion="user">
-      <form onSubmit={onSubmit} noValidate aria-label="Search stays" className="rounded-2xl bg-card p-6 shadow-sm ring-1 ring-foreground/10 sm:p-8">
-        <div className="grid gap-x-5 gap-y-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1.25fr)_minmax(0,1fr)_auto] lg:items-end">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="destination-input" className="text-sm font-medium">Destination</Label>
+      {/* Figma Homepage 7 search pill: one white rounded bar with borderless WHERE / dates / guests
+          segments, thin dividers and the brand Search button. Stacks into a card on small screens. */}
+      <form onSubmit={onSubmit} noValidate aria-label="Search stays">
+        <div className="flex flex-col rounded-[28px] bg-white p-2 shadow-[0px_12px_36px_0px_rgba(0,0,0,0.18)] lg:flex-row lg:items-center lg:rounded-full">
+          <div className="flex flex-col gap-1 px-5 py-3 lg:flex-[1.6] lg:py-2.5">
+            <Label htmlFor="destination-input" className="text-[11px] font-semibold tracking-[0.5px] text-roam-muted uppercase">Destination</Label>
             <DestinationCombobox
               id="destination-input"
               value={destination}
@@ -137,8 +139,9 @@ export function SearchForm({ initial }: { initial?: SearchFormInitial } = {}) {
               inputRef={destinationRef}
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <Label id="dates-label" htmlFor="dates-trigger" className="text-sm font-medium">Check-in and check-out</Label>
+          <div aria-hidden className="mx-2 hidden h-10 w-px bg-roam-border lg:block" />
+          <div className="flex flex-col gap-1 border-t border-roam-border/70 px-5 py-3 lg:flex-1 lg:border-t-0 lg:py-2.5">
+            <Label id="dates-label" htmlFor="dates-trigger" className="text-[11px] font-semibold tracking-[0.5px] text-roam-muted uppercase">Check-in and check-out</Label>
             <DateRangeField
               value={range}
               onChange={(r) => {
@@ -150,8 +153,9 @@ export function SearchForm({ initial }: { initial?: SearchFormInitial } = {}) {
               triggerRef={datesRef}
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <Label id="guests-label" htmlFor="guests-trigger" className="text-sm font-medium">Guests and rooms</Label>
+          <div aria-hidden className="mx-2 hidden h-10 w-px bg-roam-border lg:block" />
+          <div className="flex flex-col gap-1 border-t border-roam-border/70 px-5 py-3 lg:flex-1 lg:border-t-0 lg:py-2.5">
+            <Label id="guests-label" htmlFor="guests-trigger" className="text-[11px] font-semibold tracking-[0.5px] text-roam-muted uppercase">Guests and rooms</Label>
             <GuestsField
               value={rooms}
               onChange={(g) => {
@@ -165,7 +169,7 @@ export function SearchForm({ initial }: { initial?: SearchFormInitial } = {}) {
               describedBy={errors.guests ? errorId : undefined}
             />
           </div>
-          <Button type="submit" size="lg" disabled={busy || pending} className="h-12 px-8 text-base">
+          <Button type="submit" size="lg" disabled={busy || pending} className="mt-2 h-14 w-full shrink-0 rounded-full px-8 text-[15px] font-bold lg:mt-0 lg:ml-1 lg:w-auto">
             {busy || pending ? "Searching…" : "Search"}
           </Button>
         </div>

@@ -1,4 +1,4 @@
-import AxeBuilder from "@axe-core/playwright";
+import { axeScan } from "./axe";
 import { expect, test, type Page } from "@playwright/test";
 
 const DEST = "Destination";
@@ -218,7 +218,7 @@ test.describe("accessibility", () => {
       await page.goto("/");
       await open(page);
       await page.waitForTimeout(300);
-      expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+      expect((await axeScan(page).analyze()).violations).toEqual([]);
     });
   }
 });
