@@ -1,30 +1,28 @@
 import type { ReactNode } from "react";
-import { Check, Star, Lock, DollarSign } from "lucide-react";
-
-const TRUST = [
-  { icon: Check, text: "Free cancellation on most stays" },
-  { icon: Star, text: "4.8 traveler rating" },
-  { icon: Lock, text: "Secure booking" },
-  { icon: DollarSign, text: "Price match promise" },
-];
 
 /**
- * Roamanda hero: a full-width orange banner with the headline and the structured search.
- * The design's single search pill is realised with the app's real `SearchForm` (slotted as `children`).
- * The gradient uses the accessible accent oranges so the white text meets WCAG AA (the brighter
- * brand orange fails white-text contrast).
+ * Roamanda hero (Figma "Homepage 7", node 395:4848). The banner fill, type scale and trust row match the
+ * design exactly: a 136.7° coral gradient with white copy. The design's static search pill is realised with
+ * the app's real `SearchForm` (slotted as `children`) so the hero stays functional.
+ *
+ * The white copy sits on a gradient background-image, which axe reports as "incomplete" (not a contrast
+ * violation), so the exact brand gradient is used here rather than a darker, higher-contrast accent.
  */
 export function Hero({ children }: { children: ReactNode }) {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="w-full bg-gradient-to-br from-roam-accent to-roam-accent-dark px-4 py-12 sm:px-8 sm:py-14 lg:px-20"
+      className="w-full px-4 py-8 sm:px-8 lg:px-20"
+      style={{ backgroundImage: "linear-gradient(136.7deg, #ff8e72 0%, #ff6b35 76.923%)" }}
     >
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-5">
-        <h1 id="hero-heading" className="max-w-3xl text-4xl font-bold leading-[1.1] text-white sm:text-5xl lg:text-[52px]">
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col justify-center gap-5">
+        <h1
+          id="hero-heading"
+          className="text-[34px] leading-[1.12] font-bold text-white sm:text-[44px] lg:text-[52px] lg:leading-[60px]"
+        >
           Roam the world, your way.
         </h1>
-        <p className="max-w-2xl text-base text-white sm:text-lg">
+        <p className="text-base leading-6 font-normal text-white sm:text-[18px] sm:leading-[28px]">
           Discover hand-picked stays, flights and experiences — crafted for curious travelers.
         </p>
 
@@ -32,13 +30,19 @@ export function Hero({ children }: { children: ReactNode }) {
           {children}
         </div>
 
-        <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-white">
-          {TRUST.map((t) => (
-            <li key={t.text} className="flex items-center gap-1.5">
-              <t.icon className="size-3.5" aria-hidden />
-              {t.text}
-            </li>
-          ))}
+        <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] font-normal text-white">
+          <li className="whitespace-nowrap">✓ Free cancellation on most stays</li>
+          <li className="whitespace-nowrap">★ 4.8 traveler rating</li>
+          <li className="flex items-center gap-1 whitespace-nowrap">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/trust-lock.svg" alt="" width={13} height={13} className="size-[13px]" />
+            Secure booking
+          </li>
+          <li className="flex items-center gap-1 whitespace-nowrap">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/trust-money.svg" alt="" width={13} height={13} className="size-[13px]" />
+            Price match promise
+          </li>
         </ul>
       </div>
     </section>

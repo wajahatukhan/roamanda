@@ -18,7 +18,7 @@ const container = "mx-auto w-full max-w-[1440px] px-4 sm:px-8 lg:px-20";
 export function SiteHeader() {
   return (
     <header className="w-full border-b border-roam-border bg-white">
-      <div className={`${container} flex items-center gap-4 py-3.5 sm:gap-8`}>
+      <div className={`${container} flex items-center gap-4 pt-[18px] pb-3.5 sm:gap-8`}>
         <Link
           href="/"
           aria-label="Roamanda home"
@@ -57,7 +57,7 @@ export function SiteHeader() {
       <div className={container}>
         <nav
           aria-label="Browse categories"
-          className="-mx-4 flex gap-0.5 overflow-x-auto px-4 [scrollbar-width:none] sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden"
+          className="-mx-4 flex gap-0.5 overflow-x-auto px-4 pb-3.5 [scrollbar-width:none] sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden"
         >
           {CATEGORIES.map((c) => (
             <Link
@@ -67,7 +67,7 @@ export function SiteHeader() {
               className={[
                 "flex shrink-0 items-center gap-2 border-b-[3px] px-[18px] py-3.5 text-[13px] whitespace-nowrap transition-colors",
                 c.active
-                  ? "border-roam-accent font-bold text-roam-accent"
+                  ? "border-[#ff6b35] font-bold text-roam-accent"
                   : "border-transparent font-medium text-roam-ink hover:text-roam-accent",
               ].join(" ")}
             >
